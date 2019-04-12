@@ -10,24 +10,25 @@ using System.Windows.Forms;
 
 namespace BankSystem
 {
-    public partial class frmClientManagement : Form
+    public partial class FrmClientManagement : Form
     {
 
         /// <summary>
         /// Backup, do not really use :)
         /// </summary>
-        public frmClientManagement() : this(0) { }
+        public FrmClientManagement() : this(0) { }
 
         /// <summary>
         /// Used when viewing/updating existing client.
         /// </summary>
         /// <param name="clientId"></param>
-        public frmClientManagement(int clientId)
+        public FrmClientManagement(int clientId)
         {
             InitializeComponent();
+
         }
 
-        private void cmdUpdate_Click(object sender, EventArgs e)
+        private void CmdUpdate_Click(object sender, EventArgs e)
         {
             using (frmAccount newForm = new frmAccount(42))
             {
@@ -35,7 +36,7 @@ namespace BankSystem
             }
         }
 
-        private void cmdDeposit_Click(object sender, EventArgs e)
+        private void CmdDeposit_Click(object sender, EventArgs e)
         {
             using (frmTransaction newForm = new frmTransaction())
             {
@@ -43,7 +44,7 @@ namespace BankSystem
             }
         }
 
-        private void cmdWithdrawal_Click(object sender, EventArgs e)
+        private void CmdWithdrawal_Click(object sender, EventArgs e)
         {
             using (frmTransaction newForm = new frmTransaction())
             {
@@ -51,7 +52,7 @@ namespace BankSystem
             }
         }
 
-        private void cmdAllTransactions_Click(object sender, EventArgs e)
+        private void CmdAllTransactions_Click(object sender, EventArgs e)
         {
             using (frmTransactions newForm = new frmTransactions(42))
             {
@@ -59,7 +60,7 @@ namespace BankSystem
             }
         }
 
-        private void cmdNewTransaction_Click(object sender, EventArgs e)
+        private void CmdNewTransaction_Click(object sender, EventArgs e)
         {
             using (frmTransaction newForm = new frmTransaction())
             {
@@ -67,12 +68,22 @@ namespace BankSystem
             }
         }
 
-        private void cmdCloseAccount_Click(object sender, EventArgs e)
+        private void CmdCloseAccount_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Hodor?", "Hodor!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

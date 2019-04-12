@@ -12,20 +12,40 @@ namespace BankSystem
 {
     public partial class frmMain : Form
     {
+
+        FrmMainViewModel klient = new FrmMainViewModel();
+        /// <summary>
+        /// Používam ju na prenos vyhľadaného id podľa vyhľadávača
+        /// </summary>
+        public int id { get; set; }
+
         public frmMain()
         {
             InitializeComponent();
         }
 
-        private void cmdFindClient_Click(object sender, EventArgs e)
+        private void CmdFindClient_Click(object sender, EventArgs e)
         {
-            using (frmClientManagement newForm = new frmClientManagement())
+            string hladaj = txbHladajKlienta.Text;
+
+            //ošetrím, aby užívateľ zadal výraz, ktorý existuje
+            if (klient.HladajKlienta(hladaj) > 0)
+            {
+                lblInfoOUzivatelovi.Text = "";
+                id = klient.HladajKlienta(hladaj);
+            }
+            else
+            {
+                lblInfoOUzivatelovi.Text = "Zadaný klient neexistuje";
+            }
+            using (FrmClientManagement newForm = new FrmClientManagement(id))
             {
                 newForm.ShowDialog();
+
             }
         }
 
-        private void cmdNewAccount_Click(object sender, EventArgs e)
+        private void CmdNewAccount_Click(object sender, EventArgs e)
         {
             using (frmAccount newForm = new frmAccount())
             {
@@ -33,7 +53,7 @@ namespace BankSystem
             }
         }
 
-        private void cmdAllAccounts_Click(object sender, EventArgs e)
+        private void CmdAllAccounts_Click(object sender, EventArgs e)
         {
             using (frmAccounts newForm = new frmAccounts())
             {
@@ -41,12 +61,17 @@ namespace BankSystem
             }
         }
 
-        private void cmdAllTransactions_Click(object sender, EventArgs e)
+        private void CmdAllTransactions_Click(object sender, EventArgs e)
         {
             using (frmTransactions newForm = new frmTransactions())
             {
                 newForm.ShowDialog();
             }
+        }
+
+        private void TxbHladajKlienta_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

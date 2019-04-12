@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAccountsViewModel.cs" />
+    <Compile Include="frmAccountViewModel.cs" />
     <Compile Include="frmClientManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +72,7 @@
     <Compile Include="frmAccount.Designer.cs">
       <DependentUpon>frmAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMainViewModel.cs" />
     <Compile Include="frmTransaction.cs">
       <SubType>Form</SubType>
     </Compile>

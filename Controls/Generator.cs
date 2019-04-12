@@ -48,6 +48,25 @@ namespace Controls
             }
         }
 
+        /// <summary>
+        /// Vráti mi jedného random človeka
+        /// </summary>
+        /// <returns></returns>
+        public string GetRandomPerson()
+        {
+            return UselessLibrary.Generator.GeneratePerson();
+
+        }
+
+        /// <summary>
+        /// Vráti mi jednu random adresu
+        /// </summary>
+        /// <returns></returns>
+        public string GetRandomAddress()
+        {
+            return UselessLibrary.Generator.GenerateAddress();
+
+        }
     }
 
 }
