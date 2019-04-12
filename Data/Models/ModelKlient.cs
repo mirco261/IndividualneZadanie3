@@ -16,6 +16,8 @@ namespace Data.Models
         public string Telefon { get; set; }
         public string Mail { get; set; }
         public string OP { get; set; }
-        public string ZostatokNaUcte { get; set; }
+        public decimal StavNaUcte { get; set; }
+        public decimal Precerpanie { get; set; }
+        public string IBAN { get; set; }
     }
 }

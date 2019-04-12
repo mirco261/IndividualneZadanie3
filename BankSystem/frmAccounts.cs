@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace BankSystem
 {
-    public partial class frmAccounts : Form
+    public partial class FrmAccounts : Form
     {
         FrmAccountsViewModel ZoznamKlientov = new FrmAccountsViewModel();
 
@@ -29,17 +29,20 @@ namespace BankSystem
         /// </summary>
         public string IBAN { get; set; }
 
-        public frmAccounts()
+        public FrmAccounts()
         {
             InitializeComponent();
             dgwZoznamKlientov.AutoGenerateColumns = true;
             dgwZoznamKlientov.DataSource = ZoznamKlientov.NacitajzTabulkyPerson(txbMeno.Text,txbPriezvisko.Text, txbIBAN.Text);
             dgwZoznamKlientov.DataMember = "Klient";
+            dgwZoznamKlientov.Columns[0].Visible = false;
         }
 
         private void CmdManageAccount_Click(object sender, EventArgs e)
         {
-            using (FrmClientManagement newForm = new FrmClientManagement())
+            int id = Convert.ToInt32(dgwZoznamKlientov.CurrentRow.Cells[0].Value);
+
+            using (FrmClientManagement newForm = new FrmClientManagement(id))
             {
                 newForm.ShowDialog();
             }

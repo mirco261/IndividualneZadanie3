@@ -27,7 +27,8 @@ namespace Data.Repositories
                 using (SqlCommand command = base.Connection.CreateCommand())
                 {
                     command.CommandText = @"SELECT
-                      k.[Meno]
+                        k.ID
+                      ,k.[Meno]
                       ,k.[Priezvisko]
                       ,k.[Ulica]
                       ,k.[Mesto]
@@ -49,6 +50,7 @@ namespace Data.Repositories
                         DataSet ds = new DataSet();
                         adapter.Fill(ds, "Klient");
                         DataTable dt = ds.Tables["Klient"];
+                        
                         return ds;
                     }
                 }
@@ -78,7 +80,7 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"insert into Ucet (IBAN, Precerpanie) output inserted.ID values(@Iban, @Precerpanie)";
+                    command.CommandText = @"insert into Ucet (IBAN, Precerpanie, StavUctu) output inserted.ID values(@Iban, @Precerpanie, 0)";
                     command.Parameters.AddWithValue("@Iban", iban);
                     command.Parameters.AddWithValue("@Precerpanie", precerpanie);
 
@@ -141,10 +143,13 @@ namespace Data.Repositories
         }
 
 
-        
+        /// <summary>
+        /// Načítam údaje o klientovi podľa ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ModelKlient NacitajKlientaPodlaID(int id)
         {
-            ModelKlient klient = new ModelKlient();
             using (base.Connection)
             {
                 base.Connection.Open();
@@ -159,25 +164,92 @@ namespace Data.Repositories
                       ,k.[Mail]
                       ,k.[OP]
                       ,u.[IBAN]
+                      ,u.StavUctu
+                      ,u.Precerpanie
                       FROM [ATM].[dbo].[Klient] as k
                       left join dbo.Ucet as u
                       on k.UcetID = u.ID
-                      where k.Meno like @Meno and k.Priezvisko like @Priezvisko and u.IBAN like @IBAN";
+                      where k.ID = @id";
 
-                    command.Parameters.Add("@id", SqlDbType.NVarChar).Value = $"%{id}%";
+                    command.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
-                    
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    using(SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
-                        Debug.WriteLine(String.Format("{0}", reader[0]));
-                    }
+                        DataSet ds = new DataSet();
+                        adapter.Fill(ds, "Klient");
+                        DataTable dt = ds.Tables["Klient"];
 
-                    //klient.Meno = 
+                        ModelKlient klient = new ModelKlient
+                        {
+
+                            //naplním si klienta properties
+                            Meno = ds.Tables[0].Rows[0][0].ToString(),
+                            Priezvisko = ds.Tables[0].Rows[0][1].ToString(),
+                            Ulica = ds.Tables[0].Rows[0][2].ToString(),
+                            Mesto = ds.Tables[0].Rows[0][3].ToString(),
+                            Telefon = ds.Tables[0].Rows[0][4].ToString(),
+                            Mail = ds.Tables[0].Rows[0][5].ToString(),
+                            OP = ds.Tables[0].Rows[0][6].ToString(),
+                            IBAN = ds.Tables[0].Rows[0][7].ToString(),
+                            StavNaUcte = (decimal)ds.Tables[0].Rows[0][8],
+                            Precerpanie = (decimal)ds.Tables[0].Rows[0][9]
+                        };
+                        return klient;
+                    }
+                }
+            }            
+        }
+
+
+        /// <summary>
+        /// Úprava existujúceho klienta
+        /// </summary>
+        /// <param name="meno"></param>
+        /// <param name="priezvisko"></param>
+        /// <param name="adresa"></param>
+        /// <param name="mesto"></param>
+        /// <param name="cisloOP"></param>
+        /// <param name="telefon"></param>
+        /// <param name="mail"></param>
+        /// <param name="iban"></param>
+        /// <returns></returns>
+        public void UpravKlientaDoDb(int ID, string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                connection.Open();
+
+                //vytvorím si bankový účet
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"Update Ucet set Precerpanie = @Precerpanie where IBAN = @Iban";
+                    command.Parameters.AddWithValue("@Iban", iban);
+                    command.Parameters.AddWithValue("@Precerpanie", precerpanie);
+                    command.ExecuteNonQuery();
+                }
+
+
+                //Upravím si užívateľove informácie podľa nových
+                using (SqlCommand command = new SqlCommand()) 
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = @"Update Klient SET Meno = @Meno, Priezvisko = @Priezvisko, Ulica = @Ulica, Mesto = @Mesto, Telefon = @Telefon, Mail = @Mail, OP = @OP where[ID] = @ID";
+                    command.Parameters.AddWithValue("@Meno", meno);
+                    command.Parameters.AddWithValue("@Priezvisko", priezvisko);
+                    command.Parameters.AddWithValue("@Ulica", adresa);
+                    command.Parameters.AddWithValue("@Mesto", mesto);
+                    command.Parameters.AddWithValue("@OP", cisloOP);
+                    command.Parameters.AddWithValue("@Telefon", telefon);
+                    command.Parameters.AddWithValue("@Mail", mail);
+                    command.Parameters.AddWithValue("@ID", ID);
+
+                    command.ExecuteNonQuery();
                 }
             }
-            return klient;
-            
         }
+
+
     }
 }

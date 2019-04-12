@@ -16,6 +16,7 @@ namespace BankSystem
     public partial class frmAccount : Form
     {
         //properties na zapisovanie nového klienta
+        public int ID { get; set; }
         public string Meno { get; set; }
         public string Priezvisko { get; set; }
         public string Adresa { get; set; }
@@ -37,6 +38,10 @@ namespace BankSystem
         public frmAccount()
         {
             InitializeComponent();
+            btnUlozitStarehoKlienta.Visible = false;
+            btnUlozNovehoKlienta.Visible = true;
+
+ 
 
             //Vygeneruje IBAN
             txbIBAN.Text = NovyKlient.VratIBAN();
@@ -49,6 +54,29 @@ namespace BankSystem
         public frmAccount(int clientId)
         {
             InitializeComponent();
+
+            //Zobrazím tlačidlo na uloženie existujúceho klienta
+            btnUlozitStarehoKlienta.Visible = true;
+            btnUlozNovehoKlienta.Visible = false;
+
+            //Zapíšem si ID klienta
+            ID = clientId;
+
+            FrmAccountViewModel KlientPrenos = new FrmAccountViewModel();
+
+            ModelKlient klient = new ModelKlient();
+
+            klient = KlientPrenos.NacitajKlientaPodlaID(clientId);
+
+            txbKrstneMeno.Text = klient.Meno;
+            txbPriezvisko.Text = klient.Priezvisko;
+            txbUlica.Text = klient.Ulica;
+            txbMesto.Text = klient.Mesto;
+            txbObcianskyPreukaz.Text = klient.OP;
+            txbTelefon.Text = klient.Telefon;
+            txbMail.Text = klient.Mail;
+            txbIBAN.Text = klient.IBAN;
+            nudPrecerpanie.Value = klient.Precerpanie;
         }
 
 
@@ -56,6 +84,8 @@ namespace BankSystem
         private void BtnRandomKlient_Click(object sender, EventArgs e)
         {
             ModelKlient randomKlient = new ModelKlient();
+
+
 
             //načítam si random klienta z randomizeru
             randomKlient = NovyKlient.VratRandomKlienta();
@@ -72,6 +102,8 @@ namespace BankSystem
             Precerpanie = (int)nudPrecerpanie.Value;
         }
 
+
+        //Keď je zákazník nový, použijem toto tlačidlo
         private void BtnUlozKlienta_Click(object sender, EventArgs e)
         {
             Meno = txbKrstneMeno.Text;
@@ -87,6 +119,24 @@ namespace BankSystem
             NovyKlient.ZapisKlientaDoDb(Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie);
             this.Close();
 
+        }
+
+
+        //Keď upravujem už existujúceho klienta, použijem toto tlačidlo
+        private void BtnUlozitStarehoKlienta_Click(object sender, EventArgs e)
+        {
+            Meno = txbKrstneMeno.Text;
+            Priezvisko = txbPriezvisko.Text;
+            Adresa = txbUlica.Text;
+            Mesto = txbMesto.Text;
+            CisloOP = txbObcianskyPreukaz.Text;
+            Telefon = txbTelefon.Text;
+            Mail = txbMail.Text;
+            IBAN = txbIBAN.Text;
+            Precerpanie = (int)nudPrecerpanie.Value;
+
+            NovyKlient.UpravKlientaDoDb(ID, Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie);
+            this.Close();
         }
     }
 }

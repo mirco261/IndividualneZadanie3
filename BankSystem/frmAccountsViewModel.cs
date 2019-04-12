@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using Data;
 using Data.Repositories;
+using Data.Models;
 
 namespace BankSystem
 {
@@ -18,6 +19,9 @@ namespace BankSystem
         {
             return ZoznamKlientov.NacitajzTabulkyKlient(meno, priezvisko, IBAN);
         }
+
+
+
 
 
     }

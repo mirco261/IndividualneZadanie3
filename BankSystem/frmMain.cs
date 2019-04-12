@@ -55,7 +55,7 @@ namespace BankSystem
 
         private void CmdAllAccounts_Click(object sender, EventArgs e)
         {
-            using (frmAccounts newForm = new frmAccounts())
+            using (FrmAccounts newForm = new FrmAccounts())
             {
                 newForm.ShowDialog();
             }

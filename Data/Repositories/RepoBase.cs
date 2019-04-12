@@ -10,7 +10,7 @@ namespace Data.Repositories
 {
     public class RepoBase
     {
-        protected const string CONN_STRING = "Server = TRANSFORMER8\\SQLEXPRESS2017; Database = ATM; Trusted_Connection = True";
+        protected const string CONN_STRING = "Server = MIRCO-PC\\SQLEXPRESS; Database = ATM; Trusted_Connection = True";
 
 
         /// <summary>
