@@ -28,36 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.DgvTransakcie = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvTransakcie)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // DgvTransakcie
             // 
-            this.label1.BackColor = System.Drawing.Color.Coral;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(560, 343);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Tu bude v gride prehľad transakcií.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DgvTransakcie.AllowUserToAddRows = false;
+            this.DgvTransakcie.AllowUserToDeleteRows = false;
+            this.DgvTransakcie.AllowUserToOrderColumns = true;
+            this.DgvTransakcie.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvTransakcie.Location = new System.Drawing.Point(0, 0);
+            this.DgvTransakcie.Name = "DgvTransakcie";
+            this.DgvTransakcie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.DgvTransakcie.RowTemplate.Height = 24;
+            this.DgvTransakcie.Size = new System.Drawing.Size(1045, 619);
+            this.DgvTransakcie.TabIndex = 0;
             // 
             // frmTransactions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1045, 619);
+            this.Controls.Add(this.DgvTransakcie);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmTransactions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmTransactions";
+            ((System.ComponentModel.ISupportInitialize)(this.DgvTransakcie)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView DgvTransakcie;
     }
 }

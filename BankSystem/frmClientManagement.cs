@@ -22,7 +22,35 @@ namespace BankSystem
 
         Random CisloKarty = new Random();
 
+        /// <summary>
+        /// Načíta nové horné info o klientovi
+        /// </summary>
+        private void NacitajNoveInfoOKlientoviDoHornehoMenu()
+        {
+            klient = klientConnection.NacitajKlientaPodlaID(IdKlienta);
+            lblIBAN.Text = klient.IBAN;
+            lblMailovaAdresa.Text = klient.Mail;
+            lblMenoPriezvisko.Text = klient.Meno + " " + klient.Priezvisko;
+            lblTelefonneCislo.Text = klient.Telefon;
+            lblAdresa.Text = klient.Ulica + ", " + klient.Mesto;
+            lblPovolenePrecerpanie.Text = klient.Precerpanie.ToString() + " EUR";
+            lblStavNaUcte.Text = klient.StavNaUcte.ToString() + " EUR";
+            lblObcianskyPreukaz.Text = klient.OP;
+        }
 
+        /// <summary>
+        /// Načíta zoznam platobných kariet do pravého gridu
+        /// </summary>
+        private void NacitajZoznamPlatobnychKariet()
+        {
+            DgwZoznamPlatobnychKariet.AutoGenerateColumns = true;
+            DgwZoznamPlatobnychKariet.DataSource = klientConnection.NacitajPlatobneKarty(IdKlienta);
+            DgwZoznamPlatobnychKariet.DataMember = "Karty";
+            DgwZoznamPlatobnychKariet.Columns[0].Visible = false;
+            DgwZoznamPlatobnychKariet.Columns[1].Visible = false;
+            DgwZoznamPlatobnychKariet.Columns[3].Visible = false;
+            BtnZmenZablokovanieKarty.Visible = true;
+        }
 
         /// <summary>
         /// Backup, do not really use :)
@@ -41,27 +69,13 @@ namespace BankSystem
             IdKlienta = clientId;
 
             //načítam horné info o klientovi
-            klient =  klientConnection.NacitajKlientaPodlaID(clientId);
-            lblIBAN.Text = klient.IBAN;
-            lblMailovaAdresa.Text = klient.Mail;
-            lblMenoPriezvisko.Text = klient.Meno + " " + klient.Priezvisko;
-            lblTelefonneCislo.Text = klient.Telefon;
-            lblAdresa.Text = klient.Ulica + ", " + klient.Mesto;
-            lblPovolenePrecerpanie.Text = klient.Precerpanie.ToString() + " EUR";
-            lblStavNaUcte.Text = klient.StavNaUcte.ToString() + " EUR";
-            lblObcianskyPreukaz.Text = klient.OP;
+            NacitajNoveInfoOKlientoviDoHornehoMenu();
 
             //zistím, či klient má platobné karty
             if (klientConnection.ZistiCiMaKlientPlatobneKarty(clientId) > 0)
             {
                 //načítam datagridview o platobných kartách klienta
-                DgwZoznamPlatobnychKariet.AutoGenerateColumns = true;
-                DgwZoznamPlatobnychKariet.DataSource = klientConnection.NacitajPlatobneKarty(IdKlienta);
-                DgwZoznamPlatobnychKariet.DataMember = "Karty";
-                DgwZoznamPlatobnychKariet.Columns[0].Visible = false;
-                DgwZoznamPlatobnychKariet.Columns[1].Visible = false;
-                DgwZoznamPlatobnychKariet.Columns[3].Visible = false;
-                BtnZmenZablokovanieKarty.Visible = true;
+                NacitajZoznamPlatobnychKariet();
             }
             else BtnZmenZablokovanieKarty.Visible = false;
 
@@ -92,30 +106,27 @@ namespace BankSystem
             }
         }
 
+
+
         private void CmdUpdate_Click(object sender, EventArgs e)
         {
             using (frmAccount newForm = new frmAccount(IdKlienta))
             {
                 newForm.ShowDialog();
             }
-
             //načítam nové horné info o klientovi
-            klient = klientConnection.NacitajKlientaPodlaID(IdKlienta);
-            lblIBAN.Text = klient.IBAN;
-            lblMailovaAdresa.Text = klient.Mail;
-            lblMenoPriezvisko.Text = klient.Meno + " " + klient.Priezvisko;
-            lblTelefonneCislo.Text = klient.Telefon;
-            lblAdresa.Text = klient.Ulica + ", " + klient.Mesto;
-            lblPovolenePrecerpanie.Text = klient.Precerpanie.ToString() + " EUR";
-            lblStavNaUcte.Text = klient.StavNaUcte.ToString() + " EUR";
-            lblObcianskyPreukaz.Text = klient.OP;
+            NacitajNoveInfoOKlientoviDoHornehoMenu();
         }
+
+
 
         private void CmdDeposit_Click(object sender, EventArgs e)
         {
             using (FrmTransaction newForm = new FrmTransaction())
             {
                 newForm.ShowDialog();
+                //načítam nové horné info o klientovi
+                NacitajNoveInfoOKlientoviDoHornehoMenu();
             }
         }
 
@@ -124,14 +135,18 @@ namespace BankSystem
             using (FrmTransaction newForm = new FrmTransaction())
             {
                 newForm.ShowDialog();
+                //načítam nové horné info o klientovi
+                NacitajNoveInfoOKlientoviDoHornehoMenu();
             }
         }
 
         private void CmdAllTransactions_Click(object sender, EventArgs e)
         {
-            using (frmTransactions newForm = new frmTransactions(42))
+            using (frmTransactions newForm = new frmTransactions(IdKlienta))
             {
                 newForm.ShowDialog();
+                //načítam nové horné info o klientovi
+                NacitajNoveInfoOKlientoviDoHornehoMenu();
             }
         }
 
@@ -140,6 +155,8 @@ namespace BankSystem
             using (FrmTransaction newForm = new FrmTransaction())
             {
                 newForm.ShowDialog();
+                //načítam nové horné info o klientovi
+                NacitajNoveInfoOKlientoviDoHornehoMenu();
             }
         }
 
@@ -179,12 +196,7 @@ namespace BankSystem
             klientConnection.ZmenZablokovanieKarty(idKarty, stav);
 
             //načítam datagridview o platobných kartách klienta
-            DgwZoznamPlatobnychKariet.AutoGenerateColumns = true;
-            DgwZoznamPlatobnychKariet.DataSource = klientConnection.NacitajPlatobneKarty(IdKlienta);
-            DgwZoznamPlatobnychKariet.DataMember = "Karty";
-            DgwZoznamPlatobnychKariet.Columns[0].Visible = false;
-            DgwZoznamPlatobnychKariet.Columns[1].Visible = false;
-            DgwZoznamPlatobnychKariet.Columns[3].Visible = false;
+            NacitajZoznamPlatobnychKariet();
 
             //Zmením názov na tlačidle
              stav = Convert.ToBoolean(DgwZoznamPlatobnychKariet.CurrentRow.Cells[5].Value);
@@ -216,12 +228,7 @@ namespace BankSystem
             klientConnection.PridajKartu(RndCislo, IdKlienta);
 
             //resetnem dgw s kartami
-            DgwZoznamPlatobnychKariet.AutoGenerateColumns = true;
-            DgwZoznamPlatobnychKariet.DataSource = klientConnection.NacitajPlatobneKarty(IdKlienta);
-            DgwZoznamPlatobnychKariet.DataMember = "Karty";
-            DgwZoznamPlatobnychKariet.Columns[0].Visible = false;
-            DgwZoznamPlatobnychKariet.Columns[1].Visible = false;
-            DgwZoznamPlatobnychKariet.Columns[3].Visible = false;
+            NacitajZoznamPlatobnychKariet();
 
             //vyberiem datagrid, aby si mohol stlačiť tlačidlo aktivuj/deaktivuj
             DgwZoznamPlatobnychKariet.Select();

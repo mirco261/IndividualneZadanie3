@@ -136,5 +136,101 @@ namespace Data.Repositories
                 }
             }
         }
+
+        /// <summary>
+        /// Načíta všetky transakcie všetkých klientov
+        /// </summary>
+        /// <returns></returns>
+        public DataSet NacitajTransakcie()
+        {
+            using (base.Connection)
+            {
+                base.Connection.Open();
+                using (SqlCommand command = base.Connection.CreateCommand())
+                {
+                    command.CommandText = @"SELECT t.[ID] as ID_transakcie
+	                                      ,ko.Priezvisko +', '+ ko.Meno as Odosielateľ
+	                                      ,kp.Priezvisko +', '+ kp.Meno as Príjemca
+	                                      ,ko.ID as ID_odosielateľa
+	                                      ,kp.ID as ID_prijímateľa
+	                                      ,t.[Suma] as Čiastka
+                                          ,t.[VS]
+                                          ,t.[SS]
+                                          ,t.[KS]
+                                          ,t.[Sprava] as Správa
+                                          ,t.[OdosielatelUcetID]
+                                          ,t.[PrijemcaUcetID]
+                                          FROM [Transakcia] as t
+                                          left join Ucet as up
+                                          on t.PrijemcaUcetID = up.ID
+                                          left join Klient as kp
+                                          on up.ID = kp.ID
+                                          left join Ucet as uo
+                                          on t.OdosielatelUcetID = uo.ID
+                                         left join Klient as ko
+                                          on uo.ID = ko.ID";
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataSet ds = new DataSet();
+                        adapter.Fill(ds, "Transakcie");
+                        DataTable dt = ds.Tables["Transakcie"];
+
+                        return ds;
+                    }
+                }
+            }
+
+
+        }
+
+        /// <summary>
+        /// Načíta všetky transakcie iba vybraného klienta
+        /// </summary>
+        /// <returns></returns>
+        public DataSet NacitajTransakcie(int clientID)
+        {
+            using (base.Connection)
+            {
+                base.Connection.Open();
+                using (SqlCommand command = base.Connection.CreateCommand())
+                {
+                    command.CommandText = @"SELECT t.[ID] as ID_transakcie
+	                                      ,ko.Priezvisko +', '+ ko.Meno as Odosielateľ
+	                                      ,kp.Priezvisko +', '+ kp.Meno as Príjemca
+	                                      ,ko.ID as ID_odosielateľa
+	                                      ,kp.ID as ID_prijímateľa
+	                                      ,t.[Suma] as Čiastka
+                                          ,t.[VS]
+                                          ,t.[SS]
+                                          ,t.[KS]
+                                          ,t.[Sprava] as Správa
+                                          ,t.[OdosielatelUcetID]
+                                          ,t.[PrijemcaUcetID]
+                                          FROM [Transakcia] as t
+                                          left join Ucet as up
+                                          on t.PrijemcaUcetID = up.ID
+                                          left join Klient as kp
+                                          on up.ID = kp.ID
+                                          left join Ucet as uo
+                                          on t.OdosielatelUcetID = uo.ID
+                                         left join Klient as ko
+                                          on uo.ID = ko.ID
+                                          where ko.ID = @clientID or kp.ID = @ClientID ";
+
+                    command.Parameters.Add("@ClientID", SqlDbType.Int).Value = clientID;
+
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataSet ds = new DataSet();
+                        adapter.Fill(ds, "Transakcie");
+                        DataTable dt = ds.Tables["Transakcie"];
+
+                        return ds;
+                    }
+                }
+            }
+        }
     }
 }
