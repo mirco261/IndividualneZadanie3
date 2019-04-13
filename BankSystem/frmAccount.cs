@@ -146,12 +146,12 @@ namespace BankSystem
             this.Close();
         }
 
-        private void txbObcianskyPreukaz_TextChanged(object sender, EventArgs e)
+        private void TxbObcianskyPreukaz_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void frmAccount_Load(object sender, EventArgs e)
+        private void FrmAccount_Load(object sender, EventArgs e)
         {
 
         }

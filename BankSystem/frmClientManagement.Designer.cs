@@ -34,7 +34,6 @@
             this.cmdAllTransactions = new System.Windows.Forms.Button();
             this.cmdWithdrawal = new System.Windows.Forms.Button();
             this.cmdDeposit = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -57,6 +56,13 @@
             this.lblPovolenePrecerpanie = new System.Windows.Forms.Label();
             this.lblObcianskyPreukaz = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.DgwZoznamPlatobnychKariet = new System.Windows.Forms.DataGridView();
+            this.label10 = new System.Windows.Forms.Label();
+            this.BtnPridajKartu = new System.Windows.Forms.Button();
+            this.BtnZmenZablokovanieKarty = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.DgwZoznamPlatobnychKariet)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdUpdate
@@ -124,19 +130,6 @@
             this.cmdDeposit.Text = "Deposit";
             this.cmdDeposit.UseVisualStyleBackColor = true;
             this.cmdDeposit.Click += new System.EventHandler(this.CmdDeposit_Click);
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.DarkMagenta;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(999, 11);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(253, 478);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Niekde v tomto okne bude grid s platobnými kartami priradenými k účtu.";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -213,6 +206,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(17, 11);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -225,6 +219,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label9.Location = new System.Drawing.Point(17, 46);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -236,6 +231,7 @@
             // lblMenoPriezvisko
             // 
             this.lblMenoPriezvisko.AutoSize = true;
+            this.lblMenoPriezvisko.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblMenoPriezvisko.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblMenoPriezvisko.Location = new System.Drawing.Point(143, 11);
             this.lblMenoPriezvisko.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -247,6 +243,7 @@
             // lblAdresa
             // 
             this.lblAdresa.AutoSize = true;
+            this.lblAdresa.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblAdresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblAdresa.Location = new System.Drawing.Point(143, 46);
             this.lblAdresa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -258,6 +255,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label11.Location = new System.Drawing.Point(17, 105);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -269,6 +267,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label12.Location = new System.Drawing.Point(17, 137);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -280,6 +279,7 @@
             // lblTelefonneCislo
             // 
             this.lblTelefonneCislo.AutoSize = true;
+            this.lblTelefonneCislo.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblTelefonneCislo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTelefonneCislo.Location = new System.Drawing.Point(143, 105);
             this.lblTelefonneCislo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -291,6 +291,7 @@
             // lblMailovaAdresa
             // 
             this.lblMailovaAdresa.AutoSize = true;
+            this.lblMailovaAdresa.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblMailovaAdresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblMailovaAdresa.Location = new System.Drawing.Point(143, 137);
             this.lblMailovaAdresa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -302,6 +303,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label13.Location = new System.Drawing.Point(519, 105);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -313,6 +315,7 @@
             // lblIBAN
             // 
             this.lblIBAN.AutoSize = true;
+            this.lblIBAN.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblIBAN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblIBAN.Location = new System.Drawing.Point(519, 137);
             this.lblIBAN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -324,6 +327,7 @@
             // lbl
             // 
             this.lbl.AutoSize = true;
+            this.lbl.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lbl.Location = new System.Drawing.Point(519, 11);
             this.lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -335,6 +339,7 @@
             // lblStavNaUcte
             // 
             this.lblStavNaUcte.AutoSize = true;
+            this.lblStavNaUcte.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblStavNaUcte.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblStavNaUcte.Location = new System.Drawing.Point(519, 43);
             this.lblStavNaUcte.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -346,6 +351,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label14.Location = new System.Drawing.Point(773, 11);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -357,6 +363,7 @@
             // lblPovolenePrecerpanie
             // 
             this.lblPovolenePrecerpanie.AutoSize = true;
+            this.lblPovolenePrecerpanie.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblPovolenePrecerpanie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblPovolenePrecerpanie.Location = new System.Drawing.Point(773, 43);
             this.lblPovolenePrecerpanie.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -368,6 +375,7 @@
             // lblObcianskyPreukaz
             // 
             this.lblObcianskyPreukaz.AutoSize = true;
+            this.lblObcianskyPreukaz.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblObcianskyPreukaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblObcianskyPreukaz.Location = new System.Drawing.Point(143, 76);
             this.lblObcianskyPreukaz.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -379,6 +387,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label15.Location = new System.Drawing.Point(19, 76);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -387,11 +396,86 @@
             this.label15.TabIndex = 32;
             this.label15.Text = "Číslo OP";
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.DarkMagenta;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(999, -59);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(558, 2024);
+            this.label2.TabIndex = 11;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DgwZoznamPlatobnychKariet
+            // 
+            this.DgwZoznamPlatobnychKariet.AllowUserToAddRows = false;
+            this.DgwZoznamPlatobnychKariet.AllowUserToDeleteRows = false;
+            this.DgwZoznamPlatobnychKariet.AllowUserToOrderColumns = true;
+            this.DgwZoznamPlatobnychKariet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.DgwZoznamPlatobnychKariet.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            this.DgwZoznamPlatobnychKariet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgwZoznamPlatobnychKariet.Location = new System.Drawing.Point(1016, 46);
+            this.DgwZoznamPlatobnychKariet.Name = "DgwZoznamPlatobnychKariet";
+            this.DgwZoznamPlatobnychKariet.ReadOnly = true;
+            this.DgwZoznamPlatobnychKariet.RowTemplate.Height = 24;
+            this.DgwZoznamPlatobnychKariet.Size = new System.Drawing.Size(462, 334);
+            this.DgwZoznamPlatobnychKariet.TabIndex = 34;
+            this.DgwZoznamPlatobnychKariet.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgwZoznamPlatobnychKariet_CellContentClick);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Location = new System.Drawing.Point(1017, 11);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(199, 20);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Zoznam platobných kariet";
+            // 
+            // BtnPridajKartu
+            // 
+            this.BtnPridajKartu.Location = new System.Drawing.Point(1017, 387);
+            this.BtnPridajKartu.Name = "BtnPridajKartu";
+            this.BtnPridajKartu.Size = new System.Drawing.Size(239, 106);
+            this.BtnPridajKartu.TabIndex = 36;
+            this.BtnPridajKartu.Text = "Pridaj kartu";
+            this.BtnPridajKartu.UseVisualStyleBackColor = true;
+            this.BtnPridajKartu.Click += new System.EventHandler(this.BtnPridajKartu_Click);
+            // 
+            // BtnZmenZablokovanieKarty
+            // 
+            this.BtnZmenZablokovanieKarty.Location = new System.Drawing.Point(1262, 386);
+            this.BtnZmenZablokovanieKarty.Name = "BtnZmenZablokovanieKarty";
+            this.BtnZmenZablokovanieKarty.Size = new System.Drawing.Size(216, 107);
+            this.BtnZmenZablokovanieKarty.TabIndex = 37;
+            this.BtnZmenZablokovanieKarty.Text = "Zablokuj / Odblokuj \r\nkartu";
+            this.BtnZmenZablokovanieKarty.UseVisualStyleBackColor = true;
+            this.BtnZmenZablokovanieKarty.Click += new System.EventHandler(this.BtnZmenZablokovanieKarty_Click);
+            // 
+            // label16
+            // 
+            this.label16.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label16.Location = new System.Drawing.Point(-30, -59);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(1554, 243);
+            this.label16.TabIndex = 38;
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmClientManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 505);
+            this.ClientSize = new System.Drawing.Size(1482, 503);
+            this.Controls.Add(this.BtnZmenZablokovanieKarty);
+            this.Controls.Add(this.BtnPridajKartu);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.DgwZoznamPlatobnychKariet);
             this.Controls.Add(this.lblObcianskyPreukaz);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.lblPovolenePrecerpanie);
@@ -421,10 +505,14 @@
             this.Controls.Add(this.cmdCloseAccount);
             this.Controls.Add(this.cmdNewTransaction);
             this.Controls.Add(this.cmdUpdate);
+            this.Controls.Add(this.label16);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximumSize = new System.Drawing.Size(1500, 550);
+            this.MinimumSize = new System.Drawing.Size(1500, 550);
             this.Name = "FrmClientManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmClientManagement";
+            ((System.ComponentModel.ISupportInitialize)(this.DgwZoznamPlatobnychKariet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,7 +525,6 @@
         private System.Windows.Forms.Button cmdAllTransactions;
         private System.Windows.Forms.Button cmdWithdrawal;
         private System.Windows.Forms.Button cmdDeposit;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -460,5 +547,11 @@
         private System.Windows.Forms.Label lblPovolenePrecerpanie;
         private System.Windows.Forms.Label lblObcianskyPreukaz;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView DgwZoznamPlatobnychKariet;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button BtnPridajKartu;
+        private System.Windows.Forms.Button BtnZmenZablokovanieKarty;
+        private System.Windows.Forms.Label label16;
     }
 }

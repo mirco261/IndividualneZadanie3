@@ -179,7 +179,7 @@
             this.txbObcianskyPreukaz.Name = "txbObcianskyPreukaz";
             this.txbObcianskyPreukaz.Size = new System.Drawing.Size(132, 22);
             this.txbObcianskyPreukaz.TabIndex = 14;
-            this.txbObcianskyPreukaz.TextChanged += new System.EventHandler(this.txbObcianskyPreukaz_TextChanged);
+            this.txbObcianskyPreukaz.TextChanged += new System.EventHandler(this.TxbObcianskyPreukaz_TextChanged);
             // 
             // label7
             // 
@@ -299,7 +299,7 @@
             this.Name = "frmAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAccount";
-            this.Load += new System.EventHandler(this.frmAccount_Load);
+            this.Load += new System.EventHandler(this.FrmAccount_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecerpanie)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
