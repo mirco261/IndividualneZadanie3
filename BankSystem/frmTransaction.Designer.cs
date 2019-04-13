@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LblPrijemca = new System.Windows.Forms.Label();
+            this.LblOdosielatel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.CmbOdosielatel = new System.Windows.Forms.ComboBox();
             this.CmbPrijimatel = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.LblOdosielatelMeno = new System.Windows.Forms.Label();
+            this.LblPrijemcaMeno = new System.Windows.Forms.Label();
+            this.LblOdosielatelAdresa = new System.Windows.Forms.Label();
+            this.LblIbanOdosielatela = new System.Windows.Forms.Label();
+            this.LblPrijemcaAdresa = new System.Windows.Forms.Label();
+            this.LblIbanPrijemca = new System.Windows.Forms.Label();
             this.CmbOdosielatelAdresa = new System.Windows.Forms.ComboBox();
             this.CmbOdosielatelIBAN = new System.Windows.Forms.ComboBox();
             this.repoTransakciaBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -61,31 +61,31 @@
             ((System.ComponentModel.ISupportInitialize)(this.repoTransakciaBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label2
+            // LblPrijemca
             // 
-            this.label2.BackColor = System.Drawing.Color.Moccasin;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(328, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(300, 220);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Prijímateľ";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.LblPrijemca.BackColor = System.Drawing.Color.Moccasin;
+            this.LblPrijemca.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblPrijemca.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LblPrijemca.Location = new System.Drawing.Point(328, 9);
+            this.LblPrijemca.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblPrijemca.Name = "LblPrijemca";
+            this.LblPrijemca.Size = new System.Drawing.Size(300, 220);
+            this.LblPrijemca.TabIndex = 6;
+            this.LblPrijemca.Text = "Príjemca";
+            this.LblPrijemca.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label1
+            // LblOdosielatel
             // 
-            this.label1.BackColor = System.Drawing.Color.Firebrick;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.ForeColor = System.Drawing.Color.Snow;
-            this.label1.Location = new System.Drawing.Point(13, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(300, 220);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Odosielateľ";
+            this.LblOdosielatel.BackColor = System.Drawing.Color.Firebrick;
+            this.LblOdosielatel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblOdosielatel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LblOdosielatel.ForeColor = System.Drawing.Color.Snow;
+            this.LblOdosielatel.Location = new System.Drawing.Point(13, 9);
+            this.LblOdosielatel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblOdosielatel.Name = "LblOdosielatel";
+            this.LblOdosielatel.Size = new System.Drawing.Size(300, 220);
+            this.LblOdosielatel.TabIndex = 5;
+            this.LblOdosielatel.Text = "Odosielateľ";
             // 
             // label3
             // 
@@ -104,93 +104,94 @@
             this.CmbOdosielatel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbOdosielatel.FormattingEnabled = true;
             this.CmbOdosielatel.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.CmbOdosielatel.Location = new System.Drawing.Point(38, 81);
+            this.CmbOdosielatel.Location = new System.Drawing.Point(38, 80);
             this.CmbOdosielatel.Name = "CmbOdosielatel";
             this.CmbOdosielatel.Size = new System.Drawing.Size(248, 24);
             this.CmbOdosielatel.TabIndex = 8;
+            this.CmbOdosielatel.SelectedIndexChanged += new System.EventHandler(this.CmbOdosielatel_SelectedIndexChanged);
             // 
             // CmbPrijimatel
             // 
             this.CmbPrijimatel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbPrijimatel.FormattingEnabled = true;
-            this.CmbPrijimatel.Location = new System.Drawing.Point(368, 81);
+            this.CmbPrijimatel.Location = new System.Drawing.Point(368, 80);
             this.CmbPrijimatel.Name = "CmbPrijimatel";
             this.CmbPrijimatel.Size = new System.Drawing.Size(248, 24);
             this.CmbPrijimatel.TabIndex = 9;
             // 
-            // label4
+            // LblOdosielatelMeno
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Firebrick;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(38, 58);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(138, 17);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Vyberte odosielateľa";
+            this.LblOdosielatelMeno.AutoSize = true;
+            this.LblOdosielatelMeno.BackColor = System.Drawing.Color.Firebrick;
+            this.LblOdosielatelMeno.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LblOdosielatelMeno.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LblOdosielatelMeno.Location = new System.Drawing.Point(35, 60);
+            this.LblOdosielatelMeno.Name = "LblOdosielatelMeno";
+            this.LblOdosielatelMeno.Size = new System.Drawing.Size(80, 17);
+            this.LblOdosielatelMeno.TabIndex = 10;
+            this.LblOdosielatelMeno.Text = "Odosielateľ";
             // 
-            // label5
+            // LblPrijemcaMeno
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Moccasin;
-            this.label5.Location = new System.Drawing.Point(490, 58);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 17);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Vyberte prijímateľa";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LblPrijemcaMeno.AutoSize = true;
+            this.LblPrijemcaMeno.BackColor = System.Drawing.Color.Moccasin;
+            this.LblPrijemcaMeno.Location = new System.Drawing.Point(502, 60);
+            this.LblPrijemcaMeno.Name = "LblPrijemcaMeno";
+            this.LblPrijemcaMeno.Size = new System.Drawing.Size(114, 17);
+            this.LblPrijemcaMeno.TabIndex = 11;
+            this.LblPrijemcaMeno.Text = "Vyberte prijemcu";
+            this.LblPrijemcaMeno.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label6
+            // LblOdosielatelAdresa
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Firebrick;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(38, 108);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 17);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Adresa";
+            this.LblOdosielatelAdresa.AutoSize = true;
+            this.LblOdosielatelAdresa.BackColor = System.Drawing.Color.Firebrick;
+            this.LblOdosielatelAdresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LblOdosielatelAdresa.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LblOdosielatelAdresa.Location = new System.Drawing.Point(35, 110);
+            this.LblOdosielatelAdresa.Name = "LblOdosielatelAdresa";
+            this.LblOdosielatelAdresa.Size = new System.Drawing.Size(53, 17);
+            this.LblOdosielatelAdresa.TabIndex = 12;
+            this.LblOdosielatelAdresa.Text = "Adresa";
             // 
-            // label7
+            // LblIbanOdosielatela
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Firebrick;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(38, 165);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 17);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "IBAN";
+            this.LblIbanOdosielatela.AutoSize = true;
+            this.LblIbanOdosielatela.BackColor = System.Drawing.Color.Firebrick;
+            this.LblIbanOdosielatela.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LblIbanOdosielatela.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LblIbanOdosielatela.Location = new System.Drawing.Point(35, 160);
+            this.LblIbanOdosielatela.Name = "LblIbanOdosielatela";
+            this.LblIbanOdosielatela.Size = new System.Drawing.Size(39, 17);
+            this.LblIbanOdosielatela.TabIndex = 13;
+            this.LblIbanOdosielatela.Text = "IBAN";
             // 
-            // label8
+            // LblPrijemcaAdresa
             // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Moccasin;
-            this.label8.Location = new System.Drawing.Point(563, 108);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 17);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Adresa";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LblPrijemcaAdresa.AutoSize = true;
+            this.LblPrijemcaAdresa.BackColor = System.Drawing.Color.Moccasin;
+            this.LblPrijemcaAdresa.Location = new System.Drawing.Point(565, 110);
+            this.LblPrijemcaAdresa.Name = "LblPrijemcaAdresa";
+            this.LblPrijemcaAdresa.Size = new System.Drawing.Size(53, 17);
+            this.LblPrijemcaAdresa.TabIndex = 14;
+            this.LblPrijemcaAdresa.Text = "Adresa";
+            this.LblPrijemcaAdresa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label9
+            // LblIbanPrijemca
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Moccasin;
-            this.label9.Location = new System.Drawing.Point(577, 165);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 17);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "IBAN";
+            this.LblIbanPrijemca.AutoSize = true;
+            this.LblIbanPrijemca.BackColor = System.Drawing.Color.Moccasin;
+            this.LblIbanPrijemca.Location = new System.Drawing.Point(577, 160);
+            this.LblIbanPrijemca.Name = "LblIbanPrijemca";
+            this.LblIbanPrijemca.Size = new System.Drawing.Size(39, 17);
+            this.LblIbanPrijemca.TabIndex = 15;
+            this.LblIbanPrijemca.Text = "IBAN";
             // 
             // CmbOdosielatelAdresa
             // 
             this.CmbOdosielatelAdresa.Enabled = false;
             this.CmbOdosielatelAdresa.FormattingEnabled = true;
-            this.CmbOdosielatelAdresa.Location = new System.Drawing.Point(38, 134);
+            this.CmbOdosielatelAdresa.Location = new System.Drawing.Point(38, 130);
             this.CmbOdosielatelAdresa.Name = "CmbOdosielatelAdresa";
             this.CmbOdosielatelAdresa.Size = new System.Drawing.Size(248, 24);
             this.CmbOdosielatelAdresa.TabIndex = 20;
@@ -199,7 +200,7 @@
             // 
             this.CmbOdosielatelIBAN.Enabled = false;
             this.CmbOdosielatelIBAN.FormattingEnabled = true;
-            this.CmbOdosielatelIBAN.Location = new System.Drawing.Point(38, 185);
+            this.CmbOdosielatelIBAN.Location = new System.Drawing.Point(38, 180);
             this.CmbOdosielatelIBAN.Name = "CmbOdosielatelIBAN";
             this.CmbOdosielatelIBAN.Size = new System.Drawing.Size(248, 24);
             this.CmbOdosielatelIBAN.TabIndex = 21;
@@ -216,7 +217,7 @@
             // 
             this.CmbPrijimatelAdresa.Enabled = false;
             this.CmbPrijimatelAdresa.FormattingEnabled = true;
-            this.CmbPrijimatelAdresa.Location = new System.Drawing.Point(368, 134);
+            this.CmbPrijimatelAdresa.Location = new System.Drawing.Point(368, 130);
             this.CmbPrijimatelAdresa.Name = "CmbPrijimatelAdresa";
             this.CmbPrijimatelAdresa.Size = new System.Drawing.Size(248, 24);
             this.CmbPrijimatelAdresa.TabIndex = 22;
@@ -225,7 +226,7 @@
             // 
             this.CmbPrijimatelIBAN.Enabled = false;
             this.CmbPrijimatelIBAN.FormattingEnabled = true;
-            this.CmbPrijimatelIBAN.Location = new System.Drawing.Point(368, 185);
+            this.CmbPrijimatelIBAN.Location = new System.Drawing.Point(368, 180);
             this.CmbPrijimatelIBAN.Name = "CmbPrijimatelIBAN";
             this.CmbPrijimatelIBAN.Size = new System.Drawing.Size(248, 24);
             this.CmbPrijimatelIBAN.TabIndex = 23;
@@ -366,17 +367,17 @@
             this.Controls.Add(this.CmbPrijimatelAdresa);
             this.Controls.Add(this.CmbOdosielatelIBAN);
             this.Controls.Add(this.CmbOdosielatelAdresa);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.LblIbanPrijemca);
+            this.Controls.Add(this.LblPrijemcaAdresa);
+            this.Controls.Add(this.LblIbanOdosielatela);
+            this.Controls.Add(this.LblOdosielatelAdresa);
+            this.Controls.Add(this.LblPrijemcaMeno);
+            this.Controls.Add(this.LblOdosielatelMeno);
             this.Controls.Add(this.CmbPrijimatel);
             this.Controls.Add(this.CmbOdosielatel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LblPrijemca);
+            this.Controls.Add(this.LblOdosielatel);
             this.Name = "FrmTransaction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmTransaction";
@@ -389,17 +390,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblPrijemca;
+        private System.Windows.Forms.Label LblOdosielatel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox CmbOdosielatel;
         private System.Windows.Forms.ComboBox CmbPrijimatel;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label LblOdosielatelMeno;
+        private System.Windows.Forms.Label LblPrijemcaMeno;
+        private System.Windows.Forms.Label LblOdosielatelAdresa;
+        private System.Windows.Forms.Label LblIbanOdosielatela;
+        private System.Windows.Forms.Label LblPrijemcaAdresa;
+        private System.Windows.Forms.Label LblIbanPrijemca;
         private System.Windows.Forms.ComboBox CmbOdosielatelAdresa;
         private System.Windows.Forms.ComboBox CmbOdosielatelIBAN;
         private System.Windows.Forms.BindingSource repoTransakciaBindingSource;

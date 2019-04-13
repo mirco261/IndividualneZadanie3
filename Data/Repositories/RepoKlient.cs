@@ -28,18 +28,20 @@ namespace Data.Repositories
                 {
                     command.CommandText = @"SELECT
                         k.ID
-                      ,k.[Meno]
                       ,k.[Priezvisko]
+                      ,k.[Meno]
                       ,k.[Ulica]
                       ,k.[Mesto]
                       ,k.[Telefon]
                       ,k.[Mail]
                       ,k.[OP]
                       ,u.[IBAN]
+                      ,u.Aktivny
                       FROM [ATM].[dbo].[Klient] as k
                       left join dbo.Ucet as u
                       on k.UcetID = u.ID
-                      where k.Meno like @Meno and k.Priezvisko like @Priezvisko and u.IBAN like @IBAN";
+                      where k.Meno like @Meno and k.Priezvisko like @Priezvisko and u.IBAN like @IBAN
+                      order by k.Priezvisko asc";
 
                     command.Parameters.Add("@Meno", SqlDbType.NVarChar).Value = $"%{meno}%";
                     command.Parameters.Add("@Priezvisko", SqlDbType.NVarChar).Value = $"%{priezvisko}%";

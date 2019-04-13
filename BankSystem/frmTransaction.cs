@@ -54,6 +54,38 @@ namespace BankSystem
             CmbOdosielatelIBAN.DisplayMember = "UcetIBAN";
         }
 
+        /// <summary>
+        /// Skryjem info o odosielatelovi - ked napríklad je vklad do banky
+        /// </summary>
+        private void SkryjemInfoOOdosielatelovi()
+        {
+            CmbOdosielatel.Visible = false;
+            CmbOdosielatelAdresa.Visible = false;
+            CmbOdosielatelIBAN.Visible = false;
+            LblOdosielatelMeno.Visible = false;
+            LblOdosielatelAdresa.Visible = false;
+            LblIbanOdosielatela.Visible = false;
+            LblOdosielatel.Visible = false;
+            LblPrijemca.Text = "Vkladateľ";
+            LblPrijemcaMeno.Text = "Vkladateľ";
+
+        }
+
+        /// <summary>
+        /// Skryjem info o príjemcovi - ked napríklad je výber do banky
+        /// </summary>
+        private void SkryjemInfoOPrijemcovi()
+        {
+            CmbPrijimatel.Visible = false;
+            CmbPrijimatelAdresa.Visible = false;
+            CmbPrijimatelIBAN.Visible = false;
+            LblPrijemcaMeno.Visible = false;
+            LblPrijemcaAdresa.Visible = false;
+            LblIbanPrijemca.Visible = false;
+            LblPrijemca.Visible = false;
+            LblOdosielatel.Text = "Príjemca";
+            LblOdosielatelMeno.Text = "Príjemca";
+        }
 
         //Začiatok formulára
         public FrmTransaction(int IdKlienta, int menu)
@@ -67,18 +99,21 @@ namespace BankSystem
                 case 1:
                     {
                         ZapisemKlientaAkoPrijimatela(IdKlienta);
+                        SkryjemInfoOOdosielatelovi();
                         break;
                     }
                 //vyber z uctu
                 case 2:
                     {
                         ZapisemKlientaAkoOdosielatela(IdKlienta);
+                        SkryjemInfoOPrijemcovi();
                         break;
                     }
                 //Prevod z uctu
                 case 3:
                     {
                         ZapisemKlientaAkoOdosielatela(IdKlienta);
+                        
 
                         //Do zoznamu prijímateľov vložím zoznam klientov
                         Prijimatel = viewModel.NacitajzTabulkyKlientov();
@@ -122,6 +157,11 @@ namespace BankSystem
 
             //zatvor formular
             this.Close();
+
+        }
+
+        private void CmbOdosielatel_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

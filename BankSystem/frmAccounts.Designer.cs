@@ -43,13 +43,16 @@
             // cmdManageAccount
             // 
             this.cmdManageAccount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.cmdManageAccount.Location = new System.Drawing.Point(17, 391);
-            this.cmdManageAccount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmdManageAccount.BackColor = System.Drawing.Color.SteelBlue;
+            this.cmdManageAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cmdManageAccount.ForeColor = System.Drawing.Color.Snow;
+            this.cmdManageAccount.Location = new System.Drawing.Point(253, 632);
+            this.cmdManageAccount.Margin = new System.Windows.Forms.Padding(4);
             this.cmdManageAccount.Name = "cmdManageAccount";
-            this.cmdManageAccount.Size = new System.Drawing.Size(746, 29);
+            this.cmdManageAccount.Size = new System.Drawing.Size(746, 46);
             this.cmdManageAccount.TabIndex = 10;
             this.cmdManageAccount.Text = "Pracuj s vybraným riadkom";
-            this.cmdManageAccount.UseVisualStyleBackColor = true;
+            this.cmdManageAccount.UseVisualStyleBackColor = false;
             this.cmdManageAccount.Click += new System.EventHandler(this.CmdManageAccount_Click);
             // 
             // dgwZoznamKlientov
@@ -60,19 +63,19 @@
             this.dgwZoznamKlientov.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgwZoznamKlientov.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.dgwZoznamKlientov.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgwZoznamKlientov.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwZoznamKlientov.Location = new System.Drawing.Point(16, 91);
-            this.dgwZoznamKlientov.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgwZoznamKlientov.Margin = new System.Windows.Forms.Padding(4);
             this.dgwZoznamKlientov.Name = "dgwZoznamKlientov";
             this.dgwZoznamKlientov.ReadOnly = true;
-            this.dgwZoznamKlientov.Size = new System.Drawing.Size(747, 292);
+            this.dgwZoznamKlientov.Size = new System.Drawing.Size(1218, 533);
             this.dgwZoznamKlientov.TabIndex = 12;
             // 
             // txbMeno
             // 
             this.txbMeno.Location = new System.Drawing.Point(17, 59);
-            this.txbMeno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMeno.Margin = new System.Windows.Forms.Padding(4);
             this.txbMeno.Name = "txbMeno";
             this.txbMeno.Size = new System.Drawing.Size(132, 22);
             this.txbMeno.TabIndex = 13;
@@ -81,7 +84,7 @@
             // txbPriezvisko
             // 
             this.txbPriezvisko.Location = new System.Drawing.Point(160, 59);
-            this.txbPriezvisko.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbPriezvisko.Margin = new System.Windows.Forms.Padding(4);
             this.txbPriezvisko.Name = "txbPriezvisko";
             this.txbPriezvisko.Size = new System.Drawing.Size(132, 22);
             this.txbPriezvisko.TabIndex = 14;
@@ -90,7 +93,7 @@
             // txbIBAN
             // 
             this.txbIBAN.Location = new System.Drawing.Point(301, 59);
-            this.txbIBAN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbIBAN.Margin = new System.Windows.Forms.Padding(4);
             this.txbIBAN.Name = "txbIBAN";
             this.txbIBAN.Size = new System.Drawing.Size(132, 22);
             this.txbIBAN.TabIndex = 15;
@@ -141,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 433);
+            this.ClientSize = new System.Drawing.Size(1250, 691);
             this.Controls.Add(this.lblIBAN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
@@ -151,7 +154,7 @@
             this.Controls.Add(this.txbMeno);
             this.Controls.Add(this.dgwZoznamKlientov);
             this.Controls.Add(this.cmdManageAccount);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmAccounts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmClients";
