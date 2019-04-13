@@ -17,6 +17,8 @@ namespace BankSystem
         //Vytvorím si objekt pre prenos dát z view Model
         FrmTransactionViewModel viewModel = new FrmTransactionViewModel();
 
+        ModelTransakcia transakcia = new ModelTransakcia();
+
         //vytvorím si novú datatable
         DataTable Prijimatel = new DataTable();
         DataTable Odosielatel = new DataTable();
@@ -52,10 +54,6 @@ namespace BankSystem
             CmbPrijimatelIBAN.DataSource = Prijimatel;
             CmbPrijimatelIBAN.DisplayMember = "UcetIBAN";
 
-            ////testovanie
-            //lblUcetOdosielatela.Text = Odosielatel.Rows[0]["UcetID"].ToString();
-            //lblUcetPrijimatela.Text = Prijimatel.Rows[0]["UcetID"].ToString();
-
         }
 
         private void Label10_Click(object sender, EventArgs e)
@@ -73,12 +71,24 @@ namespace BankSystem
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
 
-            //testovanie
-            lblUcetOdosielatela.Text = Odosielatel.Rows[CmbOdosielatel.SelectedIndex]["UcetID"].ToString();
-            lblUcetPrijimatela.Text = Prijimatel.Rows[CmbPrijimatel.SelectedIndex]["UcetID"].ToString();
+            //vytvorenie objektu, ktorý sa posiela do dtb
+            transakcia.OdosielatelUcetID = (int)Odosielatel.Rows[CmbOdosielatel.SelectedIndex]["UcetID"];
+            transakcia.PrijimatelUcetID = (int)Prijimatel.Rows[CmbPrijimatel.SelectedIndex]["UcetID"];
+            transakcia.Suma = decimal.Parse(NtbSuma.Text);
+            transakcia.VariabilnySymbol = TxbVariabilnySymbol.Text;
+            transakcia.KonstatnySymbol = TxbKonstatnySymbol.Text;
+            transakcia.SpecifickySymbol = TxbSpecifickySymbol.Text;
+            transakcia.Sprava = TxbSprava.Text;
+
+            //Zapíš transakciu
+            viewModel.ZapisTransakciu(transakcia);
+
+            //zatvor formular
+            this.Close();
+
         }
     }
 }

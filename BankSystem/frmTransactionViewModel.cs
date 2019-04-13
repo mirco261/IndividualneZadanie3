@@ -26,7 +26,9 @@ namespace BankSystem
             return transakcia.NacitajzTabulkyKlientov();
         }
 
-
-
+        public void ZapisTransakciu(ModelTransakcia infoOTransakcii)
+        {
+            transakcia.ZapisTransakciu(infoOTransakcii);
+        }
     }
 }

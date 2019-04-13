@@ -15,12 +15,12 @@ namespace Data.Repositories
 
 
         /// <summary>
-        /// Načítam si všetkých klientov z db
+        /// Načítam všetkých klientov z db
         /// </summary>
         /// <returns></returns>
         public DataTable NacitajzTabulkyKlientov()
         {
-            //List<ModelKlientTransakcia> katalog = new List<ModelKlientTransakcia>();
+            
             using (base.Connection)
             {
                 base.Connection.Open();
@@ -43,20 +43,92 @@ namespace Data.Repositories
                         DataTable dt = ds.Tables["Klient"];
 
                         return dt;
-
-                        //foreach (var item in collection)
-                        //{
-
-                        //}
-                        //ModelKlientTransakcia klient = new ModelKlientTransakcia()
-                        //{
-                        //    Klient = ds.Tables[0].Rows[0][0].ToString(),
-                        //    Adresa = ds.Tables[0].Rows[0][1].ToString(),
-                        //    IBAN = ds.Tables[0].Rows[0][2].ToString(),
-                        //    UcetID = (int)ds.Tables[0].Rows[0][3]
-                        //};
-                        //return klient;
                     }
+                }
+            }
+        }
+        
+
+        public void ZapisTransakciu(ModelTransakcia transakcia)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = @"INSERT INTO [Transakcia]
+                                           ([Suma]
+                                           ,[VS]
+                                           ,[SS]
+                                           ,[KS]
+                                           ,[Sprava]
+                                           ,[PrijemcaUcetID]
+                                           ,[OdosielatelUcetID])
+                                            VALUES
+                                           (@Suma
+                                           ,@VS
+                                           ,@SS
+                                           ,@KS
+                                           ,@Sprava
+                                           ,@PrijemcaUcetID
+                                           ,@OdosielatelUcetID)";
+                    command.Parameters.Add("@Suma", SqlDbType.Decimal).Value = transakcia.Suma;
+
+                    command.Parameters.AddWithValue("@VS", transakcia.VariabilnySymbol);
+                    command.Parameters.AddWithValue("@SS", transakcia.SpecifickySymbol);
+                    command.Parameters.AddWithValue("@KS", transakcia.KonstatnySymbol);
+                    command.Parameters.AddWithValue("@Sprava", transakcia.Sprava);
+                    command.Parameters.AddWithValue("@PrijemcaUcetID", transakcia.PrijimatelUcetID);
+                    command.Parameters.AddWithValue("@OdosielatelUcetID", transakcia.OdosielatelUcetID);
+
+                    command.ExecuteNonQuery();
+
+                    PriratajPrijemcovi(transakcia.PrijimatelUcetID,transakcia.Suma);
+                    OdratajOdosielatelovi(transakcia.OdosielatelUcetID, transakcia.Suma);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Prirátam príjemcovi čiastku na účet
+        /// </summary>
+        /// <param name="PrijemcaUcetID"></param>
+        /// <param name="Ciastka"></param>
+        public void PriratajPrijemcovi(int PrijemcaUcetID, decimal Ciastka)
+        {
+            using(SqlConnection connection = base.Connection)
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"UPDATE [Ucet] SET [StavUctu] = [StavUctu]+@Suma WHERE Id = @Id";
+                    command.Parameters.Add("@Suma", SqlDbType.Decimal).Value = Ciastka;
+                    command.Parameters.AddWithValue("@Id", PrijemcaUcetID);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Odrátam odosielatelovi platby peniaze z účtu
+        /// </summary>
+        /// <param name="OdosielatelUcetId"></param>
+        /// <param name="Ciastka"></param>
+        public void OdratajOdosielatelovi(int OdosielatelUcetId, decimal Ciastka)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"UPDATE [Ucet] SET [StavUctu] = [StavUctu]-@Suma WHERE Id = @Id";
+                    command.Parameters.Add("@Suma", SqlDbType.Decimal).Value = Ciastka;
+                    command.Parameters.AddWithValue("@Id", OdosielatelUcetId);
+                    command.ExecuteNonQuery();
                 }
             }
         }

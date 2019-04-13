@@ -8,12 +8,8 @@ namespace Data.Models
 {
     public class ModelTransakcia
     {
-        public int PrijimatelID { get; set; }
-        public string PrijimatelMeno { get; set; }
-        public string PrijimatelIBAN { get; set; }
-        public string OdosielatelMeno { get; set; }
-        public string OdosielatelIBAN { get; set; }
-        public int OdosielatelID { get; set; }
+        public int PrijimatelUcetID { get; set; }
+        public int OdosielatelUcetID { get; set; }
         public decimal Suma { get; set; }
         public string VariabilnySymbol { get; set; }
         public string SpecifickySymbol { get; set; }
