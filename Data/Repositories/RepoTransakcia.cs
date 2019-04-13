@@ -31,9 +31,10 @@ namespace Data.Repositories
                                             ,k.Ulica + ', '+ k.Mesto as Adresa
                                             ,u.[IBAN] as UcetIBAN
                                             ,u.ID as UcetID
-                                            FROM [ATM].[dbo].[Klient] as k
+                                            FROM [Klient] as k
                                             left join dbo.Ucet as u
                                             on k.UcetID = u.ID
+                                            where u.[Aktivny] = 1
                                             order by k.Priezvisko asc, k.Mesto asc, u.IBAN asc";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -85,7 +86,10 @@ namespace Data.Repositories
 
                     command.ExecuteNonQuery();
 
+                    //Prirátam peniaze príjemcovi
                     PriratajPrijemcovi(transakcia.PrijimatelUcetID,transakcia.Suma);
+
+                    //Odrátam peniaze odosielateľovi
                     OdratajOdosielatelovi(transakcia.OdosielatelUcetID, transakcia.Suma);
                 }
             }
