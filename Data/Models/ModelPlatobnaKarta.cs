@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    public class PlatobnaKarta
+    public class ModelPlatobnaKarta
     {
         public int IDkarty { get; set; }
         public int IDklienta { get; set; }

@@ -49,7 +49,7 @@ namespace Data.Repositories
                         DataTable dt = ds.Tables["Karty"];
 
 
-                        PlatobnaKarta karta = new PlatobnaKarta
+                        ModelPlatobnaKarta karta = new ModelPlatobnaKarta
                         {
                             IDklienta = (int)ds.Tables[0].Rows[0][0],
                             IDkarty = (int)ds.Tables[0].Rows[0][1],
