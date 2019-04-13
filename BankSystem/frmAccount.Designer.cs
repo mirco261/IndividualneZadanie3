@@ -87,7 +87,7 @@
             // txbKrstneMeno
             // 
             this.txbKrstneMeno.Location = new System.Drawing.Point(21, 78);
-            this.txbKrstneMeno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbKrstneMeno.Margin = new System.Windows.Forms.Padding(4);
             this.txbKrstneMeno.Name = "txbKrstneMeno";
             this.txbKrstneMeno.Size = new System.Drawing.Size(132, 22);
             this.txbKrstneMeno.TabIndex = 3;
@@ -95,7 +95,7 @@
             // txbPriezvisko
             // 
             this.txbPriezvisko.Location = new System.Drawing.Point(163, 78);
-            this.txbPriezvisko.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbPriezvisko.Margin = new System.Windows.Forms.Padding(4);
             this.txbPriezvisko.Name = "txbPriezvisko";
             this.txbPriezvisko.Size = new System.Drawing.Size(132, 22);
             this.txbPriezvisko.TabIndex = 4;
@@ -113,7 +113,7 @@
             // txbUlica
             // 
             this.txbUlica.Location = new System.Drawing.Point(304, 78);
-            this.txbUlica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbUlica.Margin = new System.Windows.Forms.Padding(4);
             this.txbUlica.Name = "txbUlica";
             this.txbUlica.Size = new System.Drawing.Size(132, 22);
             this.txbUlica.TabIndex = 6;
@@ -121,7 +121,7 @@
             // txbMesto
             // 
             this.txbMesto.Location = new System.Drawing.Point(445, 78);
-            this.txbMesto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMesto.Margin = new System.Windows.Forms.Padding(4);
             this.txbMesto.Name = "txbMesto";
             this.txbMesto.Size = new System.Drawing.Size(132, 22);
             this.txbMesto.TabIndex = 7;
@@ -139,7 +139,7 @@
             // txbMail
             // 
             this.txbMail.Location = new System.Drawing.Point(304, 130);
-            this.txbMail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbMail.Margin = new System.Windows.Forms.Padding(4);
             this.txbMail.Name = "txbMail";
             this.txbMail.Size = new System.Drawing.Size(273, 22);
             this.txbMail.TabIndex = 12;
@@ -147,7 +147,7 @@
             // txbTelefon
             // 
             this.txbTelefon.Location = new System.Drawing.Point(163, 130);
-            this.txbTelefon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbTelefon.Margin = new System.Windows.Forms.Padding(4);
             this.txbTelefon.Name = "txbTelefon";
             this.txbTelefon.Size = new System.Drawing.Size(132, 22);
             this.txbTelefon.TabIndex = 11;
@@ -175,10 +175,11 @@
             // txbObcianskyPreukaz
             // 
             this.txbObcianskyPreukaz.Location = new System.Drawing.Point(21, 130);
-            this.txbObcianskyPreukaz.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbObcianskyPreukaz.Margin = new System.Windows.Forms.Padding(4);
             this.txbObcianskyPreukaz.Name = "txbObcianskyPreukaz";
             this.txbObcianskyPreukaz.Size = new System.Drawing.Size(132, 22);
             this.txbObcianskyPreukaz.TabIndex = 14;
+            this.txbObcianskyPreukaz.TextChanged += new System.EventHandler(this.txbObcianskyPreukaz_TextChanged);
             // 
             // label7
             // 
@@ -194,7 +195,7 @@
             // 
             this.txbIBAN.Enabled = false;
             this.txbIBAN.Location = new System.Drawing.Point(21, 197);
-            this.txbIBAN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbIBAN.Margin = new System.Windows.Forms.Padding(4);
             this.txbIBAN.Name = "txbIBAN";
             this.txbIBAN.Size = new System.Drawing.Size(273, 22);
             this.txbIBAN.TabIndex = 16;
@@ -212,7 +213,7 @@
             // btnUlozNovehoKlienta
             // 
             this.btnUlozNovehoKlienta.Location = new System.Drawing.Point(21, 245);
-            this.btnUlozNovehoKlienta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUlozNovehoKlienta.Margin = new System.Windows.Forms.Padding(4);
             this.btnUlozNovehoKlienta.Name = "btnUlozNovehoKlienta";
             this.btnUlozNovehoKlienta.Size = new System.Drawing.Size(557, 28);
             this.btnUlozNovehoKlienta.TabIndex = 17;
@@ -233,7 +234,7 @@
             // nudPrecerpanie
             // 
             this.nudPrecerpanie.Location = new System.Drawing.Point(304, 198);
-            this.nudPrecerpanie.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudPrecerpanie.Margin = new System.Windows.Forms.Padding(4);
             this.nudPrecerpanie.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -246,7 +247,7 @@
             // btnRandomKlient
             // 
             this.btnRandomKlient.Location = new System.Drawing.Point(445, 198);
-            this.btnRandomKlient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRandomKlient.Margin = new System.Windows.Forms.Padding(4);
             this.btnRandomKlient.Name = "btnRandomKlient";
             this.btnRandomKlient.Size = new System.Drawing.Size(133, 28);
             this.btnRandomKlient.TabIndex = 20;
@@ -292,12 +293,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblNadpis);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(617, 325);
             this.MinimumSize = new System.Drawing.Size(617, 325);
             this.Name = "frmAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmAccount";
+            this.Load += new System.EventHandler(this.frmAccount_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecerpanie)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,38 +10,47 @@ using System.Windows.Forms;
 
 namespace BankSystem
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
 
         FrmMainViewModel klient = new FrmMainViewModel();
         /// <summary>
         /// Používam ju na prenos vyhľadaného id podľa vyhľadávača
         /// </summary>
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
         }
 
         private void CmdFindClient_Click(object sender, EventArgs e)
         {
+            //naplním si do premenej text z vyhľadávania
             string hladaj = txbHladajKlienta.Text;
 
+            //vynechám medzery
+            hladaj.Replace(" ", "");
+
+            //ošetrím aby užívateľ zadal aspoň 3 znaky
+            if (hladaj.Length<3)
+            {
+                lblInfoOUzivatelovi.Text = "Zadaj aspoň tri znaky vyhľadávaného výrazu";
+            }
+
             //ošetrím, aby užívateľ zadal výraz, ktorý existuje
-            if (klient.HladajKlienta(hladaj) > 0)
+            else if (klient.HladajKlienta(hladaj) > 0)
             {
                 lblInfoOUzivatelovi.Text = "";
-                id = klient.HladajKlienta(hladaj);
+                Id = klient.HladajKlienta(hladaj);
+                using (FrmClientManagement newForm = new FrmClientManagement(Id))
+                {
+                    newForm.ShowDialog();
+                }
             }
             else
             {
                 lblInfoOUzivatelovi.Text = "Zadaný klient neexistuje";
-            }
-            using (FrmClientManagement newForm = new FrmClientManagement(id))
-            {
-                newForm.ShowDialog();
-
             }
         }
 

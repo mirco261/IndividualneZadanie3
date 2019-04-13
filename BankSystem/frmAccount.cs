@@ -80,12 +80,16 @@ namespace BankSystem
         }
 
 
-
+        /// <summary>
+        /// tlačidlom vygenerujem random klienta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRandomKlient_Click(object sender, EventArgs e)
         {
             ModelKlient randomKlient = new ModelKlient();
 
-
+            Random precerpanieRnd = new Random();
 
             //načítam si random klienta z randomizeru
             randomKlient = NovyKlient.VratRandomKlienta();
@@ -99,7 +103,7 @@ namespace BankSystem
             txbTelefon.Text = randomKlient.Telefon;
             txbMail.Text = randomKlient.Mail;
             IBAN = txbIBAN.Text;
-            Precerpanie = (int)nudPrecerpanie.Value;
+            nudPrecerpanie.Value = precerpanieRnd.Next(200,1000);
         }
 
 
@@ -115,6 +119,9 @@ namespace BankSystem
             Mail = txbMail.Text;
             IBAN = txbIBAN.Text;
             Precerpanie = (int)nudPrecerpanie.Value;
+
+            //vynechám medzery na OP
+            CisloOP = CisloOP.Replace(" ", "");
 
             NovyKlient.ZapisKlientaDoDb(Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie);
             this.Close();
@@ -137,6 +144,16 @@ namespace BankSystem
 
             NovyKlient.UpravKlientaDoDb(ID, Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie);
             this.Close();
+        }
+
+        private void txbObcianskyPreukaz_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmAccount_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
