@@ -73,7 +73,7 @@
             this.cmdUpdate.Name = "cmdUpdate";
             this.cmdUpdate.Size = new System.Drawing.Size(149, 28);
             this.cmdUpdate.TabIndex = 4;
-            this.cmdUpdate.Text = "Update info";
+            this.cmdUpdate.Text = "Aktualizuj klienta";
             this.cmdUpdate.UseVisualStyleBackColor = true;
             this.cmdUpdate.Click += new System.EventHandler(this.CmdUpdate_Click);
             // 
@@ -84,7 +84,7 @@
             this.cmdNewTransaction.Name = "cmdNewTransaction";
             this.cmdNewTransaction.Size = new System.Drawing.Size(149, 28);
             this.cmdNewTransaction.TabIndex = 5;
-            this.cmdNewTransaction.Text = "New transaction";
+            this.cmdNewTransaction.Text = "Peňažný prevod";
             this.cmdNewTransaction.UseVisualStyleBackColor = true;
             this.cmdNewTransaction.Click += new System.EventHandler(this.CmdNewTransaction_Click);
             // 
@@ -95,7 +95,7 @@
             this.cmdCloseAccount.Name = "cmdCloseAccount";
             this.cmdCloseAccount.Size = new System.Drawing.Size(149, 28);
             this.cmdCloseAccount.TabIndex = 6;
-            this.cmdCloseAccount.Text = "Close account";
+            this.cmdCloseAccount.Text = "Deaktivácia účtu";
             this.cmdCloseAccount.UseVisualStyleBackColor = true;
             this.cmdCloseAccount.Click += new System.EventHandler(this.CmdCloseAccount_Click);
             // 
@@ -106,7 +106,7 @@
             this.cmdAllTransactions.Name = "cmdAllTransactions";
             this.cmdAllTransactions.Size = new System.Drawing.Size(149, 28);
             this.cmdAllTransactions.TabIndex = 8;
-            this.cmdAllTransactions.Text = "All transactions";
+            this.cmdAllTransactions.Text = "Všetky transakcie";
             this.cmdAllTransactions.UseVisualStyleBackColor = true;
             this.cmdAllTransactions.Click += new System.EventHandler(this.CmdAllTransactions_Click);
             // 
@@ -117,7 +117,7 @@
             this.cmdWithdrawal.Name = "cmdWithdrawal";
             this.cmdWithdrawal.Size = new System.Drawing.Size(149, 28);
             this.cmdWithdrawal.TabIndex = 9;
-            this.cmdWithdrawal.Text = "Withdrawal";
+            this.cmdWithdrawal.Text = "Výber peňazí";
             this.cmdWithdrawal.UseVisualStyleBackColor = true;
             this.cmdWithdrawal.Click += new System.EventHandler(this.CmdWithdrawal_Click);
             // 
@@ -128,7 +128,7 @@
             this.cmdDeposit.Name = "cmdDeposit";
             this.cmdDeposit.Size = new System.Drawing.Size(149, 28);
             this.cmdDeposit.TabIndex = 10;
-            this.cmdDeposit.Text = "Deposit";
+            this.cmdDeposit.Text = "Vklad peňazí";
             this.cmdDeposit.UseVisualStyleBackColor = true;
             this.cmdDeposit.Click += new System.EventHandler(this.CmdDeposit_Click);
             // 
@@ -475,7 +475,7 @@
             this.lblDeaktivovanyUcet.AutoSize = true;
             this.lblDeaktivovanyUcet.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblDeaktivovanyUcet.ForeColor = System.Drawing.Color.Red;
-            this.lblDeaktivovanyUcet.Location = new System.Drawing.Point(314, 184);
+            this.lblDeaktivovanyUcet.Location = new System.Drawing.Point(294, 184);
             this.lblDeaktivovanyUcet.Name = "lblDeaktivovanyUcet";
             this.lblDeaktivovanyUcet.Size = new System.Drawing.Size(864, 95);
             this.lblDeaktivovanyUcet.TabIndex = 39;

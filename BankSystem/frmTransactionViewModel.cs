@@ -26,6 +26,15 @@ namespace BankSystem
             return transakcia.NacitajzTabulkyKlientov();
         }
 
+        /// <summary>
+        /// Vytiahnem si všetkých klientov z db
+        /// </summary>
+        /// <returns></returns>
+        public DataTable NacitajzTabulkyKlientov(int idKlienta)
+        {
+            return transakcia.NacitajzTabulkyKlientov(idKlienta);
+        }
+
         public void ZapisTransakciu(ModelTransakcia infoOTransakcii)
         {
             transakcia.ZapisTransakciu(infoOTransakcii);

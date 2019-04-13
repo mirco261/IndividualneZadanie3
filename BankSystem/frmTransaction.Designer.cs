@@ -108,7 +108,6 @@
             this.CmbOdosielatel.Name = "CmbOdosielatel";
             this.CmbOdosielatel.Size = new System.Drawing.Size(248, 24);
             this.CmbOdosielatel.TabIndex = 8;
-            this.CmbOdosielatel.SelectedIndexChanged += new System.EventHandler(this.CmbOdosielatel_SelectedIndexChanged);
             // 
             // CmbPrijimatel
             // 
@@ -118,7 +117,6 @@
             this.CmbPrijimatel.Name = "CmbPrijimatel";
             this.CmbPrijimatel.Size = new System.Drawing.Size(248, 24);
             this.CmbPrijimatel.TabIndex = 9;
-            this.CmbPrijimatel.SelectedIndexChanged += new System.EventHandler(this.CmbPrijimatel_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -243,7 +241,7 @@
             this.BtnUskutocnitPlatbu.TabIndex = 24;
             this.BtnUskutocnitPlatbu.Text = "PLATBA";
             this.BtnUskutocnitPlatbu.UseVisualStyleBackColor = false;
-            this.BtnUskutocnitPlatbu.Click += new System.EventHandler(this.Button1_Click);
+            this.BtnUskutocnitPlatbu.Click += new System.EventHandler(this.BtnUskutocnitPlatbu_Click);
             // 
             // NtbSuma
             // 
@@ -292,11 +290,11 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.DarkCyan;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label10.Location = new System.Drawing.Point(26, 331);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(157, 20);
+            this.label10.Size = new System.Drawing.Size(174, 24);
             this.label10.TabIndex = 32;
             this.label10.Text = "Variabilný symbol";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -305,11 +303,11 @@
             // 
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.DarkCyan;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label11.Location = new System.Drawing.Point(232, 331);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(160, 20);
+            this.label11.Size = new System.Drawing.Size(176, 24);
             this.label11.TabIndex = 33;
             this.label11.Text = "Špecifický symbol";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -318,11 +316,11 @@
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.DarkCyan;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label12.Location = new System.Drawing.Point(434, 331);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(167, 20);
+            this.label12.Size = new System.Drawing.Size(184, 24);
             this.label12.TabIndex = 34;
             this.label12.Text = "Konštantný symbol";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -339,11 +337,11 @@
             // 
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.DarkCyan;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label13.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label13.Location = new System.Drawing.Point(26, 398);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(178, 20);
+            this.label13.Size = new System.Drawing.Size(198, 24);
             this.label13.TabIndex = 36;
             this.label13.Text = "Správa pre príjemcu";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

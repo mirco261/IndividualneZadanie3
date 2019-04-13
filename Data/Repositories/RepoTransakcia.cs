@@ -48,7 +48,43 @@ namespace Data.Repositories
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Načítam všetkých klientov z db
+        /// </summary>
+        /// <returns></returns>
+        public DataTable NacitajzTabulkyKlientov(int clientID)
+        {
+
+            using (base.Connection)
+            {
+                base.Connection.Open();
+                using (SqlCommand command = base.Connection.CreateCommand())
+                {
+                    command.CommandText = @"SELECT
+                                            k.[Priezvisko] + ' '+ k.[Meno] as Klient
+                                            ,k.Ulica + ', '+ k.Mesto as Adresa
+                                            ,u.[IBAN] as UcetIBAN
+                                            ,u.ID as UcetID
+                                            FROM [Klient] as k
+                                            left join dbo.Ucet as u
+                                            on k.UcetID = u.ID
+                                            where u.[Aktivny] = 1 and k.ID = @ID";
+                    command.Parameters.AddWithValue("@ID", clientID);
+
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataSet ds = new DataSet();
+                        adapter.Fill(ds, "Klient");
+                        DataTable dt = ds.Tables["Klient"];
+
+                        return dt;
+                    }
+                }
+            }
+        }
+
 
         public void ZapisTransakciu(ModelTransakcia transakcia)
         {

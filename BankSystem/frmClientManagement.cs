@@ -122,7 +122,9 @@ namespace BankSystem
 
         private void CmdDeposit_Click(object sender, EventArgs e)
         {
-            using (FrmTransaction newForm = new FrmTransaction())
+            //Menu 1 = Vklad
+            int menu = 1;
+            using (FrmTransaction newForm = new FrmTransaction(IdKlienta, menu))
             {
                 newForm.ShowDialog();
                 //načítam nové horné info o klientovi
@@ -132,7 +134,21 @@ namespace BankSystem
 
         private void CmdWithdrawal_Click(object sender, EventArgs e)
         {
-            using (FrmTransaction newForm = new FrmTransaction())
+            //Menu 2 = Výber
+            int menu = 2;
+            using (FrmTransaction newForm = new FrmTransaction(IdKlienta, menu))
+            {
+                newForm.ShowDialog();
+                //načítam nové horné info o klientovi
+                NacitajNoveInfoOKlientoviDoHornehoMenu();
+            }
+        }
+
+        private void CmdNewTransaction_Click(object sender, EventArgs e)
+        {
+            //Menu 3 = Prevod
+            int menu = 3;
+            using (FrmTransaction newForm = new FrmTransaction(IdKlienta, menu))
             {
                 newForm.ShowDialog();
                 //načítam nové horné info o klientovi
@@ -150,15 +166,7 @@ namespace BankSystem
             }
         }
 
-        private void CmdNewTransaction_Click(object sender, EventArgs e)
-        {
-            using (FrmTransaction newForm = new FrmTransaction())
-            {
-                newForm.ShowDialog();
-                //načítam nové horné info o klientovi
-                NacitajNoveInfoOKlientoviDoHornehoMenu();
-            }
-        }
+
 
         private void CmdCloseAccount_Click(object sender, EventArgs e)
         {

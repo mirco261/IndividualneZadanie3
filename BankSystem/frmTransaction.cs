@@ -17,66 +17,100 @@ namespace BankSystem
         //Vytvorím si objekt pre prenos dát z view Model
         FrmTransactionViewModel viewModel = new FrmTransactionViewModel();
 
+        //vytvorím si objekt transakcie - info o transakcií
         ModelTransakcia transakcia = new ModelTransakcia();
 
         //vytvorím si novú datatable
         DataTable Prijimatel = new DataTable();
         DataTable Odosielatel = new DataTable();
 
-        public FrmTransaction()
+        /// <summary>
+        /// Metoda, pomocou ktorej zapisem do infa o prijimatelovi preneseneho klienta
+        /// </summary>
+        /// <param name="IdKlienta"></param>
+        private void ZapisemKlientaAkoPrijimatela(int IdKlienta)
         {
-            InitializeComponent();
-
-
-            //vytvorím si objekt pre klientov, aby som ich vedel vkladať do comboboxov
-            //ModelKlientTransakcia klient = new ModelKlientTransakcia();
-
-
-
-
-            //natiahnem si do klienta všetkých klientov z dtb
-            Prijimatel =  viewModel.NacitajzTabulkyKlientov();
-            Odosielatel = viewModel.NacitajzTabulkyKlientov();
-
-            //vyplním políčka odosielateľa
-            CmbOdosielatel.DataSource = Odosielatel;
-            CmbOdosielatel.DisplayMember = "Klient";
-            CmbOdosielatelAdresa.DataSource = Odosielatel;
-            CmbOdosielatelAdresa.DisplayMember = "Adresa";
-            CmbOdosielatelIBAN.DataSource = Odosielatel;
-            CmbOdosielatelIBAN.DisplayMember = "UcetIBAN";
-
-            //vyplním políčka prijímateľa
+            Prijimatel = viewModel.NacitajzTabulkyKlientov(IdKlienta);
             CmbPrijimatel.DataSource = Prijimatel;
             CmbPrijimatel.DisplayMember = "Klient";
             CmbPrijimatelAdresa.DataSource = Prijimatel;
             CmbPrijimatelAdresa.DisplayMember = "Adresa";
             CmbPrijimatelIBAN.DataSource = Prijimatel;
             CmbPrijimatelIBAN.DisplayMember = "UcetIBAN";
-
         }
 
-        private void Label10_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Metoda, pomocou ktorej zapisem do infa o odosielatelovi preneseneho klienta
+        /// </summary>
+        /// <param name="IdKlienta"></param>
+        private void ZapisemKlientaAkoOdosielatela(int IdKlienta)
         {
-
+            Odosielatel = viewModel.NacitajzTabulkyKlientov(IdKlienta);
+            CmbOdosielatel.DataSource = Odosielatel;
+            CmbOdosielatel.DisplayMember = "Klient";
+            CmbOdosielatelAdresa.DataSource = Odosielatel;
+            CmbOdosielatelAdresa.DisplayMember = "Adresa";
+            CmbOdosielatelIBAN.DataSource = Odosielatel;
+            CmbOdosielatelIBAN.DisplayMember = "UcetIBAN";
         }
 
-        private void CmbOdosielatel_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
+        //Začiatok formulára
+        public FrmTransaction(int IdKlienta, int menu)
+        {
+            InitializeComponent();
+
+            //Pohrám sa s formulárom podľa potreby
+            switch (menu)
+            {
+                //vklad na ucet
+                case 1:
+                    {
+                        ZapisemKlientaAkoPrijimatela(IdKlienta);
+                        break;
+                    }
+                //vyber z uctu
+                case 2:
+                    {
+                        ZapisemKlientaAkoOdosielatela(IdKlienta);
+                        break;
+                    }
+                //Prevod z uctu
+                case 3:
+                    {
+                        ZapisemKlientaAkoOdosielatela(IdKlienta);
+
+                        //Do zoznamu prijímateľov vložím zoznam klientov
+                        Prijimatel = viewModel.NacitajzTabulkyKlientov();
+                        CmbPrijimatel.DataSource = Prijimatel;
+                        CmbPrijimatel.DisplayMember = "Klient";
+                        CmbPrijimatelAdresa.DataSource = Prijimatel;
+                        CmbPrijimatelAdresa.DisplayMember = "Adresa";
+                        CmbPrijimatelIBAN.DataSource = Prijimatel;
+                        CmbPrijimatelIBAN.DisplayMember = "UcetIBAN";
+                        break;
+                    }
+                default:
+                    break;
+            }
         }
-
-        private void CmbPrijimatel_SelectedIndexChanged(object sender, EventArgs e)
+        
+        //akcia na tlačidlo uskutočni platbu
+        private void BtnUskutocnitPlatbu_Click(object sender, EventArgs e)
         {
+            //Ak combo odosielatel alebo prijímatel nie je prázdne, použijem hodnotu z komba ako ID účtu pre prevody
+            if (CmbOdosielatel.SelectedIndex != -1)
+            {
+                transakcia.OdosielatelUcetID = (int)Odosielatel.Rows[CmbOdosielatel.SelectedIndex]["UcetID"];
+            }
+            
+            //Ak combo odosielatel alebo prijímatel nie je prázdne, použijem hodnotu z komba ako ID účtu pre prevody
+            if (CmbPrijimatel.SelectedIndex != -1)
+            {
+                transakcia.PrijimatelUcetID = (int)Prijimatel.Rows[CmbPrijimatel.SelectedIndex]["UcetID"];
+            }
 
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-
-            //vytvorenie objektu, ktorý sa posiela do dtb
-            transakcia.OdosielatelUcetID = (int)Odosielatel.Rows[CmbOdosielatel.SelectedIndex]["UcetID"];
-            transakcia.PrijimatelUcetID = (int)Prijimatel.Rows[CmbPrijimatel.SelectedIndex]["UcetID"];
+            //Použijem premenné z textboxov následne do transakcie
             transakcia.Suma = decimal.Parse(NtbSuma.Text);
             transakcia.VariabilnySymbol = TxbVariabilnySymbol.Text;
             transakcia.KonstatnySymbol = TxbKonstatnySymbol.Text;
