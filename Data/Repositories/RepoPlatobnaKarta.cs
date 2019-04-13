@@ -57,7 +57,6 @@ namespace Data.Repositories
                             Platnost = ds.Tables[0].Rows[0][4].ToString(),
                             PIN = (int)ds.Tables[0].Rows[0][6],
                             Zablokovana = (bool)ds.Tables[0].Rows[0][5],
-                            Meno = ds.Tables[0].Rows[0][3].ToString()
                         };
                         return ds;
                     }

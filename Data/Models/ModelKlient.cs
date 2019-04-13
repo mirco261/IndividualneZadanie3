@@ -19,5 +19,6 @@ namespace Data.Models
         public decimal StavNaUcte { get; set; }
         public decimal Precerpanie { get; set; }
         public string IBAN { get; set; }
+        public bool Aktivny { get; set; }
     }
 }

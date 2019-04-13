@@ -14,6 +14,5 @@ namespace Data.Models
         public string Platnost { get; set; }
         public int PIN { get; set; }
         public bool Zablokovana { get; set; }
-        public string Meno { get; set; }
     }
 }

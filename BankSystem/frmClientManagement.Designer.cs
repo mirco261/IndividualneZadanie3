@@ -61,7 +61,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.BtnPridajKartu = new System.Windows.Forms.Button();
             this.BtnZmenZablokovanieKarty = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblPozadieHornehoMenu = new System.Windows.Forms.Label();
+            this.lblDeaktivovanyUcet = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgwZoznamPlatobnychKariet)).BeginInit();
             this.SuspendLayout();
             // 
@@ -427,11 +428,13 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.BackColor = System.Drawing.Color.DarkMagenta;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label10.Location = new System.Drawing.Point(1017, 11);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(199, 20);
+            this.label10.Size = new System.Drawing.Size(223, 20);
             this.label10.TabIndex = 35;
             this.label10.Text = "Zoznam platobných kariet";
             // 
@@ -439,7 +442,7 @@
             // 
             this.BtnPridajKartu.Location = new System.Drawing.Point(1017, 387);
             this.BtnPridajKartu.Name = "BtnPridajKartu";
-            this.BtnPridajKartu.Size = new System.Drawing.Size(239, 106);
+            this.BtnPridajKartu.Size = new System.Drawing.Size(224, 106);
             this.BtnPridajKartu.TabIndex = 36;
             this.BtnPridajKartu.Text = "Pridaj kartu";
             this.BtnPridajKartu.UseVisualStyleBackColor = true;
@@ -447,31 +450,43 @@
             // 
             // BtnZmenZablokovanieKarty
             // 
-            this.BtnZmenZablokovanieKarty.Location = new System.Drawing.Point(1262, 386);
+            this.BtnZmenZablokovanieKarty.Location = new System.Drawing.Point(1247, 386);
             this.BtnZmenZablokovanieKarty.Name = "BtnZmenZablokovanieKarty";
-            this.BtnZmenZablokovanieKarty.Size = new System.Drawing.Size(216, 107);
+            this.BtnZmenZablokovanieKarty.Size = new System.Drawing.Size(231, 107);
             this.BtnZmenZablokovanieKarty.TabIndex = 37;
             this.BtnZmenZablokovanieKarty.Text = "Zablokuj / Odblokuj \r\nkartu";
             this.BtnZmenZablokovanieKarty.UseVisualStyleBackColor = true;
             this.BtnZmenZablokovanieKarty.Click += new System.EventHandler(this.BtnZmenZablokovanieKarty_Click);
             // 
-            // label16
+            // lblPozadieHornehoMenu
             // 
-            this.label16.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label16.Location = new System.Drawing.Point(-30, -59);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(1554, 243);
-            this.label16.TabIndex = 38;
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPozadieHornehoMenu.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.lblPozadieHornehoMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPozadieHornehoMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblPozadieHornehoMenu.Location = new System.Drawing.Point(-30, -59);
+            this.lblPozadieHornehoMenu.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPozadieHornehoMenu.Name = "lblPozadieHornehoMenu";
+            this.lblPozadieHornehoMenu.Size = new System.Drawing.Size(1554, 243);
+            this.lblPozadieHornehoMenu.TabIndex = 38;
+            this.lblPozadieHornehoMenu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDeaktivovanyUcet
+            // 
+            this.lblDeaktivovanyUcet.AutoSize = true;
+            this.lblDeaktivovanyUcet.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblDeaktivovanyUcet.ForeColor = System.Drawing.Color.Red;
+            this.lblDeaktivovanyUcet.Location = new System.Drawing.Point(314, 184);
+            this.lblDeaktivovanyUcet.Name = "lblDeaktivovanyUcet";
+            this.lblDeaktivovanyUcet.Size = new System.Drawing.Size(864, 95);
+            this.lblDeaktivovanyUcet.TabIndex = 39;
+            this.lblDeaktivovanyUcet.Text = "Účet bol deaktivovaný";
             // 
             // FrmClientManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1482, 503);
+            this.Controls.Add(this.lblDeaktivovanyUcet);
             this.Controls.Add(this.BtnZmenZablokovanieKarty);
             this.Controls.Add(this.BtnPridajKartu);
             this.Controls.Add(this.label10);
@@ -505,7 +520,7 @@
             this.Controls.Add(this.cmdCloseAccount);
             this.Controls.Add(this.cmdNewTransaction);
             this.Controls.Add(this.cmdUpdate);
-            this.Controls.Add(this.label16);
+            this.Controls.Add(this.lblPozadieHornehoMenu);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(1500, 550);
             this.MinimumSize = new System.Drawing.Size(1500, 550);
@@ -552,6 +567,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button BtnPridajKartu;
         private System.Windows.Forms.Button BtnZmenZablokovanieKarty;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblPozadieHornehoMenu;
+        private System.Windows.Forms.Label lblDeaktivovanyUcet;
     }
 }

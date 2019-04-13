@@ -54,5 +54,11 @@ namespace BankSystem
 
         }
 
+
+        public void ZatvorUcetKlientovi(int IdKlienta)
+        {
+            Klient.ZatvorUcetKlientovi(IdKlienta);
+
+        }
     }
 }

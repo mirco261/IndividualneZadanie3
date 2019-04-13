@@ -16,9 +16,9 @@ namespace Data.Repositories
 
 
         /// <summary>
-        /// Načíta údaje z tabuľky klient
+        /// Načíta údaje z tabuľky klient  pre účely filtrovania klientov
         /// </summary>
-        /// <returns></returns>
+        /// <returns>vracia dataset v ktorom sú všetky potrebné info pre zobrazenie v gride</returns>
         public DataSet NacitajzTabulkyKlient(string meno, string priezvisko, string IBAN)
         {
             using (base.Connection)
@@ -50,7 +50,7 @@ namespace Data.Repositories
                         DataSet ds = new DataSet();
                         adapter.Fill(ds, "Klient");
                         DataTable dt = ds.Tables["Klient"];
-                        
+
                         return ds;
                     }
                 }
@@ -80,7 +80,7 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"insert into Ucet (IBAN, Precerpanie, StavUctu) output inserted.ID values(@Iban, @Precerpanie, 0)";
+                    command.CommandText = @"insert into Ucet (IBAN, Precerpanie, StavUctu, Aktivny) output inserted.ID values(@Iban, @Precerpanie, 0, 1)";
                     command.Parameters.AddWithValue("@Iban", iban);
                     command.Parameters.AddWithValue("@Precerpanie", precerpanie);
 
@@ -166,6 +166,7 @@ namespace Data.Repositories
                       ,u.[IBAN]
                       ,u.StavUctu
                       ,u.Precerpanie
+                      ,u.Aktivny
                       FROM [ATM].[dbo].[Klient] as k
                       left join dbo.Ucet as u
                       on k.UcetID = u.ID
@@ -173,7 +174,7 @@ namespace Data.Repositories
 
                     command.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
-                    using(SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
                         DataSet ds = new DataSet();
                         adapter.Fill(ds, "Klient");
@@ -192,12 +193,14 @@ namespace Data.Repositories
                             OP = ds.Tables[0].Rows[0][6].ToString(),
                             IBAN = ds.Tables[0].Rows[0][7].ToString(),
                             StavNaUcte = (decimal)ds.Tables[0].Rows[0][8],
-                            Precerpanie = (decimal)ds.Tables[0].Rows[0][9]
+                            Precerpanie = (decimal)ds.Tables[0].Rows[0][9],
+                            Aktivny = (bool)ds.Tables[0].Rows[0][10]
+
                         };
                         return klient;
                     }
                 }
-            }            
+            }
         }
 
 
@@ -231,7 +234,7 @@ namespace Data.Repositories
 
 
                 //Upravím si užívateľove informácie podľa nových
-                using (SqlCommand command = new SqlCommand()) 
+                using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
 
@@ -250,6 +253,25 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Zatvorí učet klientovi. Pridá príznak Aktivny=0 v tabulke ucet, pomocou ID klienta
+        /// </summary>
+        /// <param name="IDklienta"></param>
+        public void ZatvorUcetKlientovi(int IDklienta)
+        {
+            using (SqlConnection connection = base.Connection)
+            {
+                connection.Open();
 
+                //vytvorím si bankový účet
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"update Ucet set Ucet.Aktivny = 0  FROM Ucet left join Klient on Ucet.ID = Klient.UcetID where Klient.id = @ID";
+                    command.Parameters.AddWithValue("@ID", IDklienta);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

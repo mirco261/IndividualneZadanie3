@@ -61,7 +61,34 @@ namespace BankSystem
                 DgwZoznamPlatobnychKariet.Columns[0].Visible = false;
                 DgwZoznamPlatobnychKariet.Columns[1].Visible = false;
                 DgwZoznamPlatobnychKariet.Columns[3].Visible = false;
+                BtnZmenZablokovanieKarty.Visible = true;
+            }
+            else BtnZmenZablokovanieKarty.Visible = false;
 
+            //Zistím, či je aktívny, ak nie je, upravím všetko toto dole
+            if (klient.Aktivny == false)
+            {
+                cmdAllTransactions.Enabled = false;
+                cmdCloseAccount.Enabled = false;
+                cmdDeposit.Enabled = false;
+                cmdNewTransaction.Enabled = false;
+                cmdUpdate.Enabled = false;
+                cmdWithdrawal.Enabled = false;
+                BtnPridajKartu.Enabled = false;
+                BtnZmenZablokovanieKarty.Enabled = false;
+                lblDeaktivovanyUcet.Visible = true;
+            }
+            else
+            {
+                cmdAllTransactions.Enabled = true;
+                cmdCloseAccount.Enabled = true;
+                cmdDeposit.Enabled = true;
+                cmdNewTransaction.Enabled = true;
+                cmdUpdate.Enabled = true;
+                cmdWithdrawal.Enabled = true;
+                BtnPridajKartu.Enabled = true;
+                BtnZmenZablokovanieKarty.Enabled = true;
+                lblDeaktivovanyUcet.Visible = false;
             }
         }
 
@@ -118,9 +145,17 @@ namespace BankSystem
 
         private void CmdCloseAccount_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Hodor?", "Hodor!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show("Naozaj chcete zneaktívniť účet klienta?\nTáto operácia sa nedá vrátiť späť!", "Dôležité upozornenie!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+
+                //dám príkaz aby sa mu zneaktívnil účet
+
+                klientConnection.ZatvorUcetKlientovi(IdKlienta);
+
                 DialogResult = DialogResult.OK;
+
+
+
             }
         }
 
@@ -136,8 +171,10 @@ namespace BankSystem
 
         private void BtnZmenZablokovanieKarty_Click(object sender, EventArgs e)
         {
+            
             int idKarty = Convert.ToInt32(DgwZoznamPlatobnychKariet.CurrentRow.Cells[1].Value);
             bool stav = Convert.ToBoolean(DgwZoznamPlatobnychKariet.CurrentRow.Cells[5].Value);
+            int indexKliknutehoRiadka = DgwZoznamPlatobnychKariet.CurrentRow.Index;
 
             klientConnection.ZmenZablokovanieKarty(idKarty, stav);
 
@@ -148,11 +185,11 @@ namespace BankSystem
             DgwZoznamPlatobnychKariet.Columns[0].Visible = false;
             DgwZoznamPlatobnychKariet.Columns[1].Visible = false;
             DgwZoznamPlatobnychKariet.Columns[3].Visible = false;
+
+            //Zmením názov na tlačidle
              stav = Convert.ToBoolean(DgwZoznamPlatobnychKariet.CurrentRow.Cells[5].Value);
-
             BtnZmenZablokovanieKarty.Text = stav == true ?  "Odblokuj kartu" : "Zablokuj kartu";
-
-
+            
         }
 
         private void DgwZoznamPlatobnychKariet_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -179,13 +216,19 @@ namespace BankSystem
             klientConnection.PridajKartu(RndCislo, IdKlienta);
 
             //resetnem dgw s kartami
-            //načítam datagridview o platobných kartách klienta
             DgwZoznamPlatobnychKariet.AutoGenerateColumns = true;
             DgwZoznamPlatobnychKariet.DataSource = klientConnection.NacitajPlatobneKarty(IdKlienta);
             DgwZoznamPlatobnychKariet.DataMember = "Karty";
             DgwZoznamPlatobnychKariet.Columns[0].Visible = false;
             DgwZoznamPlatobnychKariet.Columns[1].Visible = false;
             DgwZoznamPlatobnychKariet.Columns[3].Visible = false;
+
+            //vyberiem datagrid, aby si mohol stlačiť tlačidlo aktivuj/deaktivuj
+            DgwZoznamPlatobnychKariet.Select();
+
+            //zaktivujem tlačidlo pre úpravu karty
+            BtnZmenZablokovanieKarty.Visible = true;
+
 
         }
     }
