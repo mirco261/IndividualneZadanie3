@@ -52,6 +52,7 @@
     <Compile Include="Repositories\RepoBase.cs" />
     <Compile Include="Repositories\RepoKlient.cs" />
     <Compile Include="Repositories\RepoPlatobnaKarta.cs" />
+    <Compile Include="Repositories\RepoStatistiky.cs" />
     <Compile Include="Repositories\RepoTransakcia.cs" />
   </ItemGroup>
   <ItemGroup />

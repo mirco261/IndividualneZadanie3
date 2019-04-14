@@ -12,6 +12,21 @@ namespace BankSystem
 {
     public partial class FrmMain : Form
     {
+        //načíta štatistiky do bočného meu
+        private void NacitajStatistiky()
+        {
+            DgwTOP10.AutoGenerateColumns = true;
+            DgwTOP10.DataSource = klient.Top10klientov();
+            DgwTOP10.DataMember = "Top10";
+
+            NtbSumaNaUctoch.Text = klient.PocetPenaziNaUctoch().ToString();
+            NtbPocetAktivnychUctov.Text = klient.PocetUctov().ToString();
+
+            DgvTopMesta.AutoGenerateColumns = true;
+            DgvTopMesta.DataSource = klient.TopMestaKlienti();
+            DgvTopMesta.DataMember = "Top10";
+        }
+
 
         FrmMainViewModel klient = new FrmMainViewModel();
         /// <summary>
@@ -22,7 +37,10 @@ namespace BankSystem
         public FrmMain()
         {
             InitializeComponent();
+            NacitajStatistiky();
         }
+
+
 
         private void CmdFindClient_Click(object sender, EventArgs e)
         {
@@ -46,6 +64,8 @@ namespace BankSystem
                 using (FrmClientManagement newForm = new FrmClientManagement(Id))
                 {
                     newForm.ShowDialog();
+                    NacitajStatistiky();
+
                 }
             }
             else
@@ -59,6 +79,8 @@ namespace BankSystem
             using (frmAccount newForm = new frmAccount())
             {
                 newForm.ShowDialog();
+                NacitajStatistiky();
+
             }
         }
 
@@ -67,6 +89,8 @@ namespace BankSystem
             using (FrmAccounts newForm = new FrmAccounts())
             {
                 newForm.ShowDialog();
+                NacitajStatistiky();
+
             }
         }
 
@@ -75,12 +99,9 @@ namespace BankSystem
             using (frmTransactions newForm = new frmTransactions())
             {
                 newForm.ShowDialog();
+                NacitajStatistiky();
+
             }
-        }
-
-        private void TxbHladajKlienta_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

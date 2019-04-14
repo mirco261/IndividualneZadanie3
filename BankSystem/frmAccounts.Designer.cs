@@ -69,6 +69,7 @@
             this.dgwZoznamKlientov.Margin = new System.Windows.Forms.Padding(4);
             this.dgwZoznamKlientov.Name = "dgwZoznamKlientov";
             this.dgwZoznamKlientov.ReadOnly = true;
+            this.dgwZoznamKlientov.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwZoznamKlientov.Size = new System.Drawing.Size(1218, 533);
             this.dgwZoznamKlientov.TabIndex = 12;
             // 

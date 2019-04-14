@@ -40,8 +40,10 @@
             this.DgvTransakcie.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvTransakcie.Location = new System.Drawing.Point(0, 0);
             this.DgvTransakcie.Name = "DgvTransakcie";
+            this.DgvTransakcie.ReadOnly = true;
             this.DgvTransakcie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.DgvTransakcie.RowTemplate.Height = 24;
+            this.DgvTransakcie.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvTransakcie.Size = new System.Drawing.Size(1045, 619);
             this.DgvTransakcie.TabIndex = 0;
             // 
@@ -51,7 +53,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1045, 619);
             this.Controls.Add(this.DgvTransakcie);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTransactions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmTransactions";

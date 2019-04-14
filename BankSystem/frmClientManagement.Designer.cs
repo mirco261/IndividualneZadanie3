@@ -421,6 +421,7 @@
             this.DgwZoznamPlatobnychKariet.Name = "DgwZoznamPlatobnychKariet";
             this.DgwZoznamPlatobnychKariet.ReadOnly = true;
             this.DgwZoznamPlatobnychKariet.RowTemplate.Height = 24;
+            this.DgwZoznamPlatobnychKariet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgwZoznamPlatobnychKariet.Size = new System.Drawing.Size(462, 334);
             this.DgwZoznamPlatobnychKariet.TabIndex = 34;
             this.DgwZoznamPlatobnychKariet.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgwZoznamPlatobnychKariet_CellContentClick);
