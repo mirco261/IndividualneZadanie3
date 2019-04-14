@@ -20,6 +20,10 @@ namespace TransformerBank
 
         ModelBankomat klient = new ModelBankomat();
 
+        int pokus = 1;
+        string CisloKartyAktualna;
+        string CisloKartyPredchadzajuca;
+
         public FrmMain()
         {
             InitializeComponent();
@@ -45,7 +49,30 @@ namespace TransformerBank
                 //Ak kombinácia karty a PIN nenašla klienta, zakričím 
                 if (klient == null)
                 {
-                    LblInformacieOPrihlaseni.Text = "Zadal si nesprávnu kombináciu karty a PIN";
+                    //načítam si kartu, ktorú teraz použil
+                    CisloKartyAktualna = NtbKodKarty.Text;
+
+                    //ak sa karty rovnaju, započítam pokus
+                    if (CisloKartyAktualna == CisloKartyPredchadzajuca)
+                    {
+                        //navýšim počet pokusov
+                        pokus++;
+                    }
+
+                    //prevezmem hodnotu aktualnej karty do predchádzajúcej
+                    CisloKartyPredchadzajuca = CisloKartyAktualna;
+
+                    //ak dosiahol počet pokusov, zablokujem kartu
+                    if (pokus == 3)
+                    {
+                        LblInformacieOPrihlaseni.Text = "Platobná karta bola zablokovaná";
+                        ViewModel.ZablokujKartu(int.Parse(NtbKodKarty.Text));
+                    }
+                    //ak nedosiahol, iba upozorním že nezadal dobrú kombináciu karty a pin
+                    else
+                    {
+                        LblInformacieOPrihlaseni.Text = "Zadal si nesprávnu kombináciu karty a PIN";
+                    }
                 }
 
                 //ak je všetko v poriadku, otvorím nové okno a pošlem informáciu o klientovi
@@ -56,9 +83,10 @@ namespace TransformerBank
                         newForm.ShowDialog();
                     }
 
-                    //vymažem hodnoty na prazdne
+                    //vymažem hodnoty na defaultne
                     NtbKodKarty.Text = "";
                     NtbPIN.Text = "";
+                    pokus = 1;
                 }
             }
 

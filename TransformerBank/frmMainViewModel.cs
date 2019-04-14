@@ -10,11 +10,18 @@ namespace TransformerBank
 {
     class FrmMainViewModel
     {
-        readonly RepoBankomat viewModel = new RepoBankomat();
+        readonly RepoBankomat viewModelRepoBankomat = new RepoBankomat();
+
+        RepoPlatobnaKarta viewModelPlatobnaKarta = new RepoPlatobnaKarta();
 
         public ModelBankomat NacitajKlienta(int karta, int PIN)
         {
-            return viewModel.NacitajKlienta(karta, PIN);
+            return viewModelRepoBankomat.NacitajKlienta(karta, PIN);
+        }
+
+        public void ZablokujKartu(int KartaCislo)
+        {
+            viewModelPlatobnaKarta.ZablokujKartu(KartaCislo);
         }
     }
 }

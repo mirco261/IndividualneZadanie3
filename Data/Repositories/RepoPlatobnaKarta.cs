@@ -151,7 +151,7 @@ namespace Data.Repositories
             {
                 connection.Open();
 
-                using(SqlCommand command = new SqlCommand())
+                using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = @"select ucet.ID from ucet inner join klient on ucet.ID = @IdKlienta";
@@ -159,19 +159,36 @@ namespace Data.Repositories
                     IdUctuKlienta = (int)command.ExecuteScalar();
                 }
 
-                    using (SqlCommand command = new SqlCommand())
+                using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = @"insert into [Karta] ([Cislo],[Platnost], [PIN],[Zablokovana], UcetID )  values(@KartaCislo, @Platnost, @PIN, @Zablokovana, @UcetID)";
                     command.Parameters.AddWithValue("@KartaCislo", cisloKarty);
-                    command.Parameters.AddWithValue("@PIN", rndPIN.Next(1000,9999));
+                    command.Parameters.AddWithValue("@PIN", rndPIN.Next(1000, 9999));
                     command.Parameters.AddWithValue("@Platnost", DateTime.Today.AddYears(2));
                     command.Parameters.AddWithValue("@Zablokovana", false);
                     command.Parameters.AddWithValue("@UcetID", IdUctuKlienta);
                     command.ExecuteNonQuery();
+                }
+            }
+        }
 
+        /// <summary>
+        /// Zablokuj kartu
+        /// </summary>
+        /// <param name="KartaCislo">pošli číslo karty</param>
+        public void ZablokujKartu(int KartaCislo)
+        {
 
-
+            using (SqlConnection connection = base.Connection)
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"UPDATE [Karta] SET [Zablokovana] = 1 WHERE Cislo = @KartaCislo";
+                    command.Parameters.AddWithValue("@KartaCislo", KartaCislo);
+                    command.ExecuteNonQuery();
                 }
             }
         }
