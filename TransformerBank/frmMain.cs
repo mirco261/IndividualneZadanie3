@@ -7,14 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Data.Models;
 
 namespace TransformerBank
 {
-    public partial class frmMain : Form
+
+    
+    
+    public partial class FrmMain : Form
     {
-        public frmMain()
+        FrmMainViewModel ViewModel = new FrmMainViewModel();
+
+        ModelBankomat klient = new ModelBankomat();
+
+        public FrmMain()
         {
             InitializeComponent();
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnPrihlasit_Click(object sender, EventArgs e)
+        {
+             klient = ViewModel.NacitajKlienta(int.Parse(NtbKodKarty.Text), int.Parse(NtbPIN.Text));
+            if (klient == null)
+            {
+                label3.Text = "Zadal si nespravne";
+            }
+            else
+            {
+                label3.Text = $"{klient.KlientMeno}";
+            }
         }
     }
 }

@@ -216,9 +216,8 @@ namespace Data.Repositories
                     }
                 }
             }
-
-
         }
+
 
         /// <summary>
         /// Načíta všetky transakcie iba vybraného klienta
