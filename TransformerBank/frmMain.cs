@@ -12,8 +12,8 @@ using Data.Models;
 namespace TransformerBank
 {
 
-    
-    
+
+
     public partial class FrmMain : Form
     {
         FrmMainViewModel ViewModel = new FrmMainViewModel();
@@ -32,15 +32,37 @@ namespace TransformerBank
 
         private void BtnPrihlasit_Click(object sender, EventArgs e)
         {
-             klient = ViewModel.NacitajKlienta(int.Parse(NtbKodKarty.Text), int.Parse(NtbPIN.Text));
-            if (klient == null)
+            //ošetrím aby vstupné boxy boli vyplnené
+            if (NtbKodKarty.Text == "" || NtbPIN.Text == "")
             {
-                label3.Text = "Zadal si nespravne";
+                LblInformacieOPrihlaseni.Text = "Vstupné údaje nesmú byť prázdne";
             }
             else
             {
-                label3.Text = $"{klient.KlientMeno}";
+                //Naplním si klienta do premennej
+                klient = ViewModel.NacitajKlienta(int.Parse(NtbKodKarty.Text), int.Parse(NtbPIN.Text));
+
+                //Ak kombinácia karty a PIN nenašla klienta, zakričím 
+                if (klient == null)
+                {
+                    LblInformacieOPrihlaseni.Text = "Zadal si nesprávnu kombináciu karty a PIN";
+                }
+
+                //ak je všetko v poriadku, otvorím nové okno a pošlem informáciu o klientovi
+                else
+                {
+                    using (frmVyberAkcie newForm = new frmVyberAkcie(klient))
+                    {
+                        newForm.ShowDialog();
+                    }
+
+                    //vymažem hodnoty na prazdne
+                    NtbKodKarty.Text = "";
+                    NtbPIN.Text = "";
+                }
             }
+
+
         }
     }
 }

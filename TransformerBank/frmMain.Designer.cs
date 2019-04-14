@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BtnPrihlasit = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.LblInformacieOPrihlaseni = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NtbKodKarty
@@ -87,22 +87,24 @@
             this.BtnPrihlasit.UseVisualStyleBackColor = true;
             this.BtnPrihlasit.Click += new System.EventHandler(this.BtnPrihlasit_Click);
             // 
-            // label3
+            // LblInformacieOPrihlaseni
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(92, 371);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
+            this.LblInformacieOPrihlaseni.AutoSize = true;
+            this.LblInformacieOPrihlaseni.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LblInformacieOPrihlaseni.ForeColor = System.Drawing.Color.Maroon;
+            this.LblInformacieOPrihlaseni.Location = new System.Drawing.Point(89, 352);
+            this.LblInformacieOPrihlaseni.Name = "LblInformacieOPrihlaseni";
+            this.LblInformacieOPrihlaseni.Size = new System.Drawing.Size(17, 25);
+            this.LblInformacieOPrihlaseni.TabIndex = 5;
+            this.LblInformacieOPrihlaseni.Text = " ";
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(512, 444);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(512, 483);
+            this.Controls.Add(this.LblInformacieOPrihlaseni);
             this.Controls.Add(this.BtnPrihlasit);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -111,6 +113,8 @@
             this.DoubleBuffered = true;
             this.Location = new System.Drawing.Point(100, 200);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximumSize = new System.Drawing.Size(530, 530);
+            this.MinimumSize = new System.Drawing.Size(530, 530);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ATM";
@@ -127,7 +131,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtnPrihlasit;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LblInformacieOPrihlaseni;
     }
 }
 

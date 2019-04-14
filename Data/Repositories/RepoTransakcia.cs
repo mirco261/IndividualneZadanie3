@@ -111,6 +111,7 @@ namespace Data.Repositories
                                            ,@Sprava
                                            ,@PrijemcaUcetID
                                            ,@OdosielatelUcetID)";
+
                     command.Parameters.Add("@Suma", SqlDbType.Decimal).Value = transakcia.Suma;
 
                     command.Parameters.AddWithValue("@VS", transakcia.VariabilnySymbol);

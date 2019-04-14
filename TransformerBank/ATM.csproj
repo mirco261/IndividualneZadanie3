@@ -53,10 +53,38 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMainViewModel.cs" />
+    <Compile Include="frmStavUctu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStavUctu.Designer.cs">
+      <DependentUpon>frmStavUctu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVyberAkcie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVyberAkcie.Designer.cs">
+      <DependentUpon>frmVyberAkcie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVyberZUctu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVyberZUctu.Designer.cs">
+      <DependentUpon>frmVyberZUctu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVyberZUctuViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStavUctu.resx">
+      <DependentUpon>frmStavUctu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVyberAkcie.resx">
+      <DependentUpon>frmVyberAkcie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVyberZUctu.resx">
+      <DependentUpon>frmVyberZUctu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
