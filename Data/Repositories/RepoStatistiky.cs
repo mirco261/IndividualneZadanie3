@@ -133,7 +133,8 @@ namespace Data.Repositories
                                             ,COUNT(ID) AS 'Počet účtov'
                                             FROM Ucet
                                             WHERE DATEDIFF(MONTH, DatumZalozenia, GETDATE()) <= 6
-                                            GROUP BY MONTH(DatumZalozenia), YEAR(DatumZalozenia)";
+                                            GROUP BY MONTH(DatumZalozenia), YEAR(DatumZalozenia)
+											ORDER BY Rok DESC, MONTH(DatumZalozenia) DESC";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {

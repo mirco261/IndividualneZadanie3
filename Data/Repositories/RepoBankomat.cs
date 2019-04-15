@@ -14,22 +14,25 @@ namespace Data.Repositories
         /// </summary>
         public ModelBankomat NacitajKlienta(int karta, int PIN)
         {
-            using (base.Connection)
+            using (Connection)
             {
-                base.Connection.Open();
+                Connection.Open();
                 using (SqlCommand command = base.Connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT 
-                                           p.[UcetID]
+                    command.CommandText = @"SELECT p.UcetID
 	                                      ,u.StavUctu
 	                                      ,u.Precerpanie
 	                                      ,k.Priezvisko + ', '+k.Meno as KlientMeno
-                                          FROM [Karta] as p
-                                          inner join Ucet as u
-                                          on p.UcetID = u.ID
-                                          inner join Klient as k
-                                         on u.ID = k.UcetID
-                                         where p.PIN = @PIN and p.Cislo = @Karta and p.Platnost >= @Platnost and p.Zablokovana = 0 and u.Aktivny =1";
+                                          FROM Karta AS p
+                                          INNER JOIN Ucet AS u
+                                          ON p.UcetID = u.ID
+                                          INNER JOIN Klient AS k
+                                          ON u.ID = k.UcetID
+                                          WHERE p.PIN = @PIN AND 
+                                          p.Cislo = @Karta AND 
+                                          p.Platnost >= @Platnost AND 
+                                          p.Zablokovana = 0 AND 
+                                          u.Aktivny =1";
 
                     command.Parameters.Add("@PIN", SqlDbType.Int).Value = PIN;
                     command.Parameters.Add("@Karta", SqlDbType.Int).Value = karta;

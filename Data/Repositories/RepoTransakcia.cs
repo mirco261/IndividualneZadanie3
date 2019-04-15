@@ -56,7 +56,7 @@ namespace Data.Repositories
             using (Connection)
             {
                 Connection.Open();
-                using (SqlCommand command = base.Connection.CreateCommand())
+                using (SqlCommand command = Connection.CreateCommand())
                 {
                     command.CommandText = @"SELECT k.Priezvisko + ' '+ k.Meno AS Klient
                                             ,k.Ulica + ', '+ k.Mesto as Adresa
