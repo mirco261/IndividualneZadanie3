@@ -71,7 +71,7 @@ namespace Data.Repositories
         /// <param name="mail"></param>
         /// <param name="iban"></param>
         /// <returns></returns>
-        public int ZapisKlientaDoDb(string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie)
+        public int ZapisKlientaDoDb(string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie, DateTime datum)
         {
             using (SqlConnection connection = base.Connection)
             {
@@ -82,9 +82,10 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"insert into Ucet (IBAN, Precerpanie, StavUctu, Aktivny) output inserted.ID values(@Iban, @Precerpanie, 0, 1)";
+                    command.CommandText = @"insert into Ucet (IBAN, Precerpanie, StavUctu, Aktivny, DatumZalozenia) output inserted.ID values(@Iban, @Precerpanie, 0, 1, @Datum)";
                     command.Parameters.AddWithValue("@Iban", iban);
                     command.Parameters.AddWithValue("@Precerpanie", precerpanie);
+                    command.Parameters.AddWithValue("@Datum", datum);
 
                     idCudziKluc = (int)command.ExecuteScalar();
                 }
@@ -169,6 +170,7 @@ namespace Data.Repositories
                       ,u.StavUctu
                       ,u.Precerpanie
                       ,u.Aktivny
+                      ,u.DatumZalozenia
                       FROM [ATM].[dbo].[Klient] as k
                       left join dbo.Ucet as u
                       on k.UcetID = u.ID
@@ -196,7 +198,8 @@ namespace Data.Repositories
                             IBAN = ds.Tables[0].Rows[0][7].ToString(),
                             StavNaUcte = (decimal)ds.Tables[0].Rows[0][8],
                             Precerpanie = (decimal)ds.Tables[0].Rows[0][9],
-                            Aktivny = (bool)ds.Tables[0].Rows[0][10]
+                            Aktivny = (bool)ds.Tables[0].Rows[0][10],
+                            DatumZalozenia = (DateTime)ds.Tables[0].Rows[0][11]
 
                         };
                         return klient;

@@ -20,5 +20,6 @@ namespace Data.Models
         public decimal Precerpanie { get; set; }
         public string IBAN { get; set; }
         public bool Aktivny { get; set; }
+        public DateTime DatumZalozenia { get; set; }
     }
 }

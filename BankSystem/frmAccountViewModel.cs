@@ -28,9 +28,9 @@ namespace BankSystem
         /// <param name="mail"></param>
         /// <param name="iban"></param>
         /// <param name="precerpanie"></param>
-        public void ZapisKlientaDoDb(string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie)
+        public void ZapisKlientaDoDb(string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie, DateTime datum)
         {
-            NovyKlient.ZapisKlientaDoDb(meno, priezvisko, adresa, mesto, cisloOP, telefon, mail, iban, precerpanie);
+            NovyKlient.ZapisKlientaDoDb(meno, priezvisko, adresa, mesto, cisloOP, telefon, mail, iban, precerpanie, datum);
         }
 
         /// <summary>

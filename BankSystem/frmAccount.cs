@@ -27,6 +27,7 @@ namespace BankSystem
         public string IBAN { get; set; }
         public int Precerpanie { get; set; }
         public int PocetKariet { get; set; }
+        public DateTime Datum { get; set; }
 
         //inicializujem si dataview 
         FrmAccountViewModel NovyKlient = new FrmAccountViewModel();
@@ -119,11 +120,12 @@ namespace BankSystem
             Mail = txbMail.Text;
             IBAN = txbIBAN.Text;
             Precerpanie = (int)nudPrecerpanie.Value;
+            Datum = DateTime.Now;    
 
             //vynechám medzery na OP
             CisloOP = CisloOP.Replace(" ", "");
 
-            NovyKlient.ZapisKlientaDoDb(Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie);
+            NovyKlient.ZapisKlientaDoDb(Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie, Datum);
             this.Close();
 
         }

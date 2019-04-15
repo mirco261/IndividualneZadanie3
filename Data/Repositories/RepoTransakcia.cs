@@ -93,6 +93,8 @@ namespace Data.Repositories
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
                 {
+                    //zadeklarujem si datum transakcie
+                    DateTime datum = DateTime.Now;
                     command.Connection = connection;
 
                     command.CommandText = @"INSERT INTO [Transakcia]
@@ -102,7 +104,8 @@ namespace Data.Repositories
                                            ,[KS]
                                            ,[Sprava]
                                            ,[PrijemcaUcetID]
-                                           ,[OdosielatelUcetID])
+                                           ,[OdosielatelUcetID]
+                                           ,t.Datum)
                                             VALUES
                                            (@Suma
                                            ,@VS
@@ -110,7 +113,8 @@ namespace Data.Repositories
                                            ,@KS
                                            ,@Sprava
                                            ,@PrijemcaUcetID
-                                           ,@OdosielatelUcetID)";
+                                           ,@OdosielatelUcetID
+                                           ,@Datum)";
 
                     command.Parameters.Add("@Suma", SqlDbType.Decimal).Value = transakcia.Suma;
 
@@ -120,6 +124,8 @@ namespace Data.Repositories
                     command.Parameters.AddWithValue("@Sprava", transakcia.Sprava);
                     command.Parameters.AddWithValue("@PrijemcaUcetID", transakcia.PrijimatelUcetID);
                     command.Parameters.AddWithValue("@OdosielatelUcetID", transakcia.OdosielatelUcetID);
+                    command.Parameters.AddWithValue("@Datum", datum);
+
 
                     command.ExecuteNonQuery();
 
@@ -196,7 +202,8 @@ namespace Data.Repositories
                                           ,t.[KS]
                                           ,t.[Sprava] as Správa
                                           ,t.[OdosielatelUcetID]
-                                          ,t.[PrijemcaUcetID]
+                                          ,t.[PrijemcaUcetID]   
+                                          ,t.Datum           
                                           FROM [Transakcia] as t
                                           left join Ucet as up
                                           on t.PrijemcaUcetID = up.ID
@@ -243,6 +250,7 @@ namespace Data.Repositories
                                           ,t.[Sprava] as Správa
                                           ,t.[OdosielatelUcetID]
                                           ,t.[PrijemcaUcetID]
+                                          ,t.Datum           
                                           FROM [Transakcia] as t
                                           left join Ucet as up
                                           on t.PrijemcaUcetID = up.ID

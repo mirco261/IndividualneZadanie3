@@ -36,6 +36,7 @@ namespace BankSystem
             lblPovolenePrecerpanie.Text = klient.Precerpanie.ToString() + " EUR";
             lblStavNaUcte.Text = klient.StavNaUcte.ToString() + " EUR";
             lblObcianskyPreukaz.Text = klient.OP;
+            LblDatumZalozenia.Text = klient.DatumZalozenia.ToShortDateString();
         }
 
         /// <summary>

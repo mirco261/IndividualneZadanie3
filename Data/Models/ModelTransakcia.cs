@@ -15,5 +15,6 @@ namespace Data.Models
         public string SpecifickySymbol { get; set; } = "";
         public string KonstatnySymbol { get; set; } = "";
         public string Sprava { get; set; } = "";
+        public DateTime Datum { get; set; }
     }
 }
