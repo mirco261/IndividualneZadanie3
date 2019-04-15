@@ -20,22 +20,20 @@ namespace Data.Repositories
         /// <returns></returns>
         public DataTable NacitajzTabulkyKlientov()
         {
-            
-            using (base.Connection)
+            using (Connection)
             {
-                base.Connection.Open();
-                using (SqlCommand command = base.Connection.CreateCommand())
+                Connection.Open();
+                using (SqlCommand command = Connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT
-                                            k.[Priezvisko] + ' '+ k.[Meno] as Klient
-                                            ,k.Ulica + ', '+ k.Mesto as Adresa
-                                            ,u.[IBAN] as UcetIBAN
-                                            ,u.ID as UcetID
-                                            FROM [Klient] as k
-                                            left join dbo.Ucet as u
-                                            on k.UcetID = u.ID
-                                            where u.[Aktivny] = 1
-                                            order by k.Priezvisko asc, k.Mesto asc, u.IBAN asc";
+                    command.CommandText = @"SELECT k.Priezvisko + ' '+ k.Meno AS Klient
+                                            ,k.Ulica + ', '+ k.Mesto AS Adresa
+                                            ,u.IBAN AS UcetIBAN
+                                            ,u.ID AS UcetID
+                                            FROM Klient AS k
+                                            LEFT JOIN Ucet AS u
+                                            ON k.UcetID = u.ID
+                                            WHERE u.Aktivny = 1
+                                            ORDER BY k.Priezvisko ASC";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -50,28 +48,25 @@ namespace Data.Repositories
         }
 
         /// <summary>
-        /// Načítam všetkých klientov z db
+        /// Načítam konkrétneho klienta z db
         /// </summary>
         /// <returns></returns>
         public DataTable NacitajzTabulkyKlientov(int clientID)
         {
-
-            using (base.Connection)
+            using (Connection)
             {
-                base.Connection.Open();
+                Connection.Open();
                 using (SqlCommand command = base.Connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT
-                                            k.[Priezvisko] + ' '+ k.[Meno] as Klient
+                    command.CommandText = @"SELECT k.Priezvisko + ' '+ k.Meno AS Klient
                                             ,k.Ulica + ', '+ k.Mesto as Adresa
-                                            ,u.[IBAN] as UcetIBAN
-                                            ,u.ID as UcetID
-                                            FROM [Klient] as k
-                                            left join dbo.Ucet as u
-                                            on k.UcetID = u.ID
-                                            where u.[Aktivny] = 1 and k.ID = @ID";
+                                            ,u.IBAN AS UcetIBAN
+                                            ,u.ID AS UcetID
+                                            FROM Klient AS k
+                                            LEFT JOIN Ucet AS u
+                                            ON k.UcetID = u.ID
+                                            WHERE u.Aktivny = 1 and k.ID = @ID";
                     command.Parameters.AddWithValue("@ID", clientID);
-
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -91,7 +86,7 @@ namespace Data.Repositories
         /// <param name="transakcia"></param>
         public void ZapisTransakciu(ModelTransakcia transakcia)
         {
-            using (SqlConnection connection = base.Connection)
+            using (SqlConnection connection = Connection)
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -100,14 +95,14 @@ namespace Data.Repositories
                     DateTime datum = DateTime.Now;
                     command.Connection = connection;
 
-                    command.CommandText = @"INSERT INTO [Transakcia]
-                                           ([Suma]
-                                           ,[VS]
-                                           ,[SS]
-                                           ,[KS]
-                                           ,[Sprava]
-                                           ,[PrijemcaUcetID]
-                                           ,[OdosielatelUcetID]
+                    command.CommandText = @"INSERT INTO Transakcia
+                                           (Suma
+                                           ,VS
+                                           ,SS
+                                           ,KS
+                                           ,Sprava
+                                           ,PrijemcaUcetID
+                                           ,OdosielatelUcetID
                                            ,t.Datum)
                                             VALUES
                                            (@Suma
@@ -129,7 +124,6 @@ namespace Data.Repositories
                     command.Parameters.AddWithValue("@OdosielatelUcetID", transakcia.OdosielatelUcetID);
                     command.Parameters.AddWithValue("@Datum", datum);
 
-
                     command.ExecuteNonQuery();
 
                     //Prirátam peniaze príjemcovi
@@ -148,13 +142,13 @@ namespace Data.Repositories
         /// <param name="Ciastka"></param>
         public void PriratajPrijemcovi(int PrijemcaUcetID, decimal Ciastka)
         {
-            using(SqlConnection connection = base.Connection)
+            using(SqlConnection connection = Connection)
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"UPDATE [Ucet] SET [StavUctu] = [StavUctu]+@Suma WHERE Id = @Id";
+                    command.CommandText = @"UPDATE Ucet SET StavUctu = StavUctu+@Suma WHERE Id = @Id";
                     command.Parameters.Add("@Suma", SqlDbType.Decimal).Value = Ciastka;
                     command.Parameters.AddWithValue("@Id", PrijemcaUcetID);
                     command.ExecuteNonQuery();
@@ -175,7 +169,7 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"UPDATE [Ucet] SET [StavUctu] = [StavUctu]-@Suma WHERE Id = @Id";
+                    command.CommandText = @"UPDATE Ucet SET StavUctu = StavUctu-@Suma WHERE Id = @Id";
                     command.Parameters.Add("@Suma", SqlDbType.Decimal).Value = Ciastka;
                     command.Parameters.AddWithValue("@Id", OdosielatelUcetId);
                     command.ExecuteNonQuery();
@@ -189,38 +183,38 @@ namespace Data.Repositories
         /// <returns>dataset ktorý použijem pre datagridview</returns>
         public DataSet NacitajTransakcie()
         {
-            using (base.Connection)
+            using (Connection)
             {
-                base.Connection.Open();
-                using (SqlCommand command = base.Connection.CreateCommand())
+                Connection.Open();
+                using (SqlCommand command = Connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT t.[ID] as ID_transakcie
-	                                      ,ko.Priezvisko +', '+ ko.Meno as Odosielateľ
-	                                      ,kp.Priezvisko +', '+ kp.Meno as Príjemca
-	                                      ,ko.ID as ID_odosielateľa
-	                                      ,kp.ID as ID_prijímateľa
+                    command.CommandText = @"SELECT t.ID AS ID_transakcie
+	                                      ,ko.Priezvisko +', '+ ko.Meno AS Odosielateľ
+	                                      ,kp.Priezvisko +', '+ kp.Meno AS Príjemca
+	                                      ,ko.ID AS ID_odosielateľa
+	                                      ,kp.ID AS ID_prijímateľa
 										  ,CASE
-                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is not null THEN 'Prevod'
-                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is     null THEN 'Výber'
-                                            WHEN ko.Priezvisko is     null and kp.Priezvisko is not null THEN 'Vklad'
+                                            WHEN ko.Priezvisko IS NOT NULL AND kp.Priezvisko IS NOT NULL THEN 'Prevod'
+                                            WHEN ko.Priezvisko IS NOT NULL AND kp.Priezvisko IS     NULL THEN 'Výber'
+                                            WHEN ko.Priezvisko IS     NULL AND kp.Priezvisko IS NOT NULL THEN 'Vklad'
                                             END AS 'Typ operácie'
-	                                      ,t.[Suma] as Čiastka
-                                          ,t.[VS]
-                                          ,t.[SS]
-                                          ,t.[KS]
-                                          ,t.[Sprava] as Správa
-                                          ,t.[OdosielatelUcetID]
-                                          ,t.[PrijemcaUcetID]   
-                                          ,t.Datum  as Dátum
-                                          FROM [Transakcia] as t
-                                          left join Ucet as up
-                                          on t.PrijemcaUcetID = up.ID
-                                          left join Klient as kp
-                                          on up.ID = kp.ID
-                                          left join Ucet as uo
-                                          on t.OdosielatelUcetID = uo.ID
-                                         left join Klient as ko
-                                          on uo.ID = ko.ID";
+	                                      ,t.Suma AS Čiastka
+                                          ,t.VS
+                                          ,t.SS
+                                          ,t.KS
+                                          ,t.Sprava AS Správa
+                                          ,t.OdosielatelUcetID
+                                          ,t.PrijemcaUcetID  
+                                          ,t.Datum AS Dátum
+                                          FROM Transakcia AS t
+                                          LEFT JOIN Ucet AS up
+                                          ON t.PrijemcaUcetID = up.ID
+                                          LEFT JOIN Klient AS kp
+                                          ON up.ID = kp.ID
+                                          LEFT JOIN Ucet AS uo
+                                          ON t.OdosielatelUcetID = uo.ID
+                                          LEFT JOIN Klient AS ko
+                                          ON uo.ID = ko.ID";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -245,36 +239,36 @@ namespace Data.Repositories
             using (base.Connection)
             {
                 base.Connection.Open();
-                using (SqlCommand command = base.Connection.CreateCommand())
+                using (SqlCommand command = Connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT t.[ID] as ID_transakcie
-	                                      ,ko.Priezvisko +', '+ ko.Meno as Odosielateľ
-	                                      ,kp.Priezvisko +', '+ kp.Meno as Príjemca
-	                                      ,ko.ID as ID_odosielateľa
-	                                      ,kp.ID as ID_prijímateľa
+                    command.CommandText = @"SELECT t.ID AS ID_transakcie
+	                                      ,ko.Priezvisko +', '+ ko.Meno AS Odosielateľ
+	                                      ,kp.Priezvisko +', '+ kp.Meno AS Príjemca
+	                                      ,ko.ID AS ID_odosielateľa
+	                                      ,kp.ID AS ID_prijímateľa
 										  ,CASE
-                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is not null THEN 'Prevod'
-                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is     null THEN 'Výber'
-                                            WHEN ko.Priezvisko is     null and kp.Priezvisko is not null THEN 'Vklad'
+                                            WHEN ko.Priezvisko IS NOT NULL AND kp.Priezvisko IS NOT NULL THEN 'Prevod'
+                                            WHEN ko.Priezvisko IS NOT NULL AND kp.Priezvisko IS     NULL THEN 'Výber'
+                                            WHEN ko.Priezvisko IS     NULL AND kp.Priezvisko IS NOT NULL THEN 'Vklad'
                                             END AS 'Typ operácie'
-	                                      ,t.[Suma] as Čiastka
-                                          ,t.[VS]
-                                          ,t.[SS]
-                                          ,t.[KS]
-                                          ,t.[Sprava] as Správa
-                                          ,t.[OdosielatelUcetID]
-                                          ,t.[PrijemcaUcetID]   
-                                          ,t.Datum  as Dátum        
-                                          FROM [Transakcia] as t
-                                          left join Ucet as up
-                                          on t.PrijemcaUcetID = up.ID
-                                          left join Klient as kp
-                                          on up.ID = kp.ID
-                                          left join Ucet as uo
-                                          on t.OdosielatelUcetID = uo.ID
-                                         left join Klient as ko
-                                          on uo.ID = ko.ID
-                                          where ko.ID = @clientID or kp.ID = @ClientID ";
+	                                      ,t.Suma AS Čiastka
+                                          ,t.VS
+                                          ,t.SS
+                                          ,t.KS
+                                          ,t.Sprava AS Správa
+                                          ,t.OdosielatelUcetID
+                                          ,t.PrijemcaUcetID  
+                                          ,t.Datum AS Dátum
+                                          FROM Transakcia AS t
+                                          LEFT JOIN Ucet AS up
+                                          ON t.PrijemcaUcetID = up.ID
+                                          LEFT JOIN Klient AS kp
+                                          ON up.ID = kp.ID
+                                          LEFT JOIN Ucet AS uo
+                                          ON t.OdosielatelUcetID = uo.ID
+                                          LEFT JOIN Klient AS ko
+                                          ON uo.ID = ko.ID
+                                          WHERE ko.ID = @clientID OR kp.ID = @ClientID ";
 
                     command.Parameters.Add("@ClientID", SqlDbType.Int).Value = clientID;
 

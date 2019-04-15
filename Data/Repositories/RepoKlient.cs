@@ -58,16 +58,8 @@ namespace Data.Repositories
         /// <summary>
         /// Pridanie nového klienta
         /// </summary>
-        /// <param name="meno"></param>
-        /// <param name="priezvisko"></param>
-        /// <param name="adresa"></param>
-        /// <param name="mesto"></param>
-        /// <param name="cisloOP"></param>
-        /// <param name="telefon"></param>
-        /// <param name="mail"></param>
-        /// <param name="iban"></param>
-        /// <returns></returns>
-        public int ZapisKlientaDoDb(string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie, DateTime datum)
+        /// <returns>vráti 1 ak zapísal</returns>
+        public int ZapisKlientaDoDb(ModelKlient klient)
         {
             using (SqlConnection connection = Connection)
             {
@@ -78,28 +70,27 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"insert into Ucet (IBAN, Precerpanie, StavUctu, Aktivny, DatumZalozenia) output inserted.ID values(@Iban, @Precerpanie, 0, 1, @Datum)";
-                    command.Parameters.AddWithValue("@Iban", iban);
-                    command.Parameters.AddWithValue("@Precerpanie", precerpanie);
-                    command.Parameters.AddWithValue("@Datum", datum);
+                    command.CommandText = @"INSERT INTO Ucet (IBAN, Precerpanie, StavUctu, Aktivny, DatumZalozenia) output inserted.ID values(@Iban, @Precerpanie, 0, 1, @Datum)";
+                    command.Parameters.AddWithValue("@Iban", klient.IBAN);
+                    command.Parameters.AddWithValue("@Precerpanie", klient.Precerpanie);
+                    command.Parameters.AddWithValue("@Datum", klient.DatumZalozenia);
 
                     idCudziKluc = (int)command.ExecuteScalar();
                 }
 
                 //Vytvorím si užívateľa
-                using (SqlCommand command = new SqlCommand(@"INSERT into Klient (Meno,Priezvisko,Ulica,Mesto,Telefon,Mail,OP,UcetID)
+                using (SqlCommand command = new SqlCommand(@"INSERT INTO Klient (Meno,Priezvisko,Ulica,Mesto,Telefon,Mail,OP,UcetID)
                                           VALUES (@Meno ,@Priezvisko ,@Ulica ,@Mesto ,@Telefon ,@Mail ,@OP, @UcetID)", connection))
                 {
-
                     command.CommandType = CommandType.Text;
 
-                    command.Parameters.AddWithValue("@Meno", meno);
-                    command.Parameters.AddWithValue("@Priezvisko", priezvisko);
-                    command.Parameters.AddWithValue("@Ulica", adresa);
-                    command.Parameters.AddWithValue("@Mesto", mesto);
-                    command.Parameters.AddWithValue("@OP", cisloOP);
-                    command.Parameters.AddWithValue("@Telefon", telefon);
-                    command.Parameters.AddWithValue("@Mail", mail);
+                    command.Parameters.AddWithValue("@Meno", klient.Meno);
+                    command.Parameters.AddWithValue("@Priezvisko", klient.Priezvisko);
+                    command.Parameters.AddWithValue("@Ulica", klient.Ulica);
+                    command.Parameters.AddWithValue("@Mesto", klient.Mesto);
+                    command.Parameters.AddWithValue("@OP", klient.OP);
+                    command.Parameters.AddWithValue("@Telefon", klient.Telefon);
+                    command.Parameters.AddWithValue("@Mail", klient.Mail);
                     command.Parameters.AddWithValue("@UcetID", idCudziKluc);
 
                     int vysledok = command.ExecuteNonQuery();
@@ -109,15 +100,14 @@ namespace Data.Repositories
         }
 
 
-
         /// <summary>
-        /// Vyhľadá klienta z dtb. 
+        /// Vyhľadá klienta z db podla zadaného výrazu
         /// </summary>
         /// <param name="vyraz">Priezvisko, Občiansky preukaz alebo IBAN</param>
-        /// <returns>Ak vráti <> 0, klient existuje</returns>
+        /// <returns>Ak vráti <> 0, klient existuje, 0 ak neexistuje</returns>
         public int HladajKlienta(string vyraz)
         {
-            using (SqlConnection connection = base.Connection)
+            using (SqlConnection connection = Connection)
             {
                 connection.Open();
                 int id;
@@ -126,8 +116,19 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"SELECT k.ID, k.Priezvisko, k.OP, u.IBAN FROM [Klient] as k left join ucet as u on k.UcetID = u.ID where k.Priezvisko like @Vyraz or k.OP like @Vyraz or k.Priezvisko like @Vyraz";
+                    command.CommandText = @"SELECT k.ID, 
+                                        k.Priezvisko, 
+                                        k.OP, 
+                                        u.IBAN 
+                                        FROM Klient AS k 
+                                        LEFT JOIN ucet AS u 
+                                        ON k.UcetID = u.ID 
+                                        WHERE k.Priezvisko LIKE @Vyraz OR 
+                                        k.OP LIKE @Vyraz OR 
+                                        k.Priezvisko LIKE @Vyraz";
                     command.Parameters.Add("@Vyraz", SqlDbType.NVarChar).Value = $"%{vyraz}%";
+
+                    //Ak scalar vráti null, znamená to, že nenašlo žiaden záznam
                     if (command.ExecuteScalar() == null)
                     {
                         id = 0;
@@ -143,34 +144,34 @@ namespace Data.Repositories
 
 
         /// <summary>
-        /// Načítam údaje o klientovi podľa ID
+        /// Načítam údaje o klientovi podľa ID a vráť ModelKlient - klienta v objekte
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ModelKlient NacitajKlientaPodlaID(int id)
         {
-            using (base.Connection)
+            using (Connection)
             {
-                base.Connection.Open();
-                using (SqlCommand command = base.Connection.CreateCommand())
+                Connection.Open();
+                using (SqlCommand command = Connection.CreateCommand())
                 {
                     command.CommandText = @"SELECT
-                      k.[Meno]
-                      ,k.[Priezvisko]
-                      ,k.[Ulica]
-                      ,k.[Mesto]
-                      ,k.[Telefon]
-                      ,k.[Mail]
-                      ,k.[OP]
-                      ,u.[IBAN]
+                       k.Meno
+                      ,k.Priezvisko
+                      ,k.Ulica
+                      ,k.Mesto
+                      ,k.Telefon
+                      ,k.Mail
+                      ,k.OP
+                      ,u.IBAN
                       ,u.StavUctu
                       ,u.Precerpanie
                       ,u.Aktivny
                       ,u.DatumZalozenia
-                      FROM [ATM].[dbo].[Klient] as k
-                      left join dbo.Ucet as u
-                      on k.UcetID = u.ID
-                      where k.ID = @id";
+                      FROM Klient AS k
+                      LEFT JOIN Ucet AS u
+                      ON k.UcetID = u.ID
+                      WHERE k.ID = @id";
 
                     command.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
@@ -182,7 +183,6 @@ namespace Data.Repositories
 
                         ModelKlient klient = new ModelKlient
                         {
-
                             //naplním si klienta properties
                             Meno = ds.Tables[0].Rows[0][0].ToString(),
                             Priezvisko = ds.Tables[0].Rows[0][1].ToString(),
@@ -196,7 +196,6 @@ namespace Data.Repositories
                             Precerpanie = (decimal)ds.Tables[0].Rows[0][9],
                             Aktivny = (bool)ds.Tables[0].Rows[0][10],
                             DatumZalozenia = (DateTime)ds.Tables[0].Rows[0][11]
-
                         };
                         return klient;
                     }
@@ -204,20 +203,10 @@ namespace Data.Repositories
             }
         }
 
-
         /// <summary>
         /// Úprava existujúceho klienta
         /// </summary>
-        /// <param name="meno"></param>
-        /// <param name="priezvisko"></param>
-        /// <param name="adresa"></param>
-        /// <param name="mesto"></param>
-        /// <param name="cisloOP"></param>
-        /// <param name="telefon"></param>
-        /// <param name="mail"></param>
-        /// <param name="iban"></param>
-        /// <returns></returns>
-        public void UpravKlientaDoDb(int ID, string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie)
+        public void UpravKlientaDoDb(ModelKlient klient)
         {
             using (SqlConnection connection = base.Connection)
             {
@@ -227,27 +216,34 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"Update Ucet set Precerpanie = @Precerpanie where IBAN = @Iban";
-                    command.Parameters.AddWithValue("@Iban", iban);
-                    command.Parameters.AddWithValue("@Precerpanie", precerpanie);
+                    command.CommandText = @"UPDATE Ucet SET Precerpanie = @Precerpanie WHERE IBAN = @Iban";
+                    command.Parameters.AddWithValue("@Iban", klient.IBAN);
+                    command.Parameters.AddWithValue("@Precerpanie", klient.Precerpanie);
                     command.ExecuteNonQuery();
                 }
-
 
                 //Upravím si užívateľove informácie podľa nových
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
 
-                    command.CommandText = @"Update Klient SET Meno = @Meno, Priezvisko = @Priezvisko, Ulica = @Ulica, Mesto = @Mesto, Telefon = @Telefon, Mail = @Mail, OP = @OP where[ID] = @ID";
-                    command.Parameters.AddWithValue("@Meno", meno);
-                    command.Parameters.AddWithValue("@Priezvisko", priezvisko);
-                    command.Parameters.AddWithValue("@Ulica", adresa);
-                    command.Parameters.AddWithValue("@Mesto", mesto);
-                    command.Parameters.AddWithValue("@OP", cisloOP);
-                    command.Parameters.AddWithValue("@Telefon", telefon);
-                    command.Parameters.AddWithValue("@Mail", mail);
-                    command.Parameters.AddWithValue("@ID", ID);
+                    command.CommandText = @"UPDATE Klient 
+                                            SET Meno = @Meno
+                                            ,Priezvisko = @Priezvisko
+                                            ,Ulica = @Ulica
+                                            ,Mesto = @Mesto
+                                            ,Telefon = @Telefon
+                                            ,Mail = @Mail
+                                            ,OP = @OP
+                                            WHERE ID = @ID";
+                    command.Parameters.AddWithValue("@Meno", klient.Meno);
+                    command.Parameters.AddWithValue("@Priezvisko", klient.Priezvisko);
+                    command.Parameters.AddWithValue("@Ulica", klient.Ulica);
+                    command.Parameters.AddWithValue("@Mesto", klient.Mesto);
+                    command.Parameters.AddWithValue("@OP", klient.OP);
+                    command.Parameters.AddWithValue("@Telefon", klient.Telefon);
+                    command.Parameters.AddWithValue("@Mail", klient.Mail);
+                    command.Parameters.AddWithValue("@ID", klient.ID);
 
                     command.ExecuteNonQuery();
                 }
@@ -264,11 +260,15 @@ namespace Data.Repositories
             {
                 connection.Open();
 
-                //vytvorím si bankový účet
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"update Ucet set Ucet.Aktivny = 0  FROM Ucet left join Klient on Ucet.ID = Klient.UcetID where Klient.id = @ID";
+                    command.CommandText = @"UPDATE Ucet 
+                                            SET Ucet.Aktivny = 0  
+                                            FROM Ucet 
+                                            LEFT JOIN Klient 
+                                            ON Ucet.ID = Klient.UcetID 
+                                            WHERE Klient.id = @ID";
                     command.Parameters.AddWithValue("@ID", IDklienta);
                     command.ExecuteNonQuery();
                 }

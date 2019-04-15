@@ -18,7 +18,7 @@ namespace Data.Repositories
         /// Načítam zoznam platobných kariet vybraného klienta
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Dataset pre datagridview</returns>
         public DataSet NacitajPlatobneKarty(int ID)
         {
             using (Connection)
@@ -33,12 +33,12 @@ namespace Data.Repositories
                                         ,karta.Platnost
                                         ,Karta.Zablokovana
                                         ,karta.PIN
-                                        FROM [Klient]
-                                        inner join Ucet
-                                        on Klient.UcetID = Ucet.ID
-                                        left join Karta
-                                        on Ucet.ID = Karta.UcetID
-                                        where Klient.Id = @Id";
+                                        FROM Klient
+                                        INNER JOIN Ucet
+                                        ON Klient.UcetID = Ucet.ID
+                                        LEFT JOIN Karta
+                                        ON Ucet.ID = Karta.UcetID
+                                        WHERE Klient.Id = @Id";
 
                     command.Parameters.Add("@Id", SqlDbType.Int).Value = ID;
 
@@ -72,7 +72,7 @@ namespace Data.Repositories
         public int ZistiCiMaKlientPlatobneKarty(int clientId)
         {
             int pocetKariet;
-            using (SqlConnection connection = base.Connection)
+            using (SqlConnection connection = Connection)
             {
                 connection.Open();
 
@@ -80,12 +80,12 @@ namespace Data.Repositories
                 {
                     command.Connection = connection;
                     command.CommandText = @"SELECT COUNT(*)
-                                            from Karta
-                                            left join Ucet
-                                            on Karta.UcetID = Ucet.ID
-                                            left join Klient
-                                            on ucet.ID = Klient.UcetID
-                                            where klient.ID = @Id";
+                                            FROM Karta
+                                            LEFT JOIN Ucet
+                                            ON Karta.UcetID = Ucet.ID
+                                            LEFT JOIN Klient
+                                            ON ucet.ID = Klient.UcetID
+                                            WHERE klient.ID = @Id";
                     command.Parameters.AddWithValue("@Id", clientId);
                     pocetKariet = (int)command.ExecuteScalar();
                 }
@@ -102,7 +102,7 @@ namespace Data.Repositories
         {
             zablokovanie = zablokovanie == true ? false : true;
 
-            using (SqlConnection connection = base.Connection)
+            using (SqlConnection connection = Connection)
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
@@ -124,13 +124,13 @@ namespace Data.Repositories
         /// <returns></returns>
         public int ZistiCiExistujeCisloKarty(int kartaCislo)
         {
-            using (SqlConnection connection = base.Connection)
+            using (SqlConnection connection = Connection)
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"SELECT count(*) from Karta where Cislo = @kartaCislo";
+                    command.CommandText = @"SELECT count(*) FROM Karta WHERE Cislo = @kartaCislo";
                     command.Parameters.AddWithValue("@KartaCislo", kartaCislo);
                     return (int)command.ExecuteScalar();
                 }
@@ -154,7 +154,10 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"select ucet.ID from ucet inner join klient on ucet.ID = @IdKlienta";
+                    command.CommandText = @"SELECT ucet.ID 
+                                            FROM ucet 
+                                            INNER JOIN klient 
+                                            ON ucet.ID = @IdKlienta";
                     command.Parameters.AddWithValue("@IdKlienta", IdKlienta);
                     IdUctuKlienta = (int)command.ExecuteScalar();
                 }
@@ -162,7 +165,8 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"insert into [Karta] ([Cislo],[Platnost], [PIN],[Zablokovana], UcetID )  values(@KartaCislo, @Platnost, @PIN, @Zablokovana, @UcetID)";
+                    command.CommandText = @"INSERT INTO Karta (Cislo, Platnost, PIN, Zablokovana, UcetID)  
+                                            VALUES(@KartaCislo, @Platnost, @PIN, @Zablokovana, @UcetID)";
                     command.Parameters.AddWithValue("@KartaCislo", cisloKarty);
                     command.Parameters.AddWithValue("@PIN", rndPIN.Next(1000, 9999));
                     command.Parameters.AddWithValue("@Platnost", DateTime.Today.AddYears(2));
@@ -186,12 +190,11 @@ namespace Data.Repositories
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = @"UPDATE [Karta] SET [Zablokovana] = 1 WHERE Cislo = @KartaCislo";
+                    command.CommandText = @"UPDATE Karta SET Zablokovana = 1 WHERE Cislo = @KartaCislo";
                     command.Parameters.AddWithValue("@KartaCislo", KartaCislo);
                     command.ExecuteNonQuery();
                 }
             }
         }
-
     }
 }

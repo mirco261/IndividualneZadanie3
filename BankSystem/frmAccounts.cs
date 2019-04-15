@@ -38,20 +38,20 @@ namespace BankSystem
             dgwZoznamKlientov.Columns[0].Visible = false;
         }
 
-
+        //Otvorí sa formulár zoznam klientov
         public FrmAccounts()
         {
             InitializeComponent();
+
+            //načítam zoznam klientov do bridu
             NacitajZoznamKlientov();
 
+            //ak je zoznam klientov prázdny, vypnem tlačidlo na editáciu
             if (dgwZoznamKlientov.Rows.Count == 0)
             {
                 cmdManageAccount.Enabled = false;
-
             }
         }
-
-
 
         private void CmdManageAccount_Click(object sender, EventArgs e)
         {

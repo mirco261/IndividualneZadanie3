@@ -13,7 +13,6 @@ namespace Data.Repositories
 
         public string ConnString { get; set; }
 
-
         /// <summary>
         /// Načíta štatistiky top 10 klientov
         /// </summary>
@@ -25,14 +24,14 @@ namespace Data.Repositories
                 base.Connection.Open();
                 using (SqlCommand command = base.Connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT top 10 rank() over ( order by Ucet.StavUctu desc) as Poradie
-                                          , [Meno] + ' '+[Priezvisko] as Klient
-	                                      ,Ucet.StavUctu as StavÚčtu
-                                          FROM [ATM].[dbo].[Klient]
-                                          inner join Ucet
-                                          on Klient.UcetID = Ucet.ID
-                                          where Ucet.[Aktivny] = 1
-                                          order by stavÚčtu desc";
+                    command.CommandText = @"SELECT TOP 10 RANK() OVER (ORDER BY Ucet.StavUctu DESC) AS Poradie
+                                          ,Meno + ' '+ Priezvisko AS Klient
+	                                      ,Ucet.StavUctu AS StavÚčtu
+                                          FROM Klient
+                                          INNER JOIN Ucet
+                                          ON Klient.UcetID = Ucet.ID
+                                          WHERE Ucet.[Aktivny] = 1
+                                          ORDER by StavÚčtu DESC";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -59,12 +58,11 @@ namespace Data.Repositories
                 {
                     command.Connection = connection;
 
-                    command.CommandText = @"SELECT SUM(Ucet.StavUctu) as StavÚčtu FROM Ucet";
-
-
-
+                    command.CommandText = @"SELECT SUM(Ucet.StavUctu) as StavÚčtu 
+                                            FROM Ucet
+                                            WHERE Aktivny = 1";
+                    
                         return (decimal)command.ExecuteScalar();
-
                 }
             }
         }
@@ -82,7 +80,7 @@ namespace Data.Repositories
                 {
                     command.Connection = connection;
 
-                    command.CommandText = @"SELECT Count(Ucet.IBAN) as PocetUctov FROM Ucet where ucet.Aktivny = 1";
+                    command.CommandText = @"SELECT COUNT(Ucet.IBAN) AS PocetUctov FROM Ucet WHERE ucet.Aktivny = 1";
 
                     return (int)command.ExecuteScalar();
                 }
@@ -95,17 +93,17 @@ namespace Data.Repositories
         /// <returns>top 5 miest, z ktorých má banka klientov</returns>
         public DataSet TopMestaKlienti()
         {
-            using (SqlConnection connection = base.Connection)
+            using (SqlConnection connection = Connection)
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
 
-                    command.CommandText = @"SELECT top 5 Mesto, Count([ID]) as PočetKlientov
-                                          FROM [ATM].[dbo].[Klient]
-                                          group by Mesto
-                                          order by PočetKlientov desc";
+                    command.CommandText = @"SELECT TOP 5 Mesto, Count(ID) AS PočetKlientov
+                                          FROM Klient
+                                          GROUP BY Mesto
+                                          ORDER BY PočetKlientov DESC";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -125,17 +123,17 @@ namespace Data.Repositories
         /// <returns>počet založených účtov</returns>
         public DataSet PocetZalozenychUctovPoMesiacoch()
         {
-            using (base.Connection)
+            using (Connection)
             {
-                base.Connection.Open();
-                using (SqlCommand command = base.Connection.CreateCommand())
+                Connection.Open();
+                using (SqlCommand command = Connection.CreateCommand())
                 {
-                    command.CommandText = @"SELECT  YEAR(DatumZalozenia) as Rok
-                                            ,Month(DatumZalozenia)  as  Mesiac
-                                            ,Count([ID]) as 'Počet účtov'
-                                            FROM [ATM].[dbo].[Ucet]
-                                            where datediff(month, DatumZalozenia, getdate()) <= 6
-                                            group by Month(DatumZalozenia), YEAR(DatumZalozenia)";
+                    command.CommandText = @"SELECT YEAR(DatumZalozenia) AS Rok
+                                            ,MONTH(DatumZalozenia)  AS  Mesiac
+                                            ,COUNT(ID) AS 'Počet účtov'
+                                            FROM Ucet
+                                            WHERE DATEDIFF(MONTH, DatumZalozenia, GETDATE()) <= 6
+                                            GROUP BY MONTH(DatumZalozenia), YEAR(DatumZalozenia)";
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {

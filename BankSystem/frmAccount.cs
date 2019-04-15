@@ -16,18 +16,10 @@ namespace BankSystem
     public partial class frmAccount : Form
     {
         //properties na zapisovanie nového klienta
+        ModelKlient Klient = new ModelKlient();
+
+        //property pre posielanie ID
         public int ID { get; set; }
-        public string Meno { get; set; }
-        public string Priezvisko { get; set; }
-        public string Adresa { get; set; }
-        public string Mesto { get; set; }
-        public string CisloOP { get; set; }
-        public string Telefon { get; set; }
-        public string Mail { get; set; }
-        public string IBAN { get; set; }
-        public int Precerpanie { get; set; }
-        public int PocetKariet { get; set; }
-        public DateTime Datum { get; set; }
 
         //inicializujem si dataview 
         FrmAccountViewModel NovyKlient = new FrmAccountViewModel();
@@ -63,9 +55,31 @@ namespace BankSystem
          }
 
         /// <summary>
+        /// Načítam do ModelKlient info o klientovi z formulára
+        /// </summary>
+        private ModelKlient NacitajKlientaZformulara()
+        {
+            Klient.Meno = txbKrstneMeno.Text;
+            Klient.Priezvisko = txbPriezvisko.Text;
+            Klient.Ulica = txbUlica.Text;
+            Klient.Mesto = txbMesto.Text;
+            Klient.OP = txbObcianskyPreukaz.Text;
+            Klient.Telefon = txbTelefon.Text;
+            Klient.Mail = txbMail.Text;
+            Klient.IBAN = txbIBAN.Text;
+            Klient.Precerpanie = (int)nudPrecerpanie.Value;
+            Klient.DatumZalozenia = DateTime.Now;
+
+            //vynechám medzery na OP
+            Klient.OP = Klient.OP.Replace(" ", "");
+
+            return Klient;
+        }
+
+        /// <summary>
         /// Frm použitý pri úprave existujúceho klienta
         /// </summary>
-        /// <param name="clientId"></param>
+        /// <param name="clientId">ID klienta z minulého frm - aby som vedel ktorého editovať</param>
         public frmAccount(int clientId)
         {
             InitializeComponent();
@@ -90,8 +104,6 @@ namespace BankSystem
         /// <summary>
         /// tlačidlom vygenerujem random klienta
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void BtnRandomKlient_Click(object sender, EventArgs e)
         {
             ModelKlient randomKlient = new ModelKlient();
@@ -109,45 +121,28 @@ namespace BankSystem
             nudPrecerpanie.Value = precerpanieRnd.Next(200,1000);
         }
 
-
         //Keď je zákazník nový, použijem toto tlačidlo
         private void BtnUlozKlienta_Click(object sender, EventArgs e)
         {
-            Meno = txbKrstneMeno.Text;
-            Priezvisko = txbPriezvisko.Text;
-            Adresa = txbUlica.Text;
-            Mesto = txbMesto.Text;
-            CisloOP = txbObcianskyPreukaz.Text;
-            Telefon = txbTelefon.Text;
-            Mail = txbMail.Text;
-            IBAN = txbIBAN.Text;
-            Precerpanie = (int)nudPrecerpanie.Value;
-            Datum = DateTime.Now;    
+            //Použijem metodu na načítanie klienta z frm
+            NacitajKlientaZformulara();
 
-            //vynechám medzery na OP
-            CisloOP = CisloOP.Replace(" ", "");
-
-            NovyKlient.ZapisKlientaDoDb(Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie, Datum);
+            //Zapíšem nového klienta do DB
+            NovyKlient.ZapisKlientaDoDb(Klient);
             this.Close();
         }
 
         //Keď upravujem už existujúceho klienta, použijem toto tlačidlo
         private void BtnUlozitStarehoKlienta_Click(object sender, EventArgs e)
         {
-            Meno = txbKrstneMeno.Text;
-            Priezvisko = txbPriezvisko.Text;
-            Adresa = txbUlica.Text;
-            Mesto = txbMesto.Text;
-            CisloOP = txbObcianskyPreukaz.Text;
-            Telefon = txbTelefon.Text;
-            Mail = txbMail.Text;
-            IBAN = txbIBAN.Text;
-            Precerpanie = (int)nudPrecerpanie.Value;
+            //Použijem metodu na načítanie klienta z frm
+            Klient = NacitajKlientaZformulara();
 
-            //vynechám medzery na OP
-            CisloOP = CisloOP.Replace(" ", "");
+            //prebijem ID s ID klienta, aby upravoval toho správneho
+            Klient.ID = ID;
 
-            NovyKlient.UpravKlientaDoDb(ID, Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie);
+            //Updatnem klienta so zvoleným ID do DB
+            NovyKlient.UpravKlientaDoDb(Klient);
             this.Close();
         }
     }

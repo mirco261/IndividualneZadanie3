@@ -19,35 +19,17 @@ namespace BankSystem
         /// <summary>
         /// prenášam informácie o klientovi a zapisujem nového
         /// </summary>
-        /// <param name="meno"></param>
-        /// <param name="priezvisko"></param>
-        /// <param name="adresa"></param>
-        /// <param name="mesto"></param>
-        /// <param name="cisloOP"></param>
-        /// <param name="telefon"></param>
-        /// <param name="mail"></param>
-        /// <param name="iban"></param>
-        /// <param name="precerpanie"></param>
-        public void ZapisKlientaDoDb(string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie, DateTime datum)
+        public void ZapisKlientaDoDb(ModelKlient klient)
         {
-            NovyKlient.ZapisKlientaDoDb(meno, priezvisko, adresa, mesto, cisloOP, telefon, mail, iban, precerpanie, datum);
+            NovyKlient.ZapisKlientaDoDb(klient);
         }
 
         /// <summary>
         /// prenášam informácie o klientovi a upravujem jeho existujúce údaje
         /// </summary>
-        /// <param name="meno"></param>
-        /// <param name="priezvisko"></param>
-        /// <param name="adresa"></param>
-        /// <param name="mesto"></param>
-        /// <param name="cisloOP"></param>
-        /// <param name="telefon"></param>
-        /// <param name="mail"></param>
-        /// <param name="iban"></param>
-        /// <param name="precerpanie"></param>
-        public void UpravKlientaDoDb(int ID, string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie)
+        public void UpravKlientaDoDb(ModelKlient klient)
         {
-            NovyKlient.UpravKlientaDoDb(ID, meno, priezvisko, adresa, mesto, cisloOP, telefon, mail, iban, precerpanie);
+            NovyKlient.UpravKlientaDoDb(klient);
         }
 
         //inicializujem si generator
