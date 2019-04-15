@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using Data.Models;
-using System.Diagnostics;
 
 namespace Data.Repositories
 {
@@ -21,27 +16,29 @@ namespace Data.Repositories
         /// <returns>vracia dataset v ktorom sú všetky potrebné info pre zobrazenie v gride</returns>
         public DataSet NacitajzTabulkyKlient(string meno, string priezvisko, string IBAN)
         {
-            using (base.Connection)
+            using (Connection)
             {
-                base.Connection.Open();
-                using (SqlCommand command = base.Connection.CreateCommand())
+                Connection.Open();
+                using (SqlCommand command = Connection.CreateCommand())
                 {
                     command.CommandText = @"SELECT
-                        k.ID
-                      ,k.[Priezvisko]
-                      ,k.[Meno]
-                      ,k.[Ulica]
-                      ,k.[Mesto]
-                      ,k.[Telefon]
-                      ,k.[Mail]
-                      ,k.[OP]
-                      ,u.[IBAN]
+                       k.ID
+                      ,k.Priezvisko
+                      ,k.Meno
+                      ,k.Ulica
+                      ,k.Mesto
+                      ,k.Telefon
+                      ,k.Mail
+                      ,k.OP
+                      ,u.IBAN
                       ,u.Aktivny
-                      FROM [ATM].[dbo].[Klient] as k
-                      left join dbo.Ucet as u
-                      on k.UcetID = u.ID
-                      where k.Meno like @Meno and k.Priezvisko like @Priezvisko and u.IBAN like @IBAN
-                      order by k.Priezvisko asc";
+                      FROM Klient AS k
+                      LEFT JOIN Ucet AS u
+                      ON k.UcetID = u.ID
+                      WHERE k.Meno LIKE @Meno AND 
+                            k.Priezvisko LIKE @Priezvisko AND
+                            u.IBAN LIKE @IBAN
+                      ORDER BY k.Priezvisko asc";
 
                     command.Parameters.Add("@Meno", SqlDbType.NVarChar).Value = $"%{meno}%";
                     command.Parameters.Add("@Priezvisko", SqlDbType.NVarChar).Value = $"%{priezvisko}%";
@@ -52,7 +49,6 @@ namespace Data.Repositories
                         DataSet ds = new DataSet();
                         adapter.Fill(ds, "Klient");
                         DataTable dt = ds.Tables["Klient"];
-
                         return ds;
                     }
                 }
@@ -73,7 +69,7 @@ namespace Data.Repositories
         /// <returns></returns>
         public int ZapisKlientaDoDb(string meno, string priezvisko, string adresa, string mesto, string cisloOP, string telefon, string mail, string iban, int precerpanie, DateTime datum)
         {
-            using (SqlConnection connection = base.Connection)
+            using (SqlConnection connection = Connection)
             {
                 connection.Open();
                 int idCudziKluc;

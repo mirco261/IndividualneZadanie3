@@ -8,10 +8,9 @@ namespace Data.Repositories
     public class RepoBankomat : RepoBase
     {
         public string ConnString { get; set; }
-
-
+        
         /// <summary>
-        /// Načítam údaje o klientovi podľa karty a PIN
+        /// Načítam údaje o klientovi podľa karty a PIN (musí mať aktívny účet, nezablokovanú kartu a platnosť karty do dnes)
         /// </summary>
         public ModelBankomat NacitajKlienta(int karta, int PIN)
         {
@@ -42,7 +41,6 @@ namespace Data.Repositories
                         adapter.Fill(ds, "Klient");
                         DataTable dt = ds.Tables["Klient"];
 
-
                         //ak select nemá žiaden záznam, vrátum null
                         if (ds.Tables[0].Rows.Count != 0)
                         {
@@ -62,42 +60,6 @@ namespace Data.Repositories
                     }
                 }
             }
-
-
-            /// <summary>
-            /// Overím prihlásenie
-            /// </summary>
-            /// <returns></returns>
-            //    public bool OvereniePrihlasenia(int karta, int pin)
-            //{
-
-            //    using (base.Connection)
-            //    {
-            //        base.Connection.Open();
-            //        using (SqlCommand command = base.Connection.CreateCommand())
-            //        {
-            //            command.CommandText = @"SELECT
-            //                                    k.[Priezvisko] + ' '+ k.[Meno] as Klient
-            //                                    ,k.Ulica + ', '+ k.Mesto as Adresa
-            //                                    ,u.[IBAN] as UcetIBAN
-            //                                    ,u.ID as UcetID
-            //                                    FROM [Klient] as k
-            //                                    left join dbo.Ucet as u
-            //                                    on k.UcetID = u.ID
-            //                                    where u.[Aktivny] = 1
-            //                                    order by k.Priezvisko asc, k.Mesto asc, u.IBAN asc";
-
-            //            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-            //            {
-            //                DataSet ds = new DataSet();
-            //                adapter.Fill(ds, "Klient");
-            //                DataTable dt = ds.Tables["Klient"];
-
-            //                return dt;
-            //            }
-            //        }
-            //    }
-
         }
     }
 }
