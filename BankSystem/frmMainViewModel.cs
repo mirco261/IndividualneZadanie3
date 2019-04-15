@@ -38,5 +38,10 @@ namespace BankSystem
         {
             return statistiky.TopMestaKlienti();
         }
+
+        public DataSet PocetZalozenychUctovPoMesiacoch()
+        {
+            return statistiky.PocetZalozenychUctovPoMesiacoch();
+        }
     }
 }

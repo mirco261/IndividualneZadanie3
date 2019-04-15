@@ -22,9 +22,17 @@ namespace BankSystem
             NtbSumaNaUctoch.Text = klient.PocetPenaziNaUctoch().ToString();
             NtbPocetAktivnychUctov.Text = klient.PocetUctov().ToString();
 
+            DgwTOP10.AutoGenerateColumns = true;
+            DgwTOP10.DataSource = klient.Top10klientov();
+            DgwTOP10.DataMember = "Top10";
+
             DgvTopMesta.AutoGenerateColumns = true;
             DgvTopMesta.DataSource = klient.TopMestaKlienti();
-            DgvTopMesta.DataMember = "Top10";
+            DgvTopMesta.DataMember = "Mesta";
+
+            DgwPocetUctov.AutoGenerateColumns = true;
+            DgwPocetUctov.DataSource = klient.PocetZalozenychUctovPoMesiacoch();
+            DgwPocetUctov.DataMember = "Top6";
         }
 
 

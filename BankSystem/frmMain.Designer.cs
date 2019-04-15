@@ -49,12 +49,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.DgvTopMesta = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.DgwPocetUctov = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.DgwTOP10)).BeginInit();
             this.tabControlStatistiky.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvTopMesta)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgwPocetUctov)).BeginInit();
             this.SuspendLayout();
             // 
             // btnHladajKlienta
@@ -145,7 +149,7 @@
             // txbHladajKlienta
             // 
             this.txbHladajKlienta.Location = new System.Drawing.Point(362, 106);
-            this.txbHladajKlienta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbHladajKlienta.Margin = new System.Windows.Forms.Padding(2);
             this.txbHladajKlienta.Name = "txbHladajKlienta";
             this.txbHladajKlienta.Size = new System.Drawing.Size(235, 20);
             this.txbHladajKlienta.TabIndex = 10;
@@ -181,7 +185,7 @@
             this.DgwTOP10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgwTOP10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgwTOP10.Location = new System.Drawing.Point(2, 2);
-            this.DgwTOP10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DgwTOP10.Margin = new System.Windows.Forms.Padding(2);
             this.DgwTOP10.Name = "DgwTOP10";
             this.DgwTOP10.ReadOnly = true;
             this.DgwTOP10.RowTemplate.Height = 24;
@@ -194,8 +198,9 @@
             this.tabControlStatistiky.Controls.Add(this.tabPage2);
             this.tabControlStatistiky.Controls.Add(this.tabPage1);
             this.tabControlStatistiky.Controls.Add(this.tabPage3);
+            this.tabControlStatistiky.Controls.Add(this.tabPage4);
             this.tabControlStatistiky.Location = new System.Drawing.Point(9, 28);
-            this.tabControlStatistiky.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlStatistiky.Margin = new System.Windows.Forms.Padding(2);
             this.tabControlStatistiky.Name = "tabControlStatistiky";
             this.tabControlStatistiky.SelectedIndex = 0;
             this.tabControlStatistiky.Size = new System.Drawing.Size(330, 351);
@@ -208,9 +213,9 @@
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.NtbSumaNaUctoch);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(322, 325);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Štatistiky";
@@ -232,7 +237,7 @@
             this.NtbPocetAktivnychUctov.Enabled = false;
             this.NtbPocetAktivnychUctov.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NtbPocetAktivnychUctov.Location = new System.Drawing.Point(4, 105);
-            this.NtbPocetAktivnychUctov.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NtbPocetAktivnychUctov.Margin = new System.Windows.Forms.Padding(2);
             this.NtbPocetAktivnychUctov.Name = "NtbPocetAktivnychUctov";
             this.NtbPocetAktivnychUctov.Size = new System.Drawing.Size(214, 30);
             this.NtbPocetAktivnychUctov.TabIndex = 2;
@@ -253,7 +258,7 @@
             this.NtbSumaNaUctoch.Enabled = false;
             this.NtbSumaNaUctoch.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NtbSumaNaUctoch.Location = new System.Drawing.Point(4, 37);
-            this.NtbSumaNaUctoch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NtbSumaNaUctoch.Margin = new System.Windows.Forms.Padding(2);
             this.NtbSumaNaUctoch.Name = "NtbSumaNaUctoch";
             this.NtbSumaNaUctoch.Size = new System.Drawing.Size(214, 30);
             this.NtbSumaNaUctoch.TabIndex = 0;
@@ -262,9 +267,9 @@
             // 
             this.tabPage1.Controls.Add(this.DgwTOP10);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(322, 325);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TOP10 klientov";
@@ -274,9 +279,9 @@
             // 
             this.tabPage3.Controls.Add(this.DgvTopMesta);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage3.Size = new System.Drawing.Size(322, 325);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "TOP Mestá";
@@ -291,13 +296,41 @@
             this.DgvTopMesta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvTopMesta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvTopMesta.Location = new System.Drawing.Point(2, 2);
-            this.DgvTopMesta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DgvTopMesta.Margin = new System.Windows.Forms.Padding(2);
             this.DgvTopMesta.Name = "DgvTopMesta";
             this.DgvTopMesta.ReadOnly = true;
             this.DgvTopMesta.RowTemplate.Height = 24;
             this.DgvTopMesta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvTopMesta.Size = new System.Drawing.Size(318, 321);
             this.DgvTopMesta.TabIndex = 13;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.DgwPocetUctov);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(322, 325);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Počet zal. účtov";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // DgwPocetUctov
+            // 
+            this.DgwPocetUctov.AllowUserToAddRows = false;
+            this.DgwPocetUctov.AllowUserToDeleteRows = false;
+            this.DgwPocetUctov.AllowUserToOrderColumns = true;
+            this.DgwPocetUctov.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.DgwPocetUctov.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgwPocetUctov.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgwPocetUctov.Location = new System.Drawing.Point(3, 3);
+            this.DgwPocetUctov.Margin = new System.Windows.Forms.Padding(2);
+            this.DgwPocetUctov.Name = "DgwPocetUctov";
+            this.DgwPocetUctov.ReadOnly = true;
+            this.DgwPocetUctov.RowTemplate.Height = 24;
+            this.DgwPocetUctov.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgwPocetUctov.Size = new System.Drawing.Size(316, 319);
+            this.DgwPocetUctov.TabIndex = 14;
             // 
             // FrmMain
             // 
@@ -327,6 +360,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvTopMesta)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DgwPocetUctov)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,6 +389,8 @@
         private System.Windows.Forms.Label label7;
         private Controls.NumericTextBox NtbPocetAktivnychUctov;
         private System.Windows.Forms.DataGridView DgvTopMesta;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView DgwPocetUctov;
     }
 }
 
