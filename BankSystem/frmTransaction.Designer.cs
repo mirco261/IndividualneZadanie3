@@ -46,15 +46,15 @@
             this.BtnUskutocnitPlatbu = new System.Windows.Forms.Button();
             this.NtbSuma = new Controls.NumericTextBox();
             this.lblSuma = new System.Windows.Forms.Label();
-            this.TxbVariabilnySymbol = new System.Windows.Forms.TextBox();
-            this.TxbSpecifickySymbol = new System.Windows.Forms.TextBox();
-            this.TxbKonstatnySymbol = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.TxbSprava = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.lblUpozornenie = new System.Windows.Forms.Label();
+            this.NtbVS = new Controls.NumericTextBox();
+            this.NtbSS = new Controls.NumericTextBox();
+            this.NtbKS = new Controls.NumericTextBox();
             this.SuspendLayout();
             // 
             // LblPrijemca
@@ -98,21 +98,20 @@
             this.CmbOdosielatel.FormattingEnabled = true;
             this.CmbOdosielatel.ImeMode = System.Windows.Forms.ImeMode.On;
             this.CmbOdosielatel.Location = new System.Drawing.Point(28, 65);
-            this.CmbOdosielatel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CmbOdosielatel.Margin = new System.Windows.Forms.Padding(2);
             this.CmbOdosielatel.Name = "CmbOdosielatel";
             this.CmbOdosielatel.Size = new System.Drawing.Size(187, 21);
-            this.CmbOdosielatel.TabIndex = 8;
-            this.CmbOdosielatel.SelectedIndexChanged += new System.EventHandler(this.CmbOdosielatel_SelectedIndexChanged);
+            this.CmbOdosielatel.TabIndex = 0;
             // 
             // CmbPrijimatel
             // 
             this.CmbPrijimatel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbPrijimatel.FormattingEnabled = true;
             this.CmbPrijimatel.Location = new System.Drawing.Point(276, 65);
-            this.CmbPrijimatel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CmbPrijimatel.Margin = new System.Windows.Forms.Padding(2);
             this.CmbPrijimatel.Name = "CmbPrijimatel";
             this.CmbPrijimatel.Size = new System.Drawing.Size(187, 21);
-            this.CmbPrijimatel.TabIndex = 9;
+            this.CmbPrijimatel.TabIndex = 3;
             // 
             // LblOdosielatelMeno
             // 
@@ -193,40 +192,40 @@
             this.CmbOdosielatelAdresa.Enabled = false;
             this.CmbOdosielatelAdresa.FormattingEnabled = true;
             this.CmbOdosielatelAdresa.Location = new System.Drawing.Point(28, 106);
-            this.CmbOdosielatelAdresa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CmbOdosielatelAdresa.Margin = new System.Windows.Forms.Padding(2);
             this.CmbOdosielatelAdresa.Name = "CmbOdosielatelAdresa";
             this.CmbOdosielatelAdresa.Size = new System.Drawing.Size(187, 21);
-            this.CmbOdosielatelAdresa.TabIndex = 20;
+            this.CmbOdosielatelAdresa.TabIndex = 1;
             // 
             // CmbOdosielatelIBAN
             // 
             this.CmbOdosielatelIBAN.Enabled = false;
             this.CmbOdosielatelIBAN.FormattingEnabled = true;
             this.CmbOdosielatelIBAN.Location = new System.Drawing.Point(28, 146);
-            this.CmbOdosielatelIBAN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CmbOdosielatelIBAN.Margin = new System.Windows.Forms.Padding(2);
             this.CmbOdosielatelIBAN.Name = "CmbOdosielatelIBAN";
             this.CmbOdosielatelIBAN.Size = new System.Drawing.Size(187, 21);
-            this.CmbOdosielatelIBAN.TabIndex = 21;
+            this.CmbOdosielatelIBAN.TabIndex = 2;
             // 
             // CmbPrijimatelAdresa
             // 
             this.CmbPrijimatelAdresa.Enabled = false;
             this.CmbPrijimatelAdresa.FormattingEnabled = true;
             this.CmbPrijimatelAdresa.Location = new System.Drawing.Point(276, 106);
-            this.CmbPrijimatelAdresa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CmbPrijimatelAdresa.Margin = new System.Windows.Forms.Padding(2);
             this.CmbPrijimatelAdresa.Name = "CmbPrijimatelAdresa";
             this.CmbPrijimatelAdresa.Size = new System.Drawing.Size(187, 21);
-            this.CmbPrijimatelAdresa.TabIndex = 22;
+            this.CmbPrijimatelAdresa.TabIndex = 4;
             // 
             // CmbPrijimatelIBAN
             // 
             this.CmbPrijimatelIBAN.Enabled = false;
             this.CmbPrijimatelIBAN.FormattingEnabled = true;
             this.CmbPrijimatelIBAN.Location = new System.Drawing.Point(276, 146);
-            this.CmbPrijimatelIBAN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CmbPrijimatelIBAN.Margin = new System.Windows.Forms.Padding(2);
             this.CmbPrijimatelIBAN.Name = "CmbPrijimatelIBAN";
             this.CmbPrijimatelIBAN.Size = new System.Drawing.Size(187, 21);
-            this.CmbPrijimatelIBAN.TabIndex = 23;
+            this.CmbPrijimatelIBAN.TabIndex = 5;
             // 
             // BtnUskutocnitPlatbu
             // 
@@ -234,22 +233,25 @@
             this.BtnUskutocnitPlatbu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnUskutocnitPlatbu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnUskutocnitPlatbu.Location = new System.Drawing.Point(172, 431);
-            this.BtnUskutocnitPlatbu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnUskutocnitPlatbu.Margin = new System.Windows.Forms.Padding(2);
             this.BtnUskutocnitPlatbu.Name = "BtnUskutocnitPlatbu";
             this.BtnUskutocnitPlatbu.Size = new System.Drawing.Size(135, 57);
-            this.BtnUskutocnitPlatbu.TabIndex = 24;
+            this.BtnUskutocnitPlatbu.TabIndex = 11;
             this.BtnUskutocnitPlatbu.Text = "PLATBA";
             this.BtnUskutocnitPlatbu.UseVisualStyleBackColor = false;
             this.BtnUskutocnitPlatbu.Click += new System.EventHandler(this.BtnUskutocnitPlatbu_Click);
             // 
             // NtbSuma
             // 
+            this.NtbSuma.AllowNegative = false;
             this.NtbSuma.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NtbSuma.Location = new System.Drawing.Point(172, 213);
-            this.NtbSuma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NtbSuma.Margin = new System.Windows.Forms.Padding(2);
+            this.NtbSuma.MaxLength = 10;
             this.NtbSuma.Name = "NtbSuma";
             this.NtbSuma.Size = new System.Drawing.Size(151, 30);
-            this.NtbSuma.TabIndex = 25;
+            this.NtbSuma.TabIndex = 6;
+            this.NtbSuma.TextChanged += new System.EventHandler(this.NtbSuma_TextChanged);
             // 
             // lblSuma
             // 
@@ -263,43 +265,16 @@
             this.lblSuma.Text = "Čiastka v EUR";
             this.lblSuma.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // TxbVariabilnySymbol
-            // 
-            this.TxbVariabilnySymbol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TxbVariabilnySymbol.Location = new System.Drawing.Point(18, 292);
-            this.TxbVariabilnySymbol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.TxbVariabilnySymbol.Name = "TxbVariabilnySymbol";
-            this.TxbVariabilnySymbol.Size = new System.Drawing.Size(136, 26);
-            this.TxbVariabilnySymbol.TabIndex = 29;
-            // 
-            // TxbSpecifickySymbol
-            // 
-            this.TxbSpecifickySymbol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TxbSpecifickySymbol.Location = new System.Drawing.Point(172, 292);
-            this.TxbSpecifickySymbol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.TxbSpecifickySymbol.Name = "TxbSpecifickySymbol";
-            this.TxbSpecifickySymbol.Size = new System.Drawing.Size(136, 26);
-            this.TxbSpecifickySymbol.TabIndex = 30;
-            // 
-            // TxbKonstatnySymbol
-            // 
-            this.TxbKonstatnySymbol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TxbKonstatnySymbol.Location = new System.Drawing.Point(327, 292);
-            this.TxbKonstatnySymbol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.TxbKonstatnySymbol.Name = "TxbKonstatnySymbol";
-            this.TxbKonstatnySymbol.Size = new System.Drawing.Size(136, 26);
-            this.TxbKonstatnySymbol.TabIndex = 31;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.DarkCyan;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label10.Location = new System.Drawing.Point(20, 269);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(139, 18);
+            this.label10.Size = new System.Drawing.Size(135, 17);
             this.label10.TabIndex = 32;
             this.label10.Text = "Variabilný symbol";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -308,12 +283,12 @@
             // 
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.DarkCyan;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label11.Location = new System.Drawing.Point(174, 269);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(144, 18);
+            this.label11.Size = new System.Drawing.Size(136, 17);
             this.label11.TabIndex = 33;
             this.label11.Text = "Špecifický symbol";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -322,12 +297,12 @@
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.DarkCyan;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label12.Location = new System.Drawing.Point(326, 269);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(151, 18);
+            this.label12.Size = new System.Drawing.Size(144, 17);
             this.label12.TabIndex = 34;
             this.label12.Text = "Konštantný symbol";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -336,21 +311,21 @@
             // 
             this.TxbSprava.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.TxbSprava.Location = new System.Drawing.Point(18, 346);
-            this.TxbSprava.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TxbSprava.Margin = new System.Windows.Forms.Padding(2);
             this.TxbSprava.Name = "TxbSprava";
             this.TxbSprava.Size = new System.Drawing.Size(445, 26);
-            this.TxbSprava.TabIndex = 35;
+            this.TxbSprava.TabIndex = 10;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.DarkCyan;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label13.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label13.Location = new System.Drawing.Point(20, 323);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(158, 18);
+            this.label13.Size = new System.Drawing.Size(154, 17);
             this.label13.TabIndex = 36;
             this.label13.Text = "Správa pre príjemcu";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -366,20 +341,53 @@
             this.lblUpozornenie.TabIndex = 37;
             this.lblUpozornenie.Text = "Upozornenie";
             // 
+            // NtbVS
+            // 
+            this.NtbVS.AllowDecimals = false;
+            this.NtbVS.AllowNegative = false;
+            this.NtbVS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.NtbVS.Location = new System.Drawing.Point(18, 291);
+            this.NtbVS.MaxLength = 10;
+            this.NtbVS.Name = "NtbVS";
+            this.NtbVS.Size = new System.Drawing.Size(136, 26);
+            this.NtbVS.TabIndex = 7;
+            // 
+            // NtbSS
+            // 
+            this.NtbSS.AllowDecimals = false;
+            this.NtbSS.AllowNegative = false;
+            this.NtbSS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.NtbSS.Location = new System.Drawing.Point(177, 291);
+            this.NtbSS.MaxLength = 10;
+            this.NtbSS.Name = "NtbSS";
+            this.NtbSS.Size = new System.Drawing.Size(136, 26);
+            this.NtbSS.TabIndex = 8;
+            // 
+            // NtbKS
+            // 
+            this.NtbKS.AllowDecimals = false;
+            this.NtbKS.AllowNegative = false;
+            this.NtbKS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.NtbKS.Location = new System.Drawing.Point(329, 291);
+            this.NtbKS.MaxLength = 10;
+            this.NtbKS.Name = "NtbKS";
+            this.NtbKS.Size = new System.Drawing.Size(136, 26);
+            this.NtbKS.TabIndex = 9;
+            // 
             // FrmTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 499);
+            this.Controls.Add(this.NtbKS);
+            this.Controls.Add(this.NtbSS);
+            this.Controls.Add(this.NtbVS);
             this.Controls.Add(this.lblUpozornenie);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.TxbSprava);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.TxbKonstatnySymbol);
-            this.Controls.Add(this.TxbSpecifickySymbol);
-            this.Controls.Add(this.TxbVariabilnySymbol);
             this.Controls.Add(this.lblSuma);
             this.Controls.Add(this.NtbSuma);
             this.Controls.Add(this.BtnUskutocnitPlatbu);
@@ -398,7 +406,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.LblPrijemca);
             this.Controls.Add(this.LblOdosielatel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmTransaction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmTransaction";
@@ -427,14 +435,14 @@
         private System.Windows.Forms.Button BtnUskutocnitPlatbu;
         private Controls.NumericTextBox NtbSuma;
         private System.Windows.Forms.Label lblSuma;
-        private System.Windows.Forms.TextBox TxbVariabilnySymbol;
-        private System.Windows.Forms.TextBox TxbSpecifickySymbol;
-        private System.Windows.Forms.TextBox TxbKonstatnySymbol;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox TxbSprava;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblUpozornenie;
+        private Controls.NumericTextBox NtbVS;
+        private Controls.NumericTextBox NtbSS;
+        private Controls.NumericTextBox NtbKS;
     }
 }

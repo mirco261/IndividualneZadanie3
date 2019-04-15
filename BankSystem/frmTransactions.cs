@@ -11,44 +11,48 @@ using System.Windows.Forms;
 
 namespace BankSystem
 {
-    public partial class frmTransactions : Form
+    public partial class FrmTransactions : Form
     {
         FrmTransactionsViewModel viewModel = new FrmTransactionsViewModel();
 
         /// <summary>
-        /// Used when viewing all transactions.
+        /// Nepotrebné stĺpce budu skryte
         /// </summary>
-        public frmTransactions()
+        private void SkryjemStlpceKtoreNepotrebujem()
+        {
+            DgvTransakcie.Columns[0].Visible = false;
+            DgvTransakcie.Columns[3].Visible = false;
+            DgvTransakcie.Columns[4].Visible = false;
+            DgvTransakcie.Columns[11].Visible = false;
+            DgvTransakcie.Columns[12].Visible = false;
+        }
+
+        /// <summary>
+        /// Použijem keď chcem zobraziť všetky transakcie
+        /// </summary>
+        public FrmTransactions()
         {
             InitializeComponent();
             DgvTransakcie.AutoGenerateColumns = true;
             DgvTransakcie.DataSource = viewModel.NacitajTransakcie();
             DgvTransakcie.DataMember = "Transakcie";
-            DgvTransakcie.Columns[0].Visible = false;
-            DgvTransakcie.Columns[3].Visible = false;
-            DgvTransakcie.Columns[4].Visible = false;
-            DgvTransakcie.Columns[10].Visible = false;
-            DgvTransakcie.Columns[11].Visible = false;
 
-
+            SkryjemStlpceKtoreNepotrebujem();
         }
 
+
         /// <summary>
-        /// Used when viewing selected client's transactions.
+        /// použité, keď chcem zobraziť transakcie iba konkrétneho clienta
         /// </summary>
-        /// <param name="clientId"></param>
-        public frmTransactions(int clientId)
+        /// <param name="clientId">ID Klienta</param>
+        public FrmTransactions(int clientId)
         {
             InitializeComponent();
-
             DgvTransakcie.AutoGenerateColumns = true;
             DgvTransakcie.DataSource = viewModel.NacitajTransakcie(clientId);
             DgvTransakcie.DataMember = "Transakcie";
-            DgvTransakcie.Columns[0].Visible = false;
-            DgvTransakcie.Columns[3].Visible = false;
-            DgvTransakcie.Columns[4].Visible = false;
-            DgvTransakcie.Columns[10].Visible = false;
-            DgvTransakcie.Columns[11].Visible = false;
+
+            SkryjemStlpceKtoreNepotrebujem();
         }
     }
 }

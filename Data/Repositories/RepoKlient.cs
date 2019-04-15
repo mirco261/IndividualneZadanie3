@@ -115,10 +115,10 @@ namespace Data.Repositories
 
 
         /// <summary>
-        /// Vyhľadám ID klienta
+        /// Vyhľadá klienta z dtb. 
         /// </summary>
-        /// <param name="vyraz"></param>
-        /// <returns></returns>
+        /// <param name="vyraz">Priezvisko, Občiansky preukaz alebo IBAN</param>
+        /// <returns>Ak vráti <> 0, klient existuje</returns>
         public int HladajKlienta(string vyraz)
         {
             using (SqlConnection connection = base.Connection)

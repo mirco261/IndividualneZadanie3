@@ -29,14 +29,29 @@ namespace BankSystem
         /// </summary>
         public string IBAN { get; set; }
 
-        public FrmAccounts()
+        //načíta mi zoznam klientov - pregeneruje a prekreslí
+        private void NacitajZoznamKlientov()
         {
-            InitializeComponent();
             dgwZoznamKlientov.AutoGenerateColumns = true;
-            dgwZoznamKlientov.DataSource = ZoznamKlientov.NacitajzTabulkyPerson(txbMeno.Text,txbPriezvisko.Text, txbIBAN.Text);
+            dgwZoznamKlientov.DataSource = ZoznamKlientov.NacitajzTabulkyPerson(txbMeno.Text, txbPriezvisko.Text, txbIBAN.Text);
             dgwZoznamKlientov.DataMember = "Klient";
             dgwZoznamKlientov.Columns[0].Visible = false;
         }
+
+
+        public FrmAccounts()
+        {
+            InitializeComponent();
+            NacitajZoznamKlientov();
+
+            if (dgwZoznamKlientov.Rows.Count == 0)
+            {
+                cmdManageAccount.Enabled = false;
+
+            }
+        }
+
+
 
         private void CmdManageAccount_Click(object sender, EventArgs e)
         {
@@ -45,6 +60,8 @@ namespace BankSystem
             using (FrmClientManagement newForm = new FrmClientManagement(id))
             {
                 newForm.ShowDialog();
+                //pregeneruj dgw
+                NacitajZoznamKlientov();
             }
         }
 

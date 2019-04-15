@@ -85,7 +85,10 @@ namespace Data.Repositories
             }
         }
 
-
+        /// <summary>
+        /// Zapíše transakciu do databázy. Stačí podhodiť transakciu z model transakcia
+        /// </summary>
+        /// <param name="transakcia"></param>
         public void ZapisTransakciu(ModelTransakcia transakcia)
         {
             using (SqlConnection connection = base.Connection)
@@ -183,7 +186,7 @@ namespace Data.Repositories
         /// <summary>
         /// Načíta všetky transakcie všetkých klientov
         /// </summary>
-        /// <returns></returns>
+        /// <returns>dataset ktorý použijem pre datagridview</returns>
         public DataSet NacitajTransakcie()
         {
             using (base.Connection)
@@ -196,6 +199,11 @@ namespace Data.Repositories
 	                                      ,kp.Priezvisko +', '+ kp.Meno as Príjemca
 	                                      ,ko.ID as ID_odosielateľa
 	                                      ,kp.ID as ID_prijímateľa
+										  ,CASE
+                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is not null THEN 'Prevod'
+                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is     null THEN 'Výber'
+                                            WHEN ko.Priezvisko is     null and kp.Priezvisko is not null THEN 'Vklad'
+                                            END AS 'Typ operácie'
 	                                      ,t.[Suma] as Čiastka
                                           ,t.[VS]
                                           ,t.[SS]
@@ -203,7 +211,7 @@ namespace Data.Repositories
                                           ,t.[Sprava] as Správa
                                           ,t.[OdosielatelUcetID]
                                           ,t.[PrijemcaUcetID]   
-                                          ,t.Datum           
+                                          ,t.Datum  as Dátum
                                           FROM [Transakcia] as t
                                           left join Ucet as up
                                           on t.PrijemcaUcetID = up.ID
@@ -228,9 +236,10 @@ namespace Data.Repositories
 
 
         /// <summary>
-        /// Načíta všetky transakcie iba vybraného klienta
+        /// Načíta všetky transakcie všetkých klientov
         /// </summary>
-        /// <returns></returns>
+        /// <param name="clientID">ID klienta, ktorého mam načítať</param>
+        /// <returns>dataset ktorý použijem pre datagridview</returns>
         public DataSet NacitajTransakcie(int clientID)
         {
             using (base.Connection)
@@ -243,14 +252,19 @@ namespace Data.Repositories
 	                                      ,kp.Priezvisko +', '+ kp.Meno as Príjemca
 	                                      ,ko.ID as ID_odosielateľa
 	                                      ,kp.ID as ID_prijímateľa
+										  ,CASE
+                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is not null THEN 'Prevod'
+                                            WHEN ko.Priezvisko is not null and kp.Priezvisko is     null THEN 'Výber'
+                                            WHEN ko.Priezvisko is     null and kp.Priezvisko is not null THEN 'Vklad'
+                                            END AS 'Typ operácie'
 	                                      ,t.[Suma] as Čiastka
                                           ,t.[VS]
                                           ,t.[SS]
                                           ,t.[KS]
                                           ,t.[Sprava] as Správa
                                           ,t.[OdosielatelUcetID]
-                                          ,t.[PrijemcaUcetID]
-                                          ,t.Datum           
+                                          ,t.[PrijemcaUcetID]   
+                                          ,t.Datum  as Dátum        
                                           FROM [Transakcia] as t
                                           left join Ucet as up
                                           on t.PrijemcaUcetID = up.ID

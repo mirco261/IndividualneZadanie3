@@ -50,11 +50,8 @@ namespace BankSystem
             NovyKlient.UpravKlientaDoDb(ID, meno, priezvisko, adresa, mesto, cisloOP, telefon, mail, iban, precerpanie);
         }
 
-
-
         //inicializujem si generator
         Generator generator = new Generator();
-
 
         /// <summary>
         /// Vytvorí mi random IBAN
@@ -73,8 +70,6 @@ namespace BankSystem
             }
             return sb.ToString();
         }
-
-
 
         /// <summary>
         /// vytvorí náhodného klienta a vráti ho ako objekt klient
@@ -99,7 +94,11 @@ namespace BankSystem
             return klient;
         }
 
-
+        /// <summary>
+        /// Načítam klieta, keď zadám jeho ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>vráti mi dataset, kde je iba 1 klient</returns>
         public ModelKlient NacitajKlientaPodlaID(int id)
         {
             return NovyKlient.NacitajKlientaPodlaID(id);

@@ -15,40 +15,42 @@ namespace BankSystem
         //načíta štatistiky do bočného meu
         private void NacitajStatistiky()
         {
+            //štatistika top10 klientov
             DgwTOP10.AutoGenerateColumns = true;
             DgwTOP10.DataSource = klient.Top10klientov();
             DgwTOP10.DataMember = "Top10";
 
+            //štatistika zakladná 
             NtbSumaNaUctoch.Text = klient.PocetPenaziNaUctoch().ToString();
             NtbPocetAktivnychUctov.Text = klient.PocetUctov().ToString();
 
-            DgwTOP10.AutoGenerateColumns = true;
-            DgwTOP10.DataSource = klient.Top10klientov();
-            DgwTOP10.DataMember = "Top10";
-
+            //štatistika top mestá
             DgvTopMesta.AutoGenerateColumns = true;
             DgvTopMesta.DataSource = klient.TopMestaKlienti();
             DgvTopMesta.DataMember = "Mesta";
 
+            //štatistika počet  založených účtov podľa mesiacov
             DgwPocetUctov.AutoGenerateColumns = true;
             DgwPocetUctov.DataSource = klient.PocetZalozenychUctovPoMesiacoch();
             DgwPocetUctov.DataMember = "Top6";
         }
 
-
+        /// <summary>
+        /// Vytvorím viewModel
+        /// </summary>
         FrmMainViewModel klient = new FrmMainViewModel();
+
         /// <summary>
         /// Používam ju na prenos vyhľadaného id podľa vyhľadávača
         /// </summary>
         public int Id { get; set; }
+
 
         public FrmMain()
         {
             InitializeComponent();
             NacitajStatistiky();
         }
-
-
 
         private void CmdFindClient_Click(object sender, EventArgs e)
         {
@@ -59,7 +61,7 @@ namespace BankSystem
             hladaj.Replace(" ", "");
 
             //ošetrím aby užívateľ zadal aspoň 3 znaky
-            if (hladaj.Length<3)
+            if (hladaj.Length < 3)
             {
                 lblInfoOUzivatelovi.Text = "Zadaj aspoň tri znaky vyhľadávaného výrazu";
             }
@@ -69,13 +71,16 @@ namespace BankSystem
             {
                 lblInfoOUzivatelovi.Text = "";
                 Id = klient.HladajKlienta(hladaj);
+
+                //otvor nový formulár
                 using (FrmClientManagement newForm = new FrmClientManagement(Id))
                 {
                     newForm.ShowDialog();
                     NacitajStatistiky();
-
                 }
             }
+
+            //ošetrím, ak užívateľa nenájdem, informujem o tom užívateľa
             else
             {
                 lblInfoOUzivatelovi.Text = "Zadaný klient neexistuje";
@@ -88,7 +93,6 @@ namespace BankSystem
             {
                 newForm.ShowDialog();
                 NacitajStatistiky();
-
             }
         }
 
@@ -98,17 +102,15 @@ namespace BankSystem
             {
                 newForm.ShowDialog();
                 NacitajStatistiky();
-
             }
         }
 
         private void CmdAllTransactions_Click(object sender, EventArgs e)
         {
-            using (frmTransactions newForm = new frmTransactions())
+            using (FrmTransactions newForm = new FrmTransactions())
             {
                 newForm.ShowDialog();
                 NacitajStatistiky();
-
             }
         }
     }

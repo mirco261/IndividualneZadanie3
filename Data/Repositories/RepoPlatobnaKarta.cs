@@ -15,9 +15,9 @@ namespace Data.Repositories
 
 
         /// <summary>
-        /// Načítam zoznam platobných kariet užívateľa
+        /// Načítam zoznam platobných kariet vybraného klienta
         /// </summary>
-        /// <param name="ID">ID klienta</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         public DataSet NacitajPlatobneKarty(int ID)
         {

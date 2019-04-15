@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.btnHladajKlienta = new System.Windows.Forms.Button();
-            this.cmdNewAccount = new System.Windows.Forms.Button();
-            this.cmdAllAccounts = new System.Windows.Forms.Button();
-            this.cmdAllTransactions = new System.Windows.Forms.Button();
+            this.cmdNovyUcet = new System.Windows.Forms.Button();
+            this.cmdZoznamUctov = new System.Windows.Forms.Button();
+            this.cmdVsetkyTransakcie = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -63,47 +63,59 @@
             // 
             // btnHladajKlienta
             // 
+            this.btnHladajKlienta.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnHladajKlienta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnHladajKlienta.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnHladajKlienta.Location = new System.Drawing.Point(601, 105);
             this.btnHladajKlienta.Name = "btnHladajKlienta";
             this.btnHladajKlienta.Size = new System.Drawing.Size(112, 23);
-            this.btnHladajKlienta.TabIndex = 2;
-            this.btnHladajKlienta.Text = "Find client";
-            this.btnHladajKlienta.UseVisualStyleBackColor = true;
+            this.btnHladajKlienta.TabIndex = 1;
+            this.btnHladajKlienta.Text = "Vyhľadať klienta";
+            this.btnHladajKlienta.UseVisualStyleBackColor = false;
             this.btnHladajKlienta.Click += new System.EventHandler(this.CmdFindClient_Click);
             // 
-            // cmdNewAccount
+            // cmdNovyUcet
             // 
-            this.cmdNewAccount.Location = new System.Drawing.Point(362, 179);
-            this.cmdNewAccount.Name = "cmdNewAccount";
-            this.cmdNewAccount.Size = new System.Drawing.Size(112, 23);
-            this.cmdNewAccount.TabIndex = 3;
-            this.cmdNewAccount.Text = "New account";
-            this.cmdNewAccount.UseVisualStyleBackColor = true;
-            this.cmdNewAccount.Click += new System.EventHandler(this.CmdNewAccount_Click);
+            this.cmdNovyUcet.BackColor = System.Drawing.Color.SteelBlue;
+            this.cmdNovyUcet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cmdNovyUcet.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cmdNovyUcet.Location = new System.Drawing.Point(360, 180);
+            this.cmdNovyUcet.Name = "cmdNovyUcet";
+            this.cmdNovyUcet.Size = new System.Drawing.Size(112, 40);
+            this.cmdNovyUcet.TabIndex = 2;
+            this.cmdNovyUcet.Text = "Založiť účet";
+            this.cmdNovyUcet.UseVisualStyleBackColor = false;
+            this.cmdNovyUcet.Click += new System.EventHandler(this.CmdNewAccount_Click);
             // 
-            // cmdAllAccounts
+            // cmdZoznamUctov
             // 
-            this.cmdAllAccounts.Location = new System.Drawing.Point(362, 240);
-            this.cmdAllAccounts.Name = "cmdAllAccounts";
-            this.cmdAllAccounts.Size = new System.Drawing.Size(112, 23);
-            this.cmdAllAccounts.TabIndex = 4;
-            this.cmdAllAccounts.Text = "All accounts";
-            this.cmdAllAccounts.UseVisualStyleBackColor = true;
-            this.cmdAllAccounts.Click += new System.EventHandler(this.CmdAllAccounts_Click);
+            this.cmdZoznamUctov.BackColor = System.Drawing.Color.SteelBlue;
+            this.cmdZoznamUctov.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cmdZoznamUctov.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cmdZoznamUctov.Location = new System.Drawing.Point(362, 240);
+            this.cmdZoznamUctov.Name = "cmdZoznamUctov";
+            this.cmdZoznamUctov.Size = new System.Drawing.Size(112, 40);
+            this.cmdZoznamUctov.TabIndex = 3;
+            this.cmdZoznamUctov.Text = "Zoznam účtov";
+            this.cmdZoznamUctov.UseVisualStyleBackColor = false;
+            this.cmdZoznamUctov.Click += new System.EventHandler(this.CmdAllAccounts_Click);
             // 
-            // cmdAllTransactions
+            // cmdVsetkyTransakcie
             // 
-            this.cmdAllTransactions.Location = new System.Drawing.Point(362, 300);
-            this.cmdAllTransactions.Name = "cmdAllTransactions";
-            this.cmdAllTransactions.Size = new System.Drawing.Size(112, 23);
-            this.cmdAllTransactions.TabIndex = 5;
-            this.cmdAllTransactions.Text = "All transactions";
-            this.cmdAllTransactions.UseVisualStyleBackColor = true;
-            this.cmdAllTransactions.Click += new System.EventHandler(this.CmdAllTransactions_Click);
+            this.cmdVsetkyTransakcie.BackColor = System.Drawing.Color.SteelBlue;
+            this.cmdVsetkyTransakcie.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cmdVsetkyTransakcie.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cmdVsetkyTransakcie.Location = new System.Drawing.Point(362, 300);
+            this.cmdVsetkyTransakcie.Name = "cmdVsetkyTransakcie";
+            this.cmdVsetkyTransakcie.Size = new System.Drawing.Size(112, 40);
+            this.cmdVsetkyTransakcie.TabIndex = 4;
+            this.cmdVsetkyTransakcie.Text = "Zoznam transakcií";
+            this.cmdVsetkyTransakcie.UseVisualStyleBackColor = false;
+            this.cmdVsetkyTransakcie.Click += new System.EventHandler(this.CmdAllTransactions_Click);
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.ForeColor = System.Drawing.Color.SeaGreen;
             this.label2.Location = new System.Drawing.Point(362, 9);
             this.label2.Name = "label2";
@@ -152,7 +164,7 @@
             this.txbHladajKlienta.Margin = new System.Windows.Forms.Padding(2);
             this.txbHladajKlienta.Name = "txbHladajKlienta";
             this.txbHladajKlienta.Size = new System.Drawing.Size(235, 20);
-            this.txbHladajKlienta.TabIndex = 10;
+            this.txbHladajKlienta.TabIndex = 0;
             // 
             // lblInfoOUzivatelovi
             // 
@@ -204,7 +216,7 @@
             this.tabControlStatistiky.Name = "tabControlStatistiky";
             this.tabControlStatistiky.SelectedIndex = 0;
             this.tabControlStatistiky.Size = new System.Drawing.Size(330, 351);
-            this.tabControlStatistiky.TabIndex = 13;
+            this.tabControlStatistiky.TabIndex = 5;
             // 
             // tabPage2
             // 
@@ -344,15 +356,17 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmdAllTransactions);
-            this.Controls.Add(this.cmdAllAccounts);
-            this.Controls.Add(this.cmdNewAccount);
+            this.Controls.Add(this.cmdVsetkyTransakcie);
+            this.Controls.Add(this.cmdZoznamUctov);
+            this.Controls.Add(this.cmdNovyUcet);
             this.Controls.Add(this.btnHladajKlienta);
             this.Controls.Add(this.label1);
             this.Location = new System.Drawing.Point(600, 200);
+            this.MaximumSize = new System.Drawing.Size(734, 427);
+            this.MinimumSize = new System.Drawing.Size(734, 427);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bank System";
+            this.Text = "Bankový systém 2019";
             ((System.ComponentModel.ISupportInitialize)(this.DgwTOP10)).EndInit();
             this.tabControlStatistiky.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -369,9 +383,9 @@
 
         #endregion
         private System.Windows.Forms.Button btnHladajKlienta;
-        private System.Windows.Forms.Button cmdNewAccount;
-        private System.Windows.Forms.Button cmdAllAccounts;
-        private System.Windows.Forms.Button cmdAllTransactions;
+        private System.Windows.Forms.Button cmdNovyUcet;
+        private System.Windows.Forms.Button cmdZoznamUctov;
+        private System.Windows.Forms.Button cmdVsetkyTransakcie;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

@@ -159,7 +159,7 @@ namespace BankSystem
 
         private void CmdAllTransactions_Click(object sender, EventArgs e)
         {
-            using (frmTransactions newForm = new frmTransactions(IdKlienta))
+            using (FrmTransactions newForm = new FrmTransactions(IdKlienta))
             {
                 newForm.ShowDialog();
                 //načítam nové horné info o klientovi

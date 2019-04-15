@@ -32,43 +32,12 @@ namespace BankSystem
         //inicializujem si dataview 
         FrmAccountViewModel NovyKlient = new FrmAccountViewModel();
 
-        
         /// <summary>
-        /// Used when adding new account.
+        /// Načíta klienta do textboxov vo formulári (môžem použiť načítaného alebo random)
         /// </summary>
-        public frmAccount()
+        /// <param name="klient"></param>
+        private void NacitajKlientaDoTextBoxov(ModelKlient klient)
         {
-            InitializeComponent();
-            btnUlozitStarehoKlienta.Visible = false;
-            btnUlozNovehoKlienta.Visible = true;
-
- 
-
-            //Vygeneruje IBAN
-            txbIBAN.Text = NovyKlient.VratIBAN();
-        }
-
-        /// <summary>
-        /// Used when viewing/updating existing account.
-        /// </summary>
-        /// <param name="clientId"></param>
-        public frmAccount(int clientId)
-        {
-            InitializeComponent();
-
-            //Zobrazím tlačidlo na uloženie existujúceho klienta
-            btnUlozitStarehoKlienta.Visible = true;
-            btnUlozNovehoKlienta.Visible = false;
-
-            //Zapíšem si ID klienta
-            ID = clientId;
-
-            FrmAccountViewModel KlientPrenos = new FrmAccountViewModel();
-
-            ModelKlient klient = new ModelKlient();
-
-            klient = KlientPrenos.NacitajKlientaPodlaID(clientId);
-
             txbKrstneMeno.Text = klient.Meno;
             txbPriezvisko.Text = klient.Priezvisko;
             txbUlica.Text = klient.Ulica;
@@ -80,6 +49,43 @@ namespace BankSystem
             nudPrecerpanie.Value = klient.Precerpanie;
         }
 
+        /// <summary>
+        /// Keď pridávam nového klienta
+        /// </summary>
+        public frmAccount()
+        {
+            InitializeComponent();
+
+            //zobrazím správne tlačidlá na ukladanie
+            btnUlozitStarehoKlienta.Visible = false;
+            btnUlozNovehoKlienta.Visible = true;
+            this.Text = "Pridanie nového klienta";
+         }
+
+        /// <summary>
+        /// Frm použitý pri úprave existujúceho klienta
+        /// </summary>
+        /// <param name="clientId"></param>
+        public frmAccount(int clientId)
+        {
+            InitializeComponent();
+            this.Text = "Editácia existujúceho klienta";
+
+            //Zobrazím tlačidlo na uloženie existujúceho klienta
+            btnUlozitStarehoKlienta.Visible = true;
+            btnUlozNovehoKlienta.Visible = false;
+
+            //Zapíšem si ID klienta
+            ID = clientId;
+
+            //vytvorím si všetky potrebné veci z viewModelu
+            FrmAccountViewModel KlientPrenos = new FrmAccountViewModel();
+            ModelKlient klient = new ModelKlient();
+
+            //načítam všetky polia klientom
+            klient = KlientPrenos.NacitajKlientaPodlaID(clientId);
+            NacitajKlientaDoTextBoxov(klient);
+        }
 
         /// <summary>
         /// tlačidlom vygenerujem random klienta
@@ -96,14 +102,10 @@ namespace BankSystem
             randomKlient = NovyKlient.VratRandomKlienta();
 
             //Naplním jednotlivé textboxy random hodnotami
-            txbKrstneMeno.Text = randomKlient.Meno;
-            txbPriezvisko.Text = randomKlient.Priezvisko;
-            txbUlica.Text = randomKlient.Ulica;
-            txbMesto.Text = randomKlient.Mesto;
-            txbObcianskyPreukaz.Text = randomKlient.OP;
-            txbTelefon.Text = randomKlient.Telefon;
-            txbMail.Text = randomKlient.Mail;
-            IBAN = txbIBAN.Text;
+            NacitajKlientaDoTextBoxov(randomKlient);
+
+            //prebijem hodnoty random hodnotami
+            txbIBAN.Text = NovyKlient.VratIBAN();
             nudPrecerpanie.Value = precerpanieRnd.Next(200,1000);
         }
 
@@ -127,9 +129,7 @@ namespace BankSystem
 
             NovyKlient.ZapisKlientaDoDb(Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie, Datum);
             this.Close();
-
         }
-
 
         //Keď upravujem už existujúceho klienta, použijem toto tlačidlo
         private void BtnUlozitStarehoKlienta_Click(object sender, EventArgs e)
@@ -144,18 +144,11 @@ namespace BankSystem
             IBAN = txbIBAN.Text;
             Precerpanie = (int)nudPrecerpanie.Value;
 
+            //vynechám medzery na OP
+            CisloOP = CisloOP.Replace(" ", "");
+
             NovyKlient.UpravKlientaDoDb(ID, Meno, Priezvisko, Adresa, Mesto, CisloOP, Telefon, Mail, IBAN, Precerpanie);
             this.Close();
-        }
-
-        private void TxbObcianskyPreukaz_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FrmAccount_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

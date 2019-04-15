@@ -24,11 +24,11 @@ namespace BankSystem
         DataTable Prijimatel = new DataTable();
         DataTable Odosielatel = new DataTable();
 
-        //premenna klient id
+        //premenna klient id a typ transakcie
         public int Klient { get; set; }
         public int TypTransakcie { get; set; }
 
-
+        
         /// <summary>
         /// Metoda, pomocou ktorej zapisem do infa o prijimatelovi preneseneho klienta
         /// </summary>
@@ -92,6 +92,20 @@ namespace BankSystem
             LblOdosielatelMeno.Text = "Príjemca";
         }
 
+        /// <summary>
+        /// Do zoznamu prijímateľov vložím zoznam klientov
+        /// </summary>
+        private void VlozDoZoznamuPrijimatelovZoznamKlientov()
+        {
+            Prijimatel = viewModel.NacitajzTabulkyKlientov();
+            CmbPrijimatel.DataSource = Prijimatel;
+            CmbPrijimatel.DisplayMember = "Klient";
+            CmbPrijimatelAdresa.DataSource = Prijimatel;
+            CmbPrijimatelAdresa.DisplayMember = "Adresa";
+            CmbPrijimatelIBAN.DataSource = Prijimatel;
+            CmbPrijimatelIBAN.DisplayMember = "UcetIBAN";
+        }
+
         //Začiatok formulára
         public FrmTransaction(int IdKlienta, int menu)
         {
@@ -105,7 +119,6 @@ namespace BankSystem
 
             //vyčistím text upozornenia
             lblUpozornenie.Text = "";
-
 
             //Pohrám sa s formulárom podľa potreby
             switch (menu)
@@ -128,23 +141,14 @@ namespace BankSystem
                 case 3:
                     {
                         ZapisemKlientaAkoOdosielatela(IdKlienta);
-                        
-
-                        //Do zoznamu prijímateľov vložím zoznam klientov
-                        Prijimatel = viewModel.NacitajzTabulkyKlientov();
-                        CmbPrijimatel.DataSource = Prijimatel;
-                        CmbPrijimatel.DisplayMember = "Klient";
-                        CmbPrijimatelAdresa.DataSource = Prijimatel;
-                        CmbPrijimatelAdresa.DisplayMember = "Adresa";
-                        CmbPrijimatelIBAN.DataSource = Prijimatel;
-                        CmbPrijimatelIBAN.DisplayMember = "UcetIBAN";
+                        VlozDoZoznamuPrijimatelovZoznamKlientov();
                         break;
                     }
                 default:
                     break;
             }
         }
-        
+
         //akcia na tlačidlo uskutočni platbu
         private void BtnUskutocnitPlatbu_Click(object sender, EventArgs e)
         {
@@ -154,19 +158,16 @@ namespace BankSystem
             //načítam si info o klientovi
             ModelKlient ucastnik = viewModel.NacitajKlientaPodlaID(Klient);
 
-
             //overím či zadal sumu
             if (NtbSuma.Text == "")
             {
                 lblUpozornenie.Text = "Suma nesmie byť prázdna";
-
             }
 
             //overim, či ma dostatok peňazí na účte
             else if (ucastnik.StavNaUcte - decimal.Parse(NtbSuma.Text) < ucastnik.Precerpanie *-1  && TypTransakcie != 1)
             {
                 lblUpozornenie.Text = "Nedostatok peňazí na účte";
-
             }
 
             //Zapíšem platbu
@@ -174,9 +175,9 @@ namespace BankSystem
             {
                 //Použijem premenné z textboxov následne do transakcie
                 transakcia.Suma = decimal.Parse(NtbSuma.Text);
-                transakcia.VariabilnySymbol = TxbVariabilnySymbol.Text;
-                transakcia.KonstatnySymbol = TxbKonstatnySymbol.Text;
-                transakcia.SpecifickySymbol = TxbSpecifickySymbol.Text;
+                transakcia.VariabilnySymbol = NtbVS.Text;
+                transakcia.KonstatnySymbol = NtbKS.Text;
+                transakcia.SpecifickySymbol = NtbSS.Text;
                 transakcia.Sprava = TxbSprava.Text;
                 
                 //Zapíšem obrat na účte odosielateľa - Ak combo odosielatel alebo prijímatel nie je prázdne, použijem hodnotu z komba ako ID účtu pre prevody
@@ -199,9 +200,9 @@ namespace BankSystem
             }
         }
 
-        private void CmbOdosielatel_SelectedIndexChanged(object sender, EventArgs e)
+        private void NtbSuma_TextChanged(object sender, EventArgs e)
         {
-
+ 
         }
     }
 }

@@ -30,7 +30,7 @@ namespace BankSystem
         }
 
         /// <summary>
-        /// Vytiahnem si všetkých klientov z db
+        /// Vytiahnem si konkrétneho klienta z db
         /// </summary>
         /// <returns></returns>
         public DataTable NacitajzTabulkyKlientov(int idKlienta)
@@ -38,12 +38,20 @@ namespace BankSystem
             return transakcia.NacitajzTabulkyKlientov(idKlienta);
         }
 
+        /// <summary>
+        /// Zapíše transakciu do databázy. Stačí podhodiť transakciu z model transakcia
+        /// </summary>
+        /// <param name="transakcia"></param>
         public void ZapisTransakciu(ModelTransakcia infoOTransakcii)
         {
             transakcia.ZapisTransakciu(infoOTransakcii);
         }
 
-
+        /// <summary>
+        /// Načítam údaje o klientovi podľa ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ModelKlient NacitajKlientaPodlaID(int id)
         {
             return klient.NacitajKlientaPodlaID(id);

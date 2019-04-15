@@ -46,6 +46,10 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Načíta koľko peňazí banka disponuje iba na aktívnych účtoch
+        /// </summary>
+        /// <returns>Suma peňazí banky</returns>
         public decimal PocetPenaziNaUctoch()
         {
             using (SqlConnection connection = base.Connection)
@@ -57,12 +61,18 @@ namespace Data.Repositories
 
                     command.CommandText = @"SELECT SUM(Ucet.StavUctu) as StavÚčtu FROM Ucet";
 
-                    decimal peniaze = (decimal)command.ExecuteScalar();
-                    return peniaze;
+
+
+                        return (decimal)command.ExecuteScalar();
+
                 }
             }
         }
 
+        /// <summary>
+        /// Načíta počet aktívnych účtov v banke
+        /// </summary>
+        /// <returns>Počet aktívnych účtov v banke</returns>
         public decimal PocetUctov()
         {
             using (SqlConnection connection = base.Connection)
@@ -79,6 +89,10 @@ namespace Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Načíta dataset top 5 miest, z ktorých má banka klientov
+        /// </summary>
+        /// <returns>top 5 miest, z ktorých má banka klientov</returns>
         public DataSet TopMestaKlienti()
         {
             using (SqlConnection connection = base.Connection)
@@ -106,9 +120,9 @@ namespace Data.Repositories
         }
 
         /// <summary>
-        /// Počet založených účtov po mesiacoch
+        /// Načíta dataset počet založených účtov po mesiacoch za posledných 6 mesiacov
         /// </summary>
-        /// <returns>vracia dataset v ktorom sú top 10 klientov</returns>
+        /// <returns>počet založených účtov</returns>
         public DataSet PocetZalozenychUctovPoMesiacoch()
         {
             using (base.Connection)
