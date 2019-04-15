@@ -14,10 +14,15 @@ namespace TransformerBank
         readonly ModelTransakcia informacie = new ModelTransakcia();
 
 
+
         public void ZapisTransakciu(ModelTransakcia informacie)
         {
             transakcia.ZapisTransakciu(informacie);
-
         }
+
+
+
+
+
     }
 }

@@ -17,6 +17,9 @@ namespace BankSystem
         //vytvorím si objekt repozitára, v ktorom si ťahám klientov banky a záznamy o transakciach
         RepoTransakcia transakcia = new RepoTransakcia();
 
+        readonly RepoKlient klient = new RepoKlient();
+
+
         /// <summary>
         /// Vytiahnem si všetkých klientov z db
         /// </summary>
@@ -38,6 +41,12 @@ namespace BankSystem
         public void ZapisTransakciu(ModelTransakcia infoOTransakcii)
         {
             transakcia.ZapisTransakciu(infoOTransakcii);
+        }
+
+
+        public ModelKlient NacitajKlientaPodlaID(int id)
+        {
+            return klient.NacitajKlientaPodlaID(id);
         }
     }
 }

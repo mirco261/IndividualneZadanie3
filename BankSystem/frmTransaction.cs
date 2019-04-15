@@ -24,6 +24,11 @@ namespace BankSystem
         DataTable Prijimatel = new DataTable();
         DataTable Odosielatel = new DataTable();
 
+        //premenna klient id
+        public int Klient { get; set; }
+        public int TypTransakcie { get; set; }
+
+
         /// <summary>
         /// Metoda, pomocou ktorej zapisem do infa o prijimatelovi preneseneho klienta
         /// </summary>
@@ -92,6 +97,16 @@ namespace BankSystem
         {
             InitializeComponent();
 
+            //uložím si klienta
+            Klient = IdKlienta;
+
+            //uložím si premennú pre menu - aby som vedel kedy mam pozerať stav účtu
+            TypTransakcie = menu;
+
+            //vyčistím text upozornenia
+            lblUpozornenie.Text = "";
+
+
             //Pohrám sa s formulárom podľa potreby
             switch (menu)
             {
@@ -133,31 +148,55 @@ namespace BankSystem
         //akcia na tlačidlo uskutočni platbu
         private void BtnUskutocnitPlatbu_Click(object sender, EventArgs e)
         {
-            //Ak combo odosielatel alebo prijímatel nie je prázdne, použijem hodnotu z komba ako ID účtu pre prevody
-            if (CmbOdosielatel.SelectedIndex != -1)
+            //vyčistím text upozornenia
+            lblUpozornenie.Text = "";
+
+            //načítam si info o klientovi
+            ModelKlient ucastnik = viewModel.NacitajKlientaPodlaID(Klient);
+
+
+            //overím či zadal sumu
+            if (NtbSuma.Text == "")
             {
-                transakcia.OdosielatelUcetID = (int)Odosielatel.Rows[CmbOdosielatel.SelectedIndex]["UcetID"];
+                lblUpozornenie.Text = "Suma nesmie byť prázdna";
+
             }
-            
-            //Ak combo odosielatel alebo prijímatel nie je prázdne, použijem hodnotu z komba ako ID účtu pre prevody
-            if (CmbPrijimatel.SelectedIndex != -1)
+
+            //overim, či ma dostatok peňazí na účte
+            else if (ucastnik.StavNaUcte - decimal.Parse(NtbSuma.Text) < ucastnik.Precerpanie *-1  && TypTransakcie != 1)
             {
-                transakcia.PrijimatelUcetID = (int)Prijimatel.Rows[CmbPrijimatel.SelectedIndex]["UcetID"];
+                lblUpozornenie.Text = "Nedostatok peňazí na účte";
+
             }
 
-            //Použijem premenné z textboxov následne do transakcie
-            transakcia.Suma = decimal.Parse(NtbSuma.Text);
-            transakcia.VariabilnySymbol = TxbVariabilnySymbol.Text;
-            transakcia.KonstatnySymbol = TxbKonstatnySymbol.Text;
-            transakcia.SpecifickySymbol = TxbSpecifickySymbol.Text;
-            transakcia.Sprava = TxbSprava.Text;
+            //Zapíšem platbu
+            else
+            {
+                //Použijem premenné z textboxov následne do transakcie
+                transakcia.Suma = decimal.Parse(NtbSuma.Text);
+                transakcia.VariabilnySymbol = TxbVariabilnySymbol.Text;
+                transakcia.KonstatnySymbol = TxbKonstatnySymbol.Text;
+                transakcia.SpecifickySymbol = TxbSpecifickySymbol.Text;
+                transakcia.Sprava = TxbSprava.Text;
+                
+                //Zapíšem obrat na účte odosielateľa - Ak combo odosielatel alebo prijímatel nie je prázdne, použijem hodnotu z komba ako ID účtu pre prevody
+                if (CmbOdosielatel.SelectedIndex != -1)
+                {
+                    transakcia.OdosielatelUcetID = (int)Odosielatel.Rows[CmbOdosielatel.SelectedIndex]["UcetID"];
+                }
 
-            //Zapíš transakciu
-            viewModel.ZapisTransakciu(transakcia);
+                //Zapíšem obrat na účte príjemcu - Ak combo odosielatel alebo prijímatel nie je prázdne, použijem hodnotu z komba ako ID účtu pre prevody
+                if (CmbPrijimatel.SelectedIndex != -1)
+                {
+                    transakcia.PrijimatelUcetID = (int)Prijimatel.Rows[CmbPrijimatel.SelectedIndex]["UcetID"];
+                }
 
-            //zatvor formular
-            this.Close();
+                //Zapíš transakciu
+                viewModel.ZapisTransakciu(transakcia);
 
+                //zatvor formular
+                this.Close();
+            }
         }
 
         private void CmbOdosielatel_SelectedIndexChanged(object sender, EventArgs e)
