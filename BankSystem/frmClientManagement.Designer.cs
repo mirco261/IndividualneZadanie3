@@ -73,7 +73,7 @@
             this.cmdUpdate.Location = new System.Drawing.Point(12, 171);
             this.cmdUpdate.Name = "cmdUpdate";
             this.cmdUpdate.Size = new System.Drawing.Size(112, 23);
-            this.cmdUpdate.TabIndex = 4;
+            this.cmdUpdate.TabIndex = 0;
             this.cmdUpdate.Text = "Aktualizuj klienta";
             this.cmdUpdate.UseVisualStyleBackColor = true;
             this.cmdUpdate.Click += new System.EventHandler(this.CmdUpdate_Click);
@@ -83,7 +83,7 @@
             this.cmdNewTransaction.Location = new System.Drawing.Point(392, 256);
             this.cmdNewTransaction.Name = "cmdNewTransaction";
             this.cmdNewTransaction.Size = new System.Drawing.Size(112, 23);
-            this.cmdNewTransaction.TabIndex = 5;
+            this.cmdNewTransaction.TabIndex = 4;
             this.cmdNewTransaction.Text = "Peňažný prevod";
             this.cmdNewTransaction.UseVisualStyleBackColor = true;
             this.cmdNewTransaction.Click += new System.EventHandler(this.CmdNewTransaction_Click);
@@ -93,7 +93,7 @@
             this.cmdCloseAccount.Location = new System.Drawing.Point(392, 344);
             this.cmdCloseAccount.Name = "cmdCloseAccount";
             this.cmdCloseAccount.Size = new System.Drawing.Size(112, 23);
-            this.cmdCloseAccount.TabIndex = 6;
+            this.cmdCloseAccount.TabIndex = 5;
             this.cmdCloseAccount.Text = "Deaktivácia účtu";
             this.cmdCloseAccount.UseVisualStyleBackColor = true;
             this.cmdCloseAccount.Click += new System.EventHandler(this.CmdCloseAccount_Click);
@@ -103,7 +103,7 @@
             this.cmdAllTransactions.Location = new System.Drawing.Point(392, 171);
             this.cmdAllTransactions.Name = "cmdAllTransactions";
             this.cmdAllTransactions.Size = new System.Drawing.Size(112, 23);
-            this.cmdAllTransactions.TabIndex = 8;
+            this.cmdAllTransactions.TabIndex = 3;
             this.cmdAllTransactions.Text = "Všetky transakcie";
             this.cmdAllTransactions.UseVisualStyleBackColor = true;
             this.cmdAllTransactions.Click += new System.EventHandler(this.CmdAllTransactions_Click);
@@ -113,7 +113,7 @@
             this.cmdWithdrawal.Location = new System.Drawing.Point(12, 344);
             this.cmdWithdrawal.Name = "cmdWithdrawal";
             this.cmdWithdrawal.Size = new System.Drawing.Size(112, 23);
-            this.cmdWithdrawal.TabIndex = 9;
+            this.cmdWithdrawal.TabIndex = 2;
             this.cmdWithdrawal.Text = "Výber peňazí";
             this.cmdWithdrawal.UseVisualStyleBackColor = true;
             this.cmdWithdrawal.Click += new System.EventHandler(this.CmdWithdrawal_Click);
@@ -123,7 +123,7 @@
             this.cmdDeposit.Location = new System.Drawing.Point(12, 256);
             this.cmdDeposit.Name = "cmdDeposit";
             this.cmdDeposit.Size = new System.Drawing.Size(112, 23);
-            this.cmdDeposit.TabIndex = 10;
+            this.cmdDeposit.TabIndex = 1;
             this.cmdDeposit.Text = "Vklad peňazí";
             this.cmdDeposit.UseVisualStyleBackColor = true;
             this.cmdDeposit.Click += new System.EventHandler(this.CmdDeposit_Click);
@@ -391,13 +391,13 @@
             this.DgwZoznamPlatobnychKariet.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.DgwZoznamPlatobnychKariet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgwZoznamPlatobnychKariet.Location = new System.Drawing.Point(762, 37);
-            this.DgwZoznamPlatobnychKariet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DgwZoznamPlatobnychKariet.Margin = new System.Windows.Forms.Padding(2);
             this.DgwZoznamPlatobnychKariet.Name = "DgwZoznamPlatobnychKariet";
             this.DgwZoznamPlatobnychKariet.ReadOnly = true;
             this.DgwZoznamPlatobnychKariet.RowTemplate.Height = 24;
             this.DgwZoznamPlatobnychKariet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgwZoznamPlatobnychKariet.Size = new System.Drawing.Size(346, 271);
-            this.DgwZoznamPlatobnychKariet.TabIndex = 34;
+            this.DgwZoznamPlatobnychKariet.TabIndex = 7;
             this.DgwZoznamPlatobnychKariet.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgwZoznamPlatobnychKariet_CellContentClick);
             // 
             // label10
@@ -415,10 +415,10 @@
             // BtnPridajKartu
             // 
             this.BtnPridajKartu.Location = new System.Drawing.Point(763, 314);
-            this.BtnPridajKartu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnPridajKartu.Margin = new System.Windows.Forms.Padding(2);
             this.BtnPridajKartu.Name = "BtnPridajKartu";
             this.BtnPridajKartu.Size = new System.Drawing.Size(168, 86);
-            this.BtnPridajKartu.TabIndex = 36;
+            this.BtnPridajKartu.TabIndex = 6;
             this.BtnPridajKartu.Text = "Pridaj kartu";
             this.BtnPridajKartu.UseVisualStyleBackColor = true;
             this.BtnPridajKartu.Click += new System.EventHandler(this.BtnPridajKartu_Click);
@@ -426,10 +426,10 @@
             // BtnZmenZablokovanieKarty
             // 
             this.BtnZmenZablokovanieKarty.Location = new System.Drawing.Point(935, 314);
-            this.BtnZmenZablokovanieKarty.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnZmenZablokovanieKarty.Margin = new System.Windows.Forms.Padding(2);
             this.BtnZmenZablokovanieKarty.Name = "BtnZmenZablokovanieKarty";
             this.BtnZmenZablokovanieKarty.Size = new System.Drawing.Size(173, 87);
-            this.BtnZmenZablokovanieKarty.TabIndex = 37;
+            this.BtnZmenZablokovanieKarty.TabIndex = 8;
             this.BtnZmenZablokovanieKarty.Text = "Zablokuj / Odblokuj \r\nkartu";
             this.BtnZmenZablokovanieKarty.UseVisualStyleBackColor = true;
             this.BtnZmenZablokovanieKarty.Click += new System.EventHandler(this.BtnZmenZablokovanieKarty_Click);
@@ -442,7 +442,7 @@
             this.lblPozadieHornehoMenu.Location = new System.Drawing.Point(-22, -48);
             this.lblPozadieHornehoMenu.Name = "lblPozadieHornehoMenu";
             this.lblPozadieHornehoMenu.Size = new System.Drawing.Size(1166, 198);
-            this.lblPozadieHornehoMenu.TabIndex = 38;
+            this.lblPozadieHornehoMenu.TabIndex = 9;
             this.lblPozadieHornehoMenu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDeaktivovanyUcet
@@ -450,7 +450,7 @@
             this.lblDeaktivovanyUcet.AutoSize = true;
             this.lblDeaktivovanyUcet.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblDeaktivovanyUcet.ForeColor = System.Drawing.Color.Red;
-            this.lblDeaktivovanyUcet.Location = new System.Drawing.Point(220, 150);
+            this.lblDeaktivovanyUcet.Location = new System.Drawing.Point(245, 35);
             this.lblDeaktivovanyUcet.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDeaktivovanyUcet.Name = "lblDeaktivovanyUcet";
             this.lblDeaktivovanyUcet.Size = new System.Drawing.Size(686, 76);
@@ -525,7 +525,7 @@
             this.MinimumSize = new System.Drawing.Size(1129, 454);
             this.Name = "FrmClientManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FrmClientManagement";
+            this.Text = "Manažment klientskych operácií";
             ((System.ComponentModel.ISupportInitialize)(this.DgwZoznamPlatobnychKariet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

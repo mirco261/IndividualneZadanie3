@@ -59,7 +59,7 @@
             this.NtbStavUctu.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NtbStavUctu.ForeColor = System.Drawing.Color.DarkBlue;
             this.NtbStavUctu.Location = new System.Drawing.Point(9, 154);
-            this.NtbStavUctu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NtbStavUctu.Margin = new System.Windows.Forms.Padding(2);
             this.NtbStavUctu.Name = "NtbStavUctu";
             this.NtbStavUctu.Size = new System.Drawing.Size(158, 38);
             this.NtbStavUctu.TabIndex = 6;
@@ -107,7 +107,7 @@
             this.NtbPovolenePrecerpanie.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NtbPovolenePrecerpanie.ForeColor = System.Drawing.Color.DarkBlue;
             this.NtbPovolenePrecerpanie.Location = new System.Drawing.Point(205, 154);
-            this.NtbPovolenePrecerpanie.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NtbPovolenePrecerpanie.Margin = new System.Windows.Forms.Padding(2);
             this.NtbPovolenePrecerpanie.Name = "NtbPovolenePrecerpanie";
             this.NtbPovolenePrecerpanie.Size = new System.Drawing.Size(158, 38);
             this.NtbPovolenePrecerpanie.TabIndex = 10;
@@ -119,7 +119,7 @@
             this.NtbVyberCiastka.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NtbVyberCiastka.ForeColor = System.Drawing.Color.DarkBlue;
             this.NtbVyberCiastka.Location = new System.Drawing.Point(94, 229);
-            this.NtbVyberCiastka.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NtbVyberCiastka.Margin = new System.Windows.Forms.Padding(2);
             this.NtbVyberCiastka.MaxLength = 4;
             this.NtbVyberCiastka.Name = "NtbVyberCiastka";
             this.NtbVyberCiastka.Size = new System.Drawing.Size(188, 38);
@@ -132,7 +132,7 @@
             this.BtnVyberHotovosti.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnVyberHotovosti.ForeColor = System.Drawing.Color.GhostWhite;
             this.BtnVyberHotovosti.Location = new System.Drawing.Point(23, 310);
-            this.BtnVyberHotovosti.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnVyberHotovosti.Margin = new System.Windows.Forms.Padding(2);
             this.BtnVyberHotovosti.Name = "BtnVyberHotovosti";
             this.BtnVyberHotovosti.Size = new System.Drawing.Size(145, 65);
             this.BtnVyberHotovosti.TabIndex = 13;
@@ -146,7 +146,7 @@
             this.BtnZatvor.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.BtnZatvor.ForeColor = System.Drawing.Color.GhostWhite;
             this.BtnZatvor.Location = new System.Drawing.Point(214, 310);
-            this.BtnZatvor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnZatvor.Margin = new System.Windows.Forms.Padding(2);
             this.BtnZatvor.Name = "BtnZatvor";
             this.BtnZatvor.Size = new System.Drawing.Size(145, 65);
             this.BtnZatvor.TabIndex = 14;
@@ -195,12 +195,12 @@
             this.Controls.Add(this.LblCiastka);
             this.Controls.Add(this.NtbStavUctu);
             this.Controls.Add(this.LblPrivitanie);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximumSize = new System.Drawing.Size(402, 438);
             this.MinimumSize = new System.Drawing.Size(402, 438);
             this.Name = "frmVyberZUctu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmVyberZUctu";
+            this.Text = "ATM Výber z účtu";
             this.ResumeLayout(false);
             this.PerformLayout();
 

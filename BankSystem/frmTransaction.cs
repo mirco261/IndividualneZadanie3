@@ -128,6 +128,7 @@ namespace BankSystem
                     {
                         ZapisemKlientaAkoPrijimatela(IdKlienta);
                         SkryjemInfoOOdosielatelovi();
+                        this.Text = "Vklad na účet";
                         break;
                     }
                 //vyber z uctu
@@ -135,6 +136,7 @@ namespace BankSystem
                     {
                         ZapisemKlientaAkoOdosielatela(IdKlienta);
                         SkryjemInfoOPrijemcovi();
+                        this.Text = "Výber peňazí z banky";
                         break;
                     }
                 //Prevod z uctu
@@ -142,6 +144,7 @@ namespace BankSystem
                     {
                         ZapisemKlientaAkoOdosielatela(IdKlienta);
                         VlozDoZoznamuPrijimatelovZoznamKlientov();
+                        this.Text = "Medziúčtový prevod";
                         break;
                     }
                 default:
